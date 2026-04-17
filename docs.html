@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Docs — AgentFactory</title>
+  <meta name="description" content="Step-by-step installation and environment setup for AgentFactory." />
+
+  <!-- Bulma + extensions -->
+  <link rel="stylesheet" href="css/bulma.min.css" />
+  <link rel="stylesheet" href="css/bulma-carousel.min.css" />
+  <link rel="stylesheet" href="css/bulma-slider.min.css" />
+  <link rel="stylesheet" href="css/fontawesome.all.min.css" />
+
+  <!-- Project overrides -->
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body class="docs-light">
+
+  <!-- ── Navbar ─────────────────────────────────────────────── -->
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item has-text-weight-semibold" href="index.html">
+          <span class="icon has-text-info mr-2"><i class="fas fa-robot"></i></span>
+          AgentFactory
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="mainNav" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="index.html">
+            <span class="icon"><i class="fas fa-home"></i></span><span>Home</span>
+          </a>
+          <a class="navbar-item is-active" href="docs.html">
+            <span class="icon"><i class="fas fa-book"></i></span><span>Docs</span>
+          </a>
+          <a class="navbar-item" href="playground.html">
+            <span class="icon"><i class="fas fa-cogs"></i></span><span>Playground</span>
+          </a>
+          <a class="navbar-item" href="https://github.com/chenjix/agentfractory" target="_blank" rel="noopener">
+            <span class="icon"><i class="fab fa-github"></i></span><span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Main content ───────────────────────────────────────── -->
+  <section class="section" style="padding-top: 100px;">
+    <div class="container">
+      <div class="columns">
+
+        <!-- Sidebar -->
+        <div class="column is-3">
+          <aside class="menu is-sticky" style="position: sticky; top: 88px;">
+            <p class="menu-label">Getting Started</p>
+            <ul class="menu-list">
+              <li><a class="is-active" href="#overview">Overview</a></li>
+              <li><a href="#installation">Installation</a></li>
+              <li><a href="#quick-start">Quick Start</a></li>
+              <li><a href="#run-first-agent">Run First Agent</a></li>
+            </ul>
+            <p class="menu-label">Environments</p>
+            <ul class="menu-list">
+              <li><a href="#environment-overview">Environment Overview</a></li>
+              <li><a href="#minigrid-environments">MiniGrid Environments</a></li>
+            </ul>
+            <p class="menu-label">Tools</p>
+            <ul class="menu-list">
+              <li><a href="#quick-start-code">Quick Start Code</a></li>
+              <li><a href="#interactive-demo">Playground</a></li>
+            </ul>
+          </aside>
+        </div>
+
+        <!-- Content -->
+        <div class="column is-9">
+          <div class="content" style="max-width: 820px;">
+
+            <!-- Header -->
+            <header id="overview" class="mb-6">
+              <p class="is-size-7 has-text-weight-bold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.08em;">Getting Started</p>
+              <h1 class="title is-2 mt-2">Docs</h1>
+              <p class="subtitle is-5 has-text-grey">
+                Get the framework running on your machine in a few minutes. Install the base package,
+                enable the extras you need, and run a working agent loop against MiniGrid or DeliveryBench.
+              </p>
+            </header>
+
+            <!-- Overview -->
+            <section class="mb-6">
+              <h2 class="title is-4">Overview</h2>
+              <p>
+                AgentFactory lets you combine environment adapters, perception,
+                reasoning, memory, and reflection modules into a single agent runtime. The setup flow
+                below keeps the defaults simple while still making it easy to enable LLM-based methods
+                and environment-specific dependencies.
+              </p>
+              <div class="notification is-info is-light mt-4">
+                <strong>New here?</strong> Start with the installation and quick start commands below,
+                then use the playground once the core dependencies are installed.
+              </div>
+            </section>
+
+            <!-- Installation -->
+            <hr />
+            <section id="installation" class="mb-6">
+              <h2 class="title is-4">Installation</h2>
+              <p>
+                Clone the repository and install it in editable mode. Add optional extras depending on
+                the environment stack you plan to use.
+              </p>
+              <div class="code-panel mt-4">
+                <div class="code-toolbar">
+                  <span class="code-filename">terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="cmt"># Clone</span>
+git clone https://github.com/chenjix/agentfractory.git
+cd agentfractory
+
+<span class="cmt"># Basic install</span>
+pip install -e .
+
+<span class="cmt"># Optional extras</span>
+pip install -e <span class="str">".[thor]"</span>      <span class="cmt"># AI2-THOR support</span>
+pip install -e <span class="str">".[gym]"</span>       <span class="cmt"># Gym / MiniGrid support</span></pre>
+                </div>
+              </div>
+            </section>
+
+            <!-- Quick Start -->
+            <hr />
+            <section id="quick-start" class="mb-6">
+              <h2 class="title is-4">Quick Start</h2>
+              <p>
+                Set <code class="setup-inline-code">OPENAI_API_KEY</code> if you plan to use
+                LLM-backed reasoning. MiniGrid and AI2-THOR can then be installed independently.
+              </p>
+              <div class="code-panel mt-4">
+                <div class="code-toolbar">
+                  <span class="code-filename">terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="cmt"># API key for llm, react, cot, tot, guided_search, or self_refine</span>
+<span class="kw">export</span> OPENAI_API_KEY=<span class="str">"sk-..."</span>
+
+<span class="cmt"># MiniGrid</span>
+pip install minigrid
+
+<span class="cmt"># AI2-THOR</span>
+pip install ai2thor</pre>
+                </div>
+              </div>
+              <p class="mt-4">
+                After installation, environments expose the usual loop you would expect:
+                <code class="setup-inline-code">reset()</code>,
+                <code class="setup-inline-code">step()</code>, and an action schema that the agent can
+                consume.
+              </p>
+            </section>
+
+            <!-- Environment Overview -->
+            <hr />
+            <section id="environment-overview" class="mb-6">
+              <h2 class="title is-4">Environment Overview</h2>
+              <p>
+                MiniGrid is the fastest way to validate an agent configuration locally. DeliveryBench
+                is useful when you want a richer benchmark flow, while THOR is best when you need a
+                more grounded 3D embodied environment.
+              </p>
+            </section>
+
+            <!-- MiniGrid Environments -->
+            <hr />
+            <section id="minigrid-environments" class="mb-6">
+              <h2 class="title is-4">MiniGrid Environments</h2>
+              <p>
+                The following presets are exposed directly in the playground and example scripts.
+              </p>
+              <div class="box mt-4 p-0" style="overflow: hidden;">
+                <table class="table is-striped is-fullwidth mb-0">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>MiniGrid-Empty-5x5-v0</code></td>
+                      <td>Simple navigation</td>
+                    </tr>
+                    <tr>
+                      <td><code>MiniGrid-DoorKey-5x5-v0</code></td>
+                      <td>Find key, open door, and reach goal</td>
+                    </tr>
+                    <tr>
+                      <td><code>MiniGrid-DoorKey-6x6-v0</code></td>
+                      <td>Larger key-door task</td>
+                    </tr>
+                    <tr>
+                      <td><code>MiniGrid-DoorKey-8x8-v0</code></td>
+                      <td>Even larger variant</td>
+                    </tr>
+                    <tr>
+                      <td><code>MiniGrid-MultiRoom-N2-S4-v0</code></td>
+                      <td>Multi-room navigation</td>
+                    </tr>
+                    <tr>
+                      <td><code>MiniGrid-MemoryS17Random-v0</code></td>
+                      <td>Memory-focused task</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- Run Your First Agent -->
+            <hr />
+            <section id="run-first-agent" class="mb-6">
+              <h2 class="title is-4">Run Your First Agent</h2>
+              <p>
+                Start with a simple MiniGrid loop, then move to a more capable reasoning module once
+                your environment and API key are configured.
+              </p>
+              <div class="code-panel mt-4">
+                <div class="code-toolbar">
+                  <span class="code-filename">terminal</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="cmt"># MiniGrid - simple reasoning (no llm)</span>
+python examples/minigrid_example.py --env MiniGrid-DoorKey-5x5-v0 --no-llm
+
+<span class="cmt"># MiniGrid - ReAct reasoning</span>
+python examples/minigrid_react_example.py --env MiniGrid-DoorKey-5x5-v0
+
+<span class="cmt"># MiniGrid - Guided Search</span>
+python examples/minigrid_example.py --reasoner guided_search
+
+<span class="cmt"># DeliveryBench</span>
+python examples/deliverybench_example.py --reasoning-method react</pre>
+                </div>
+              </div>
+            </section>
+
+            <!-- Quick Start Code -->
+            <hr />
+            <section id="quick-start-code" class="mb-6">
+              <h2 class="title is-4">Quick Start Code</h2>
+              <p>
+                You can also compose the framework programmatically by importing the modules directly
+                and wiring them into an <code class="setup-inline-code">EmbodiedAgent</code>.
+              </p>
+              <div class="code-panel mt-4">
+                <div class="code-toolbar">
+                  <span class="code-filename">quick_start.py</span>
+                </div>
+                <div class="code-body">
+                  <pre><span class="kw">import</span> os
+<span class="kw">from</span> modules.llm <span class="kw">import</span> OpenAIClient
+<span class="kw">from</span> modules.reasoning <span class="kw">import</span> ReActReasoning
+<span class="kw">from</span> agents <span class="kw">import</span> EmbodiedAgent
+
+llm_client = OpenAIClient(
+    api_key=os.getenv(<span class="str">"OPENAI_API_KEY"</span>),
+    model=<span class="str">"gpt-4o-mini"</span>,
+)
+
+reasoning = ReActReasoning(
+    llm_client=llm_client,
+    enable_history=<span class="kw">True</span>,
+)
+
+agent = EmbodiedAgent(
+    perception=perception,
+    reasoning=reasoning,
+    memory=memory,
+)</pre>
+                </div>
+              </div>
+            </section>
+
+            <!-- Interactive Demo -->
+            <hr />
+            <section id="interactive-demo" class="mb-6">
+              <h2 class="title is-4">Playground</h2>
+              <p>
+                Prefer a guided flow? Use the <a href="playground.html">playground</a>
+                to visually choose your modules and download a generated script.
+              </p>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        AgentFactory &mdash;
+        <a href="https://github.com/chenjix/agentfractory" target="_blank" rel="noopener">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ────────────────────────────────────────────── -->
+  <script src="js/fontawesome.all.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Navbar burger toggle
+      const burgers = document.querySelectorAll('.navbar-burger');
+      burgers.forEach(burger => {
+        burger.addEventListener('click', () => {
+          const target = document.getElementById(burger.dataset.target);
+          burger.classList.toggle('is-active');
+          target.classList.toggle('is-active');
+        });
+      });
+
+      // Sidebar scroll spy
+      const links = Array.from(document.querySelectorAll('.menu-list a'));
+      const sections = links
+        .map(link => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+
+      function setActive(id) {
+        links.forEach(link => {
+          const isMatch = link.getAttribute('href') === `#${id}`;
+          if (isMatch) {
+            link.classList.add('is-active');
+          } else {
+            link.classList.remove('is-active');
+          }
+        });
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter(entry => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) {
+          setActive(visible.target.id);
+        }
+      }, {
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: [0.2, 0.4, 0.6]
+      });
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+</body>
+
+</html>

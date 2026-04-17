@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Playground — AgentFactory</title>
+  <meta name="description"
+    content="Visually compose an embodied agent by picking environment, perception, reasoning, memory and reflection modules, then download ready-to-run Python setup code." />
+
+  <!-- Bulma + extensions -->
+  <link rel="stylesheet" href="css/bulma.min.css" />
+  <link rel="stylesheet" href="css/bulma-carousel.min.css" />
+  <link rel="stylesheet" href="css/bulma-slider.min.css" />
+  <link rel="stylesheet" href="css/fontawesome.all.min.css" />
+
+  <!-- Project overrides -->
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+
+  <!-- ── Navbar ─────────────────────────────────────────────── -->
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item has-text-weight-semibold" href="index.html">
+          <span class="icon has-text-info mr-2"><i class="fas fa-robot"></i></span>
+          AgentFactory
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="mainNav" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="index.html">
+            <span class="icon"><i class="fas fa-home"></i></span><span>Home</span>
+          </a>
+          <a class="navbar-item" href="docs.html">
+            <span class="icon"><i class="fas fa-book"></i></span><span>Docs</span>
+          </a>
+          <a class="navbar-item is-active" href="playground.html">
+            <span class="icon"><i class="fas fa-cogs"></i></span><span>Playground</span>
+          </a>
+          <a class="navbar-item" href="https://github.com/chenjix/agentfractory" target="_blank" rel="noopener">
+            <span class="icon"><i class="fab fa-github"></i></span><span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <section class="hero is-small is-light" style="padding-top: 52px;">
+    <div class="hero-body">
+      <div class="container">
+        <div class="is-flex is-align-items-start" style="gap: 16px;">
+          <span class="icon is-large has-text-info"><i class="fas fa-2x fa-puzzle-piece"></i></span>
+          <div>
+            <h1 class="title is-3"><span class="has-text-info">Playground</span></h1>
+            <p class="subtitle is-6 has-text-grey">
+              Pick each module implementation below, then generate runnable Python
+              setup code. Copy to clipboard or download as <strong>.py</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Main ───────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Module selector grid -->
+      <div class="columns is-multiline" aria-label="Module configuration">
+
+        <!-- Environment — full width -->
+        <div class="column is-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                <span class="module-icon module-icon--env">&#9881;</span>
+                <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.07em;">Environment</span>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <div class="field">
+                    <label class="label is-small" for="sel-env">Adapter</label>
+                    <div class="control">
+                      <div class="select is-fullwidth">
+                        <select id="sel-env">
+                          <option value="minigrid">MiniGrid</option>
+                          <option value="deliverybench">DeliveryBench</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column" id="env-name-wrap">
+                  <div class="field">
+                    <label class="label is-small" for="sel-env-name">Environment Name</label>
+                    <div class="control">
+                      <div class="select is-fullwidth">
+                        <select id="sel-env-name">
+                          <option value="MiniGrid-DoorKey-5x5-v0">DoorKey-5x5</option>
+                          <option value="MiniGrid-DoorKey-6x6-v0">DoorKey-6x6</option>
+                          <option value="MiniGrid-Empty-5x5-v0">Empty-5x5</option>
+                          <option value="MiniGrid-DoorKey-8x8-v0">DoorKey-8x8</option>
+                          <option value="MiniGrid-MultiRoom-N2-S4-v0">MultiRoom-N2-S4</option>
+                          <option value="MiniGrid-MemoryS17Random-v0">MemoryS17Random</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="is-size-7 has-text-grey">Choose an adapter (runtime wrapper) and the specific environment variant to use.
+                DeliveryBench uses its own fixed environment.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Perception -->
+        <div class="column is-6">
+          <div class="card">
+            <div class="card-content">
+              <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                <span class="module-icon module-icon--perc">&#9673;</span>
+                <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.07em;">Perception</span>
+              </div>
+              <div class="field">
+                <label class="label is-small" for="sel-perception">Adapter</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select id="sel-perception">
+                      <option value="minigrid">MiniGrid (basic)</option>
+                      <option value="minigrid_relation">MiniGrid (relation)</option>
+                      <option value="deliverybench">DeliveryBench</option>
+                      <option value="gym">Gym</option>
+                      <option value="thor">THOR</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <p class="is-size-7 has-text-grey mt-2">Converts raw observations into <code>UnifiedAgentInput</code>. Match this to your
+                environment adapter.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reasoning -->
+        <div class="column is-6">
+          <div class="card">
+            <div class="card-content">
+              <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                <span class="module-icon module-icon--reas">&#9733;</span>
+                <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.07em;">Reasoning</span>
+              </div>
+              <div class="field">
+                <label class="label is-small" for="sel-reasoning">Method</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select id="sel-reasoning">
+                      <option value="simple">Simple (no LLM)</option>
+                      <option value="llm">LLM direct</option>
+                      <option value="react">ReAct</option>
+                      <option value="cot">Chain-of-Thought</option>
+                      <option value="tot">Tree of Thoughts</option>
+                      <option value="guided_search">Guided Search</option>
+                      <option value="rap">RAP (MCTS)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <p class="is-size-7 has-text-grey mt-2">LLM-based methods require <code>OPENAI_API_KEY</code> to be set. Simple mode needs no
+                API key.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Memory -->
+        <div class="column is-6">
+          <div class="card">
+            <div class="card-content">
+              <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                <span class="module-icon module-icon--mem">&#9830;</span>
+                <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.07em;">Memory</span>
+              </div>
+              <div class="field">
+                <label class="label is-small" for="sel-memory">Backend</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select id="sel-memory">
+                      <option value="none">None</option>
+                      <option value="minigrid">MiniGrid</option>
+                      <option value="bot">Buffer-of-Thought</option>
+                      <option value="graph">GraphContextMemory</option>
+                      <option value="ace">ACE (Agentic Context Engine)</option>
+                      <option value="amem">A-Mem (Associative Memory)</option>
+                      <option value="dynamic_cheatsheet">Dynamic Cheatsheet</option>
+                      <option value="letta">Letta (Structured Blocks)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <p class="is-size-7 has-text-grey mt-2">Stores and retrieves past observations. LLM-backed backends (ACE, A-Mem, Dynamic Cheatsheet) require <code>OPENAI_API_KEY</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reflection -->
+        <div class="column is-6">
+          <div class="card">
+            <div class="card-content">
+              <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                <span class="module-icon module-icon--refl">&#8634;</span>
+                <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.07em;">Reflection</span>
+              </div>
+              <div class="field">
+                <label class="label is-small" for="sel-reflection">Module</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select id="sel-reflection">
+                      <option value="none">None</option>
+                      <option value="self_refine">Self-Refine</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <p class="is-size-7 has-text-grey mt-2">Self-Refine iteratively critiques and improves the agent's reasoning output using an
+                LLM.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Module APIs -->
+      <div class="mt-6" aria-label="Module APIs">
+        <div class="has-text-centered mb-5">
+          <h2 class="title is-4">Module APIs</h2>
+          <p class="subtitle is-6 has-text-grey">Core method signatures used by the framework. Helpful when implementing custom modules.</p>
+        </div>
+
+        <div class="columns is-multiline" aria-label="Module API reference">
+          <div class="column is-6">
+            <div class="card">
+              <div class="card-content">
+                <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                  <span class="module-icon module-icon--perc">&#9673;</span>
+                  <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase;">Perception API</span>
+                </div>
+                <pre class="api-pre"><code>encode(
+  raw_obs: Any,
+  info: Optional[Dict] = None,
+  meta: Optional[EnvMeta] = None,
+  task: Optional[TaskSpec] = None,
+  action_space: Optional[ActionSchema] = None,
+  history_stub: Optional[StepInfo] = None,
+  **kwargs,
+) -&gt; UnifiedAgentInput
+
+reset() -&gt; None</code></pre>
+                <p class="is-size-7 has-text-grey mt-2">Perception converts raw environment observations into <code>UnifiedAgentInput</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-6">
+            <div class="card">
+              <div class="card-content">
+                <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                  <span class="module-icon module-icon--reas">&#9733;</span>
+                  <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase;">Reasoning API</span>
+                </div>
+                <pre class="api-pre"><code>reason(
+  input: UnifiedAgentInput,
+  memory: Optional[List[Any]] = None,
+  profile: Optional[Dict[str, Any]] = None,
+  **kwargs,
+) -&gt; Dict[str, Any]
+
+reset() -&gt; None</code></pre>
+                <p class="is-size-7 has-text-grey mt-2">Reasoning returns an <code>{"action","reasoning","confidence"}</code> dict (at minimum).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-6">
+            <div class="card">
+              <div class="card-content">
+                <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                  <span class="module-icon module-icon--mem">&#9830;</span>
+                  <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase;">Memory API</span>
+                </div>
+                <pre class="api-pre"><code>retrieve(
+  query: UnifiedAgentInput,
+  top_k: int = 5,
+  **kwargs,
+) -&gt; List[Any]
+
+store(
+  experience: Dict[str, Any],
+  **kwargs,
+) -&gt; None
+
+update(updates: Dict[str, Any], **kwargs) -&gt; None
+on_episode_start(task: Optional[Dict[str, Any]] = None) -&gt; None
+clear() -&gt; None
+reset() -&gt; None</code></pre>
+                <p class="is-size-7 has-text-grey mt-2">Memory stores/retrieves past experiences; some backends are LLM-backed.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-6">
+            <div class="card">
+              <div class="card-content">
+                <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                  <span class="module-icon module-icon--refl">&#8634;</span>
+                  <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase;">Reflection API</span>
+                </div>
+                <pre class="api-pre"><code>reflect(
+  reasoning_output: Dict[str, Any],
+  input: UnifiedAgentInput,
+  memory: Optional[List[Any]] = None,
+  profile: Optional[Dict[str, Any]] = None,
+  **kwargs,
+) -&gt; Dict[str, Any]
+
+reset() -&gt; None</code></pre>
+                <p class="is-size-7 has-text-grey mt-2">Reflection refines the reasoning output (e.g. Self-Refine loops).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Generate button -->
+      <div class="is-flex is-align-items-center mt-5" style="gap: 16px;">
+        <button id="btn-generate" class="button is-link is-medium" aria-label="Generate Python agent code">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Generate Code</span>
+        </button>
+        <span id="status-text" class="status-text" role="status" aria-live="polite"></span>
+      </div>
+
+      <!-- Code output -->
+      <section id="code-section" class="mt-5" style="display:none;" aria-label="Generated code">
+        <div class="code-panel-v2">
+          <!-- Tabs -->
+          <div class="tabs is-small mb-0">
+            <ul>
+              <li class="is-active" data-target="python"><a class="code-tab" data-target="python">Python</a></li>
+              <li data-target="shell"><a class="code-tab" data-target="shell">Shell</a></li>
+            </ul>
+          </div>
+          <!-- Hover-reveal action buttons -->
+          <div class="code-float-actions">
+            <button id="btn-copy" class="code-float-btn" aria-label="Copy code" title="Copy to clipboard">Copy</button>
+            <button id="btn-download" class="code-float-btn" aria-label="Download" title="Download">Download</button>
+          </div>
+          <!-- Code display: Python -->
+          <div class="code-display" id="display-python">
+            <div class="code-gutter" id="line-numbers-python" aria-hidden="true"></div>
+            <pre class="code-pre"><code id="code-output" class="code-src"></code></pre>
+          </div>
+          <!-- Code display: Shell -->
+          <div class="code-display" id="display-shell" style="display:none;">
+            <div class="code-gutter" id="line-numbers-shell" aria-hidden="true"></div>
+            <pre class="code-pre"><code id="shell-output" class="code-src"></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick start panel -->
+      <div class="box mt-6" aria-label="Quick-start commands">
+        <div class="level mb-4">
+          <div class="level-left">
+            <h3 class="title is-5 mb-0">
+              <span class="icon has-text-warning mr-2"><i class="fas fa-bolt"></i></span>
+              Quick Start Examples
+            </h3>
+          </div>
+          <div class="level-right">
+            <a href="https://github.com/chenjix/agentfractory" class="button is-small is-outlined" target="_blank" rel="noopener">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </div>
+        <div class="cmd-item mb-3">
+          <span class="cmd-label">MiniGrid (ReAct)</span>
+          <code class="cmd-code">python examples/minigrid_react_example.py</code>
+        </div>
+        <div class="cmd-item mb-3">
+          <span class="cmd-label">MiniGrid (Guided Search)</span>
+          <code class="cmd-code">python examples/minigrid_example.py --reasoner guided_search</code>
+        </div>
+        <div class="cmd-item">
+          <span class="cmd-label">DeliveryBench</span>
+          <code class="cmd-code">python examples/deliverybench_example.py --reasoning-method react</code>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        AgentFactory &mdash;
+        <a href="https://github.com/chenjix/agentfractory" target="_blank" rel="noopener">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ────────────────────────────────────────────── -->
+  <script src="js/fontawesome.all.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Navbar burger toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const burgers = document.querySelectorAll('.navbar-burger');
+      burgers.forEach(burger => {
+        burger.addEventListener('click', () => {
+          const target = document.getElementById(burger.dataset.target);
+          burger.classList.toggle('is-active');
+          target.classList.toggle('is-active');
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

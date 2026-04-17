@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- <title>AgentFactory — Home</title> -->
+  <title>AgentFactory: Compose perception, reasoning, memory, and reflection for MiniGrid and DeliveryBench</title>
+  <meta name="description"
+    content="AgentFactory main page: modular architecture, benchmark-ready environments, docs, and playground." />
+
+  <!-- Bulma + extensions -->
+  <link rel="stylesheet" href="css/bulma.min.css" />
+  <link rel="stylesheet" href="css/bulma-carousel.min.css" />
+  <link rel="stylesheet" href="css/bulma-slider.min.css" />
+  <link rel="stylesheet" href="css/fontawesome.all.min.css" />
+
+  <!-- Project overrides -->
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+
+  <!-- ── Navbar ─────────────────────────────────────────────── -->
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item has-text-weight-semibold" href="index.html">
+          <span class="icon has-text-info mr-2"><i class="fas fa-robot"></i></span>
+          AgentFactory
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="mainNav" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item is-active" href="index.html">
+            <span class="icon"><i class="fas fa-home"></i></span><span>Home</span>
+          </a>
+          <a class="navbar-item" href="docs.html">
+            <span class="icon"><i class="fas fa-book"></i></span><span>Docs</span>
+          </a>
+          <a class="navbar-item" href="playground.html">
+            <span class="icon"><i class="fas fa-cogs"></i></span><span>Playground</span>
+          </a>
+          <a class="navbar-item" href="https://github.com/chenjix/agentfractory" target="_blank" rel="noopener">
+            <span class="icon"><i class="fab fa-github"></i></span><span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────────── -->
+  <section class="hero is-medium" style="padding-top: 52px;">
+    <div class="hero-body">
+      <div class="container">
+        <div class="has-text-centered">
+          <div class="is-flex is-justify-content-center is-align-items-center" style="gap: 16px;">
+            <img src="assests/logo.png" alt="AgentFactory Logo" style="width: 80px; height: auto;" />
+            <h1 class="brand-title">AgentFactory</h1>
+          </div>
+          <p class="subtitle is-4 mt-4 has-text-weight-bold"
+            style="color: #333; max-width: 780px; margin-left: auto; margin-right: auto;">
+            Compose perception, reasoning, memory, and reflection for MiniGrid and DeliveryBench.
+            Iterate quickly from idea to reproducible evaluation.
+          </p>
+        </div>
+
+        <!-- Pill links -->
+        <div class="buttons is-centered mt-5">
+          <a href="#" class="button is-rounded is-outlined abstract-pill">
+            <span class="icon"><i class="fas fa-scroll"></i></span>
+            <span>arXiv</span>
+          </a>
+          <a href="https://github.com/chenjix/agentfractory" target="_blank" rel="noopener"
+            class="button is-rounded is-outlined abstract-pill">
+            <span class="icon"><i class="fab fa-github"></i></span>
+            <span>Code</span>
+          </a>
+          <a href="#" class="button is-rounded is-outlined abstract-pill">
+            <span class="icon"><i class="fab fa-youtube"></i></span>
+            <span>YouTube</span>
+          </a>
+          <a href="#" class="button is-rounded is-outlined abstract-pill">
+            <span class="icon"><i class="fas fa-database"></i></span>
+            <span>SAF</span>
+          </a>
+          <a href="docs.html" class="button is-rounded is-outlined abstract-pill">
+            <span class="icon"><i class="fas fa-book"></i></span>
+            <span>Docs</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Overview (renamed from Abstract) ───────────────────── -->
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-2 has-text-centered">Overview</h2>
+      <div class="abstract-copy" id="abstract-copy" aria-live="polite">
+        <p>LLM-based agents are usually built as tightly coupled pipelines, which makes it hard to isolate component
+          contributions or study their interactions. AgentFactory addresses this by introducing a modular framework
+          where agents are composed of reusable components with standardized interfaces, enabling flexible recombination
+          and systematic analysis. Experiments across multiple benchmarks show that performance depends not only on
+          individual components but also on their interactions, and that modular designs can outperform monolithic
+          systems.</p>
+      </div>
+      <div class="box mt-5">
+        <figure class="image" aria-label="AgentFactory main image">
+          <img src="assests/agentfractory_main.png" alt="AgentFactory main visual" style="border-radius: 12px;" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Design Diagram (now below Overview) ─────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="has-text-centered mb-4">
+        <h2 class="title is-3">Design Diagram</h2>
+        <p class="subtitle is-6">Modular flow of perception, reasoning, memory, reflection, and environment interaction.
+        </p>
+      </div>
+      <div class="box has-text-centered">
+        <img src="assests/design_diagram1.png" class="design-diagram-image"
+          alt="SimWorld agent framework design diagram showing module connections and closed-loop interaction."
+          style="margin: 0 auto;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Agent Pipeline ─────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="has-text-centered mb-4">
+        <h2 class="title is-3">Agent Pipeline</h2>
+        <p class="subtitle is-6">Vision-driven agent pipeline used in AgentFactory.</p>
+      </div>
+      <div class="box has-text-centered">
+        <!-- Replace src with your final pipeline diagram -->
+        <img src="assests/agent_pipeline.png"
+          alt="Vision-driven agent pipeline showing multimodal inputs, task planner stages, environment feedback loop, and executable plan generation."
+          style="max-width: 100%; height: auto; margin: 0 auto; border-radius: 8px;" />
+      </div>
+      <div class="content mt-4" style="max-width: 860px; margin: 0 auto;">
+        <p>
+          To evaluate MLLMs as agents, we design a unified embodied agent pipeline. This pipeline provides
+          a robust framework for processing multimodal inputs, reasoning through interactions, and generating
+          structured, executable plans composed of sequential actions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Key Features ───────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="has-text-centered mb-5">
+        <h2 class="title is-3">Key Features</h2>
+        <p class="subtitle is-6">Core capabilities that make the framework useful for embodied agent research and
+          benchmarking.</p>
+      </div>
+      <div class="columns is-multiline">
+        <div class="column is-4">
+          <div class="card feature-card">
+            <div class="card-content">
+              <div class="is-flex is-align-items-start mb-3" style="gap: 12px;">
+                <span class="feature-icon">1</span>
+                <h3 class="title is-5 mb-0">Structured Multimodal Interface</h3>
+              </div>
+              <p class="has-text-grey">
+                Converts raw environment observations into <code>UnifiedAgentInput</code> with structured state, visual
+                inputs, task metadata, and action schema in one place.
+              </p>
+              <div class="feature-mosaic" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="card feature-card">
+            <div class="card-content">
+              <div class="is-flex is-align-items-start mb-3" style="gap: 12px;">
+                <span class="feature-icon">2</span>
+                <h3 class="title is-5 mb-0">Pluggable Reasoning and Memory</h3>
+              </div>
+              <p class="has-text-grey">
+                Supports baseline policies, search-based planners, self-reflection, and multiple memory backends
+                that can be swapped independently for controlled ablations.
+              </p>
+              <div class="feature-mosaic" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="card feature-card">
+            <div class="card-content">
+              <div class="is-flex is-align-items-start mb-3" style="gap: 12px;">
+                <span class="feature-icon">3</span>
+                <h3 class="title is-5 mb-0">Reusable Evaluation Pipeline</h3>
+              </div>
+              <p class="has-text-grey">
+                Produces JSONL episode logs, summary tables, and per-environment comparisons so results are easy to
+                reproduce and report across benchmarks.
+              </p>
+              <div class="feature-mosaic" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Coverage (marquee) ──────────────────────────────────── -->
+  <section class="section has-background-white-bis">
+    <div class="container">
+      <div class="mb-5">
+        <p class="is-size-7 has-text-weight-bold has-text-info"
+          style="text-transform: uppercase; letter-spacing: 0.1em;">COVERAGE</p>
+        <h2 class="title is-2 mt-2">Covering Every Module and Domain</h2>
+        <p class="subtitle is-6" style="max-width: 800px;">
+          AgentFactory covers rigorous and adaptable setups for all major agent cognitive loops, spanning from memory
+          architectures to reasoning paradigms and reflection mechanisms.
+        </p>
+      </div>
+
+      <div class="marquee-section">
+        <!-- MEMORY row — scrolls left -->
+        <div class="marquee-row">
+          <div class="marquee-label">Memory</div>
+          <div class="marquee-track">
+            <div class="marquee-inner animate-scroll-left">
+              <span class="marquee-pill">ACE</span>
+              <span class="marquee-pill">Amem</span>
+              <span class="marquee-pill">Buffer of Thought</span>
+              <span class="marquee-pill">ChatDB Memory</span>
+              <span class="marquee-pill">Graph Context</span>
+              <span class="marquee-pill">LangMem</span>
+              <span class="marquee-pill">Letta</span>
+              <span class="marquee-pill">LightMem</span>
+              <span class="marquee-pill">Mem0</span>
+              <span class="marquee-pill">MemoryBank</span>
+              <span class="marquee-pill">MIRIX</span>
+              <span class="marquee-pill">OpenClaw Memory</span>
+              <span class="marquee-pill">Ranked Memory</span>
+              <span class="marquee-pill">SimpleMem</span>
+              <span class="marquee-pill">Zep</span>
+              <!-- duplicate for seamless loop -->
+              <span class="marquee-pill">ACE</span>
+              <span class="marquee-pill">Amem</span>
+              <span class="marquee-pill">Buffer of Thought</span>
+              <span class="marquee-pill">ChatDB Memory</span>
+              <span class="marquee-pill">Graph Context</span>
+              <span class="marquee-pill">LangMem</span>
+              <span class="marquee-pill">Letta</span>
+              <span class="marquee-pill">LightMem</span>
+              <span class="marquee-pill">Mem0</span>
+              <span class="marquee-pill">MemoryBank</span>
+              <span class="marquee-pill">MIRIX</span>
+              <span class="marquee-pill">OpenClaw Memory</span>
+              <span class="marquee-pill">Ranked Memory</span>
+              <span class="marquee-pill">SimpleMem</span>
+              <span class="marquee-pill">Zep</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- REASONING row — scrolls right -->
+        <div class="marquee-row">
+          <div class="marquee-label">Reasoning</div>
+          <div class="marquee-track">
+            <div class="marquee-inner animate-scroll-right">
+              <span class="marquee-pill">Chain of Thought (CoT)</span>
+              <span class="marquee-pill">Direct Reasoning</span>
+              <span class="marquee-pill">Guided Search</span>
+              <span class="marquee-pill">Language Agent Tree Search (LATS)</span>
+              <span class="marquee-pill">Multi-Agent Debate (MAD)</span>
+              <span class="marquee-pill">Plan and Solve</span>
+              <span class="marquee-pill">Reasoning via Planning (RAP)</span>
+              <span class="marquee-pill">Reasoning and Acting (ReAct)</span>
+              <span class="marquee-pill">Self Consistency</span>
+              <span class="marquee-pill">Situation Supervision (SitSup)</span>
+              <span class="marquee-pill">Tree of Thoughts (ToT)</span>
+              <!-- duplicate for seamless loop -->
+              <span class="marquee-pill">Chain of Thought (CoT)</span>
+              <span class="marquee-pill">Direct Reasoning</span>
+              <span class="marquee-pill">Guided Search</span>
+              <span class="marquee-pill">Language Agent Tree Search (LATS)</span>
+              <span class="marquee-pill">Multi-Agent Debate (MAD)</span>
+              <span class="marquee-pill">Plan and Solve</span>
+              <span class="marquee-pill">Reasoning via Planning (RAP)</span>
+              <span class="marquee-pill">Reasoning and Acting (ReAct)</span>
+              <span class="marquee-pill">Self Consistency</span>
+              <span class="marquee-pill">Situation Supervision (SitSup)</span>
+              <span class="marquee-pill">Tree of Thoughts (ToT)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- REFLECTION row — scrolls left -->
+        <div class="marquee-row">
+          <div class="marquee-label">Reflection</div>
+          <div class="marquee-track">
+            <div class="marquee-inner animate-scroll-left">
+              <span class="marquee-pill">Reflexion</span>
+              <span class="marquee-pill">Retroformer</span>
+              <span class="marquee-pill">Self Refine</span>
+              <!-- duplicate for seamless loop -->
+              <span class="marquee-pill">Reflexion</span>
+              <span class="marquee-pill">Retroformer</span>
+              <span class="marquee-pill">Self Refine</span>
+              <!-- triple to fill width -->
+              <span class="marquee-pill">Reflexion</span>
+              <span class="marquee-pill">Retroformer</span>
+              <span class="marquee-pill">Self Refine</span>
+              <span class="marquee-pill">Reflexion</span>
+              <span class="marquee-pill">Retroformer</span>
+              <span class="marquee-pill">Self Refine</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Environment Setup ──────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="mb-4">
+        <h2 class="title is-3">Environment Setup</h2>
+        <p class="subtitle is-6">Supported backends and the features they bring into the unified perception stack.</p>
+      </div>
+      <div class="columns is-multiline">
+        <div class="column is-3">
+          <div class="card">
+            <div class="card-content">
+              <h3 class="title is-5">MiniGrid</h3>
+              <p class="has-text-grey">Fast local validation for discrete embodied tasks.</p>
+              <ul class="env-feature-list">
+                <li>Discrete action schemas</li>
+                <li>Relation extraction</li>
+                <li>Low-latency debugging</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="card">
+            <div class="card-content">
+              <h3 class="title is-5">AI2-THOR</h3>
+              <p class="has-text-grey">Grounded 3D embodied scenes with richer visual inputs.</p>
+              <ul class="env-feature-list">
+                <li>RGB and depth frames</li>
+                <li>Object and room metadata</li>
+                <li>Camera-based perception</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="card">
+            <div class="card-content">
+              <h3 class="title is-5">DeliveryBench</h3>
+              <p class="has-text-grey">Long-horizon benchmark with delivery and resource-management signals.</p>
+              <ul class="env-feature-list">
+                <li>Task progress tracking</li>
+                <li>Resource usage metrics</li>
+                <li>Structured episode summaries</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="column is-3">
+          <div class="card">
+            <div class="card-content">
+              <h3 class="title is-5">Gym-Compatible</h3>
+              <p class="has-text-grey">General interface for custom environments and wrappers.</p>
+              <ul class="env-feature-list">
+                <li>Unified <code>UnifiedAgentInput</code> mapping</li>
+                <li>Pluggable adapters</li>
+                <li>Reusable evaluation pipeline</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Demo Video ─────────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="mb-4">
+        <h2 class="title is-3">Demo Video</h2>
+        <p class="subtitle is-6">Placeholder player for your upcoming embedded demo.</p>
+      </div>
+      <div class="box">
+        <div class="level mb-3">
+          <div class="level-left">
+            <h3 class="title is-5 mb-0">AgentFactory Demo</h3>
+          </div>
+          <div class="level-right">
+            <span class="tag is-light is-rounded">Sample Placeholder</span>
+          </div>
+        </div>
+        <div class="demo-video-shell">
+          <video class="demo-video-player" controls preload="metadata" poster="">
+            <source src="" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <p class="has-text-grey mt-3 is-size-7">
+          Update the <code>src</code> in this section when your final video URL is ready.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Evaluation Results ─────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="mb-4">
+        <h2 class="title is-3">Evaluation Results</h2>
+        <p class="subtitle is-6">Compare method performance by environment. Hover any bar to inspect reasoning, memory,
+          and reflection setup.</p>
+      </div>
+      <div class="box eval-results-card">
+        <div id="eval-filter-strip" class="eval-filter-strip" role="tablist" aria-label="Filter by task"></div>
+        <div class="eval-table-wrap">
+          <table class="eval-input-table" aria-label="Agent configuration and performance">
+            <thead>
+              <tr>
+                <th>Agents</th>
+                <th>Reasoning</th>
+                <th>Memory</th>
+                <th>Reflection</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody id="eval-table-body"></tbody>
+          </table>
+        </div>
+        <div class="eval-chart-shell">
+          <div id="eval-bars" class="eval-bars" aria-live="polite"></div>
+          <div class="eval-axis-row" aria-hidden="true">
+            <span class="eval-axis-spacer"></span>
+            <div id="eval-axis" class="eval-axis"></div>
+          </div>
+          <div id="eval-hover-tooltip" class="eval-hover-tooltip" role="tooltip" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Architecture Overview ──────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="mb-4">
+        <h2 class="title is-3">Architecture Overview</h2>
+        <p class="subtitle is-6">Every layer can be independently replaced while keeping the same execution interface.
+        </p>
+      </div>
+      <div class="columns is-multiline">
+        <div class="column is-6">
+          <div class="card surface-card" data-module="perception" onclick="loadArchitecture('perception')">
+            <div class="card-content">
+              <h3 class="title is-5">Perception</h3>
+              <p class="has-text-grey">Adapters normalize raw observations into a common agent input schema.</p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="card surface-card" data-module="reasoning" onclick="loadArchitecture('reasoning')">
+            <div class="card-content">
+              <h3 class="title is-5">Reasoning</h3>
+              <p class="has-text-grey">Run Simple, ReAct, CoT, ToT, RAP, or Guided Search with minimal config changes.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="card surface-card" data-module="memory" onclick="loadArchitecture('memory')">
+            <div class="card-content">
+              <h3 class="title is-5">Memory</h3>
+              <p class="has-text-grey">Pick stateless mode or pluggable memory backends for longer-horizon behavior.</p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="card surface-card" data-module="reflection" onclick="loadArchitecture('reflection')">
+            <div class="card-content">
+              <h3 class="title is-5">Reflection</h3>
+              <p class="has-text-grey">Attach self-refinement loops to improve decision quality over iterations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="architecture-detail" class="box mt-4" style="display: none;"></div>
+    </div>
+  </section>
+
+  <!-- ── From Setup to Evaluation ───────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="mb-4">
+        <h2 class="title is-3">From Setup to Evaluation</h2>
+        <p class="subtitle is-6">A direct workflow for fast experiments.</p>
+      </div>
+      <div class="columns">
+        <div class="column is-4">
+          <div class="card flow-step">
+            <div class="card-content">
+              <span class="step-num">01</span>
+              <h3 class="title is-5 mt-2">Install + Configure</h3>
+              <p class="has-text-grey">Set up dependencies, environment adapters, and API keys.</p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="card flow-step">
+            <div class="card-content">
+              <span class="step-num">02</span>
+              <h3 class="title is-5 mt-2">Compose Agent</h3>
+              <p class="has-text-grey">Use the playground UI to generate runnable Python setup code.</p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div class="card flow-step">
+            <div class="card-content">
+              <span class="step-num">03</span>
+              <h3 class="title is-5 mt-2">Run Benchmarks</h3>
+              <p class="has-text-grey">Execute repeatable loops and compare module combinations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>&copy; 2026 AgentFactory Team. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ────────────────────────────────────────────── -->
+  <script src="js/fontawesome.all.min.js"></script>
+  <script src="js/bulma-carousel.min.js"></script>
+  <script src="js/bulma-slider.min.js"></script>
+  <script src="js/results-csv.js"></script>
+  <script src="js/home.js"></script>
+  <script>
+    // Navbar burger toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const burgers = document.querySelectorAll('.navbar-burger');
+      burgers.forEach(burger => {
+        burger.addEventListener('click', () => {
+          const target = document.getElementById(burger.dataset.target);
+          burger.classList.toggle('is-active');
+          target.classList.toggle('is-active');
+        });
+      });
+    });
+
+    async function loadArchitecture(moduleName) {
+      const detailEl = document.getElementById('architecture-detail');
+      if (!detailEl) return;
+
+      try {
+        detailEl.style.display = 'block';
+        detailEl.innerHTML = '<p>Loading...</p>';
+
+        // Highlight the active card
+        document.querySelectorAll('.surface-card').forEach(card => {
+          if (card.dataset.module === moduleName) {
+            card.style.borderColor = 'var(--accent, #0ea5e9)';
+            card.style.boxShadow = '0 4px 14px rgba(15, 23, 42, .08)';
+          } else {
+            card.style.borderColor = '';
+            card.style.boxShadow = '';
+          }
+        });
+
+        const fetchUrl = `lists/${moduleName}.md?_t=${Date.now()}`;
+        const response = await fetch(fetchUrl);
+        if (!response.ok) {
+          throw new Error(`Failed to load architecture markdown: ${response.status}`);
+        }
+
+        const text = (await response.text()).trim();
+        const paragraphs = text
+          .split(/\n\s*\n/g)
+          .map(part => part.trim())
+          .filter(Boolean);
+
+        detailEl.innerHTML = `<h3 class="title is-5">${moduleName.charAt(0).toUpperCase() + moduleName.slice(1)} Module</h3>` +
+          paragraphs.map(p => `<p class="mt-2">${p.replace(/\n/g, '<br />')}</p>`).join('');
+      } catch (err) {
+        detailEl.innerHTML = `<p class="has-text-danger">Error loading details: ${err.message}</p>`;
+      }
+    }
+  </script>
+</body>
+
+</html>
