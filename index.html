@@ -431,16 +431,23 @@
     <div class="container">
       <div class="mb-4">
         <h2 class="title is-3">Evaluation Results</h2>
-        <p class="subtitle is-6">Compare method performance by environment. Hover any bar to inspect reasoning, memory,
+        <p class="subtitle is-6">Compare performance by task and model. Hover any bar to inspect reasoning, memory,
           and reflection setup.</p>
       </div>
       <div class="box eval-results-card">
-        <div id="eval-filter-strip" class="eval-filter-strip" role="tablist" aria-label="Filter by task"></div>
+        <div class="mb-3">
+          <p class="is-size-7 has-text-weight-semibold has-text-grey mb-2">Filter by Task</p>
+          <div id="eval-task-strip" class="eval-filter-strip" role="tablist" aria-label="Filter by task"></div>
+        </div>
+        <div class="mb-3">
+          <p class="is-size-7 has-text-weight-semibold has-text-grey mb-2">Filter by Model</p>
+          <div id="eval-model-strip" class="eval-filter-strip" role="tablist" aria-label="Filter by model"></div>
+        </div>
         <div class="eval-table-wrap">
-          <table class="eval-input-table" aria-label="Agent configuration and performance">
+          <table class="eval-input-table" aria-label="Model configuration and performance">
             <thead>
               <tr>
-                <th>Agents</th>
+                <th>Models</th>
                 <th>Reasoning</th>
                 <th>Memory</th>
                 <th>Reflection</th>

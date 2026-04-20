@@ -1,161 +1,60 @@
+const MODEL_ALL = '__all__';
+const MODEL_ORDER = [
+  'GPT-5',
+  'Gemini-3-Flash',
+  'Qwen3.5-397B',
+  'Qwen3.5-9B',
+  'GPT-5 mini',
+];
+
 let HOME_EVAL = {
-  envs: [
-    { id: 'Minigrid', label: 'MiniGrid', offset: 2.8 },
-    { id: 'ALFWorld', label: 'ALFWorld', offset: -2.1 },
-    { id: 'DeliveryBench', label: 'DeliveryBench', offset: -1.0 },
-    { id: 'RoboThor', label: 'RoboThor', offset: 1.4 },
-  ],
-  variation: [0.0, 0.3, -0.2, 0.1, -0.4, 0.2, -0.1, 0.4, -0.3],
-  methods: [
-    {
-      name: 'AgentSquare',
-      score: 66.9,
-      reasoning: 'Hybrid search + planner reranking',
-      memory: 'Graph episodic memory',
-      reflection: 'Self-refine on failed trajectories',
-    },
-    {
-      name: 'Random Search',
-      score: 66.0,
-      reasoning: 'Random action rollout and retry',
-      memory: 'None',
-      reflection: 'None',
-    },
-    {
-      name: 'Bayesian Search',
-      score: 65.0,
-      reasoning: 'Bayesian optimization over plans',
-      memory: 'Short-horizon score buffer',
-      reflection: 'Prompt update via posterior estimate',
-    },
-    {
-      name: 'OPENAGI',
-      score: 61.6,
-      reasoning: 'Task decomposition + tool routing',
-      memory: 'Task execution context memory',
-      reflection: 'Replan after tool failures',
-    },
-    {
-      name: 'DEPS',
-      score: 59.1,
-      reasoning: 'Dynamic exemplar policy search',
-      memory: 'Exemplar retrieval memory',
-      reflection: 'Trajectory-level self-critique',
-    },
-    {
-      name: 'OPRO',
-      score: 58.9,
-      reasoning: 'Optimizer-driven prompt search',
-      memory: 'Prompt history memory',
-      reflection: 'Policy update from score deltas',
-    },
-    {
-      name: 'HuggingGPT',
-      score: 58.4,
-      reasoning: 'Planner + model/tool orchestration',
-      memory: 'Tool-call trace memory',
-      reflection: 'Failure-aware tool reselection',
-    },
-    {
-      name: 'Generative Agents',
-      score: 55.3,
-      reasoning: 'Goal-driven daily planning loop',
-      memory: 'Long-term natural language memory',
-      reflection: 'Periodic reflection summary',
-    },
-    {
-      name: 'CoT',
-      score: 54.2,
-      reasoning: 'Chain-of-thought single path',
-      memory: 'None',
-      reflection: 'None',
-    },
-    {
-      name: 'TP',
-      score: 51.8,
-      reasoning: 'Explicit task planning',
-      memory: 'Task-state notes',
-      reflection: 'Plan repair after mismatch',
-    },
-    {
-      name: 'Self-refine',
-      score: 51.4,
-      reasoning: 'Draft -> critique -> revise loop',
-      memory: 'Working-memory scratchpad',
-      reflection: 'Built-in iterative self-reflection',
-    },
-    {
-      name: 'Cot-SC',
-      score: 49.5,
-      reasoning: 'CoT with self-consistency voting',
-      memory: 'Sampled answer cache',
-      reflection: 'Vote-based error correction',
-    },
-    {
-      name: 'Step Back',
-      score: 48.6,
-      reasoning: 'Abstraction-first step-back prompting',
-      memory: 'Abstract schema memory',
-      reflection: 'Backtracking over abstract plan',
-    },
-    {
-      name: 'ToT',
-      score: 47.6,
-      reasoning: 'Tree-of-thought branching search',
-      memory: 'Search tree memory',
-      reflection: 'Branch evaluation and pruning',
-    },
-    {
-      name: 'Dilu',
-      score: 46.3,
-      reasoning: 'Deliberate look-ahead utility search',
-      memory: 'Action-outcome cache',
-      reflection: 'Look-ahead adjustment loop',
-    },
-    {
-      name: 'Voyager',
-      score: 41.2,
-      reasoning: 'Skill curriculum and exploration',
-      memory: 'Skill library memory',
-      reflection: 'Automatic skill critique and update',
-    },
-  ],
+  tasks: [],
+  models: [],
+  records: [],
 };
 
 const CHART_MAX = 80;
 const AXIS_STEP = 10;
 
-function clampScore(score) {
-  return Math.max(0, Math.min(CHART_MAX, score));
+function getTaskById(taskId) {
+  return HOME_EVAL.tasks.find((task) => task.id === taskId) || HOME_EVAL.tasks[0] || null;
 }
 
-function getEnvById(envId) {
-  return HOME_EVAL.envs.find((env) => env.id === envId) || HOME_EVAL.envs[0];
-}
-
-function getResultsMax(envId) {
-  const results = getResultsByEnv(envId);
-  const maxScore = results.reduce((acc, item) => Math.max(acc, Number(item.score) || 0), 0);
-  return maxScore <= CHART_MAX ? CHART_MAX : Math.ceil(maxScore / 10) * 10;
-}
-
-function getResultsByEnv(envId) {
-  if (HOME_EVAL.methodsByEnv && HOME_EVAL.methodsByEnv[envId]) {
-    return HOME_EVAL.methodsByEnv[envId]
-      .map((method) => ({ ...method, score: Number(method.score) || 0 }))
-      .sort((a, b) => b.score - a.score);
+function getModelsForTask(taskId) {
+  const taskIdResolved = getTaskById(taskId)?.id;
+  if (!taskIdResolved) {
+    return HOME_EVAL.models;
   }
 
-  const envIdx = HOME_EVAL.envs.findIndex((env) => env.id === envId);
-  const env = HOME_EVAL.envs[envIdx] || HOME_EVAL.envs[0];
+  const taskRecords = HOME_EVAL.records.filter((record) => record.task === taskIdResolved);
+  const taskModels = new Set(taskRecords.map((record) => record.model));
+  const orderedModels = MODEL_ORDER
+    .filter((modelId) => taskModels.has(modelId))
+    .map((modelId) => HOME_EVAL.models.find((model) => model.id === modelId) || { id: modelId, label: modelId });
 
-  return HOME_EVAL.methods
-    .map((method, idx) => {
-      const v = HOME_EVAL.variation[(idx + envIdx) % HOME_EVAL.variation.length];
-      const score = clampScore(Number((method.score + env.offset + v).toFixed(1)));
-      return { ...method, score };
-    })
+  const extraModels = HOME_EVAL.models.filter(
+    (model) => !MODEL_ORDER.includes(model.id) && taskModels.has(model.id),
+  );
+
+  return [...orderedModels, ...extraModels];
+}
+
+function getResultsBySelection(taskId, modelId) {
+  const task = getTaskById(taskId);
+  if (!task) {
+    return [];
+  }
+
+  return HOME_EVAL.records
+    .filter((record) => record.task === task.id && (modelId === MODEL_ALL || record.model === modelId))
+    .map((record) => ({ ...record, score: Number(record.score) || 0 }))
     .sort((a, b) => b.score - a.score);
+}
+
+function getResultsMax(taskId, modelId) {
+  const results = getResultsBySelection(taskId, modelId);
+  const maxScore = results.reduce((acc, item) => Math.max(acc, Number(item.score) || 0), 0);
+  return maxScore <= CHART_MAX ? CHART_MAX : Math.ceil(maxScore / 10) * 10;
 }
 
 function getBarColor(score, maxValue = CHART_MAX) {
@@ -165,9 +64,9 @@ function getBarColor(score, maxValue = CHART_MAX) {
   return `hsl(211 ${saturation.toFixed(1)}% ${lightness.toFixed(1)}%)`;
 }
 
-function renderTooltipContent(tooltipEl, entry, envLabel) {
+function renderTooltipContent(tooltipEl, entry, taskLabel) {
   tooltipEl.innerHTML = `
-    <p class="eval-hover-tooltip-title">${entry.name} — ${envLabel}: ${entry.score.toFixed(1)}</p>
+    <p class="eval-hover-tooltip-title">${entry.model} — ${taskLabel}: ${entry.score.toFixed(1)}</p>
     <p class="eval-hover-tooltip-line"><strong>Reasoning:</strong> ${entry.reasoning}</p>
     <p class="eval-hover-tooltip-line"><strong>Memory:</strong> ${entry.memory}</p>
     <p class="eval-hover-tooltip-line"><strong>Reflection:</strong> ${entry.reflection}</p>
@@ -192,8 +91,8 @@ function renderAxis(axisEl, maxValue = CHART_MAX, step = AXIS_STEP) {
   }
 }
 
-function showTooltip(tooltipEl, shellEl, targetEl, entry, envLabel, clientX) {
-  renderTooltipContent(tooltipEl, entry, envLabel);
+function showTooltip(tooltipEl, shellEl, targetEl, entry, taskLabel, clientX) {
+  renderTooltipContent(tooltipEl, entry, taskLabel);
   tooltipEl.classList.add('visible');
   tooltipEl.setAttribute('aria-hidden', 'false');
 
@@ -219,10 +118,10 @@ function hideTooltip(tooltipEl) {
   tooltipEl.setAttribute('aria-hidden', 'true');
 }
 
-function renderTableRows(tableBodyEl, envId) {
-  const env = getEnvById(envId);
-  const results = getResultsByEnv(env.id);
-  const maxValue = getResultsMax(env.id);
+function renderTableRows(tableBodyEl, taskId, modelId) {
+  const task = getTaskById(taskId);
+  const results = getResultsBySelection(task?.id, modelId);
+  const maxValue = getResultsMax(task?.id, modelId);
   tableBodyEl.innerHTML = '';
 
   results.forEach((entry) => {
@@ -232,7 +131,7 @@ function renderTableRows(tableBodyEl, envId) {
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${entry.name}</td>
+      <td>${entry.model}</td>
       <td>${entry.reasoning}</td>
       <td>${entry.memory}</td>
       <td>${entry.reflection}</td>
@@ -242,10 +141,10 @@ function renderTableRows(tableBodyEl, envId) {
   });
 }
 
-function renderChartRows(containerEl, tooltipEl, shellEl, envId) {
-  const env = getEnvById(envId);
-  const results = getResultsByEnv(env.id);
-  const maxValue = getResultsMax(env.id);
+function renderChartRows(containerEl, tooltipEl, shellEl, taskId, modelId) {
+  const task = getTaskById(taskId);
+  const results = getResultsBySelection(task?.id, modelId);
+  const maxValue = getResultsMax(task?.id, modelId);
 
   containerEl.innerHTML = '';
 
@@ -256,14 +155,14 @@ function renderChartRows(containerEl, tooltipEl, shellEl, envId) {
     row.type = 'button';
     row.className = 'eval-bar-row';
     row.innerHTML = `
-      <span class="eval-bar-label">${entry.name}</span>
+      <span class="eval-bar-label">${entry.model}</span>
       <span class="eval-bar-track" style="--bar-pct:${pct.toFixed(2)}%;">
         <span class="eval-bar-fill" style="width:${pct.toFixed(2)}%; background:${barColor};"></span>
         <span class="eval-bar-end">${entry.score.toFixed(2)}</span>
       </span>
     `;
 
-    const showDetails = (event) => showTooltip(tooltipEl, shellEl, row, entry, env.label, event?.clientX);
+    const showDetails = (event) => showTooltip(tooltipEl, shellEl, row, entry, task.label, event?.clientX);
     row.addEventListener('mouseenter', showDetails);
     row.addEventListener('mousemove', showDetails);
     row.addEventListener('focus', showDetails);
@@ -274,40 +173,84 @@ function renderChartRows(containerEl, tooltipEl, shellEl, envId) {
   });
 }
 
-function renderFilters(stripEl, barsEl, tableBodyEl, tooltipEl, shellEl) {
+function buildButton(stripEl, id, label, activeClass, role, onClick) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'eval-filter-btn';
+  btn.dataset[role] = id;
+  btn.textContent = label;
+  btn.setAttribute('role', 'tab');
+  btn.setAttribute('aria-selected', 'false');
+  btn.addEventListener('click', onClick);
+  stripEl.appendChild(btn);
+  return btn;
+}
+
+function renderTaskButtons(stripEl, state, updateView) {
   stripEl.innerHTML = '';
 
-  const label = document.createElement('span');
-  label.className = 'eval-filter-label';
-  label.textContent = 'Filter by Task:';
-  stripEl.appendChild(label);
-
-  const setActive = (activeId) => {
-    stripEl.querySelectorAll('.eval-filter-btn').forEach((btn) => {
-      const active = btn.dataset.env === activeId;
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+  HOME_EVAL.tasks.forEach((task) => {
+    buildButton(stripEl, task.id, task.label, 'task', 'env', () => {
+      state.taskId = task.id;
+      const availableModels = getModelsForTask(state.taskId);
+      if (!availableModels.some((model) => model.id === state.modelId)) {
+        state.modelId = MODEL_ALL;
+      }
+      renderModelButtons(state.modelStripEl, state, updateView);
+      updateView();
     });
+  });
+}
 
-    hideTooltip(tooltipEl);
-    renderAxis(document.querySelector('#eval-axis'), getResultsMax(activeId));
-    renderChartRows(barsEl, tooltipEl, shellEl, activeId);
-    renderTableRows(tableBodyEl, activeId);
-  };
+function renderModelButtons(stripEl, state, updateView) {
+  stripEl.innerHTML = '';
 
-  HOME_EVAL.envs.forEach((env) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'eval-filter-btn';
-    btn.dataset.env = env.id;
-    btn.textContent = env.label;
-    btn.setAttribute('role', 'tab');
-    btn.setAttribute('aria-selected', 'false');
-    btn.addEventListener('click', () => setActive(env.id));
-    stripEl.appendChild(btn);
+  buildButton(stripEl, MODEL_ALL, 'All Models', 'model', 'model', () => {
+    state.modelId = MODEL_ALL;
+    updateView();
   });
 
-  setActive(HOME_EVAL.envs[0].id);
+  getModelsForTask(state.taskId).forEach((model) => {
+    buildButton(stripEl, model.id, model.label, 'model', 'model', () => {
+      state.modelId = model.id;
+      updateView();
+    });
+  });
+}
+
+function syncActiveButtons(stripEl, selectedAttr, activeId) {
+  stripEl.querySelectorAll('.eval-filter-btn').forEach((btn) => {
+    const selected = btn.dataset[selectedAttr] === activeId;
+    btn.classList.toggle('active', selected);
+    btn.setAttribute('aria-selected', selected ? 'true' : 'false');
+  });
+}
+
+function renderFilters(taskStripEl, modelStripEl, barsEl, tableBodyEl, tooltipEl, shellEl, axisEl) {
+  const initialTask = HOME_EVAL.tasks[0]?.id;
+  if (!initialTask) {
+    return;
+  }
+
+  const state = {
+    taskId: initialTask,
+    modelId: MODEL_ALL,
+    modelStripEl,
+  };
+
+  const updateView = () => {
+    const task = getTaskById(state.taskId);
+    hideTooltip(tooltipEl);
+    syncActiveButtons(taskStripEl, 'env', task.id);
+    syncActiveButtons(modelStripEl, 'model', state.modelId);
+    renderAxis(axisEl, getResultsMax(task.id, state.modelId));
+    renderChartRows(barsEl, tooltipEl, shellEl, task.id, state.modelId);
+    renderTableRows(tableBodyEl, task.id, state.modelId);
+  };
+
+  renderTaskButtons(taskStripEl, state, updateView);
+  renderModelButtons(modelStripEl, state, updateView);
+  updateView();
 }
 
 async function loadHomeEvaluationFromCsv() {
@@ -317,7 +260,7 @@ async function loadHomeEvaluationFromCsv() {
 
   try {
     const csvEval = await window.HomeEvalCsv.loadHomeEvalData('data/results.csv');
-    if (csvEval && Array.isArray(csvEval.envs) && csvEval.envs.length > 0) {
+    if (csvEval && Array.isArray(csvEval.tasks) && csvEval.tasks.length > 0) {
       HOME_EVAL = csvEval;
     }
   } catch (_err) {
@@ -326,20 +269,24 @@ async function loadHomeEvaluationFromCsv() {
 }
 
 async function initHomeEvaluation() {
-  const filterStrip = document.querySelector('#eval-filter-strip');
+  const taskStrip = document.querySelector('#eval-task-strip');
+  const modelStrip = document.querySelector('#eval-model-strip');
   const barsContainer = document.querySelector('#eval-bars');
   const axis = document.querySelector('#eval-axis');
   const tableBody = document.querySelector('#eval-table-body');
   const hoverTooltip = document.querySelector('#eval-hover-tooltip');
   const chartShell = document.querySelector('.eval-chart-shell');
 
-  if (!filterStrip || !barsContainer || !axis || !tableBody || !hoverTooltip || !chartShell) {
+  if (!taskStrip || !modelStrip || !barsContainer || !axis || !tableBody || !hoverTooltip || !chartShell) {
     return;
   }
 
   await loadHomeEvaluationFromCsv();
-  renderAxis(axis, getResultsMax(HOME_EVAL.envs[0].id));
-  renderFilters(filterStrip, barsContainer, tableBody, hoverTooltip, chartShell);
+  if (!HOME_EVAL.tasks.length) {
+    return;
+  }
+
+  renderFilters(taskStrip, modelStrip, barsContainer, tableBody, hoverTooltip, chartShell, axis);
 }
 
 async function loadAbstract() {

@@ -1,6 +1,14 @@
 /* CSV-driven evaluation loader + lightweight formatters for home results */
 
 (function () {
+  const MODEL_ORDER = [
+    'GPT-5',
+    'Gemini-3-Flash',
+    'Qwen3.5-397B',
+    'Qwen3.5-9B',
+    'GPT-5 mini',
+  ];
+
   function parseCSV(text) {
     const rows = [];
     let current = '';
@@ -113,36 +121,24 @@
       return null;
     }
 
-    const allowedEnvs = new Map([
-      ['Minigrid', { id: 'Minigrid', label: 'MiniGrid' }],
-      ['ALFWorld', { id: 'ALFWorld', label: 'ALFWorld' }],
-      ['DeliveryBench', { id: 'DeliveryBench', label: 'DeliveryBench' }],
-      ['THOR', { id: 'RoboThor' }],
-      ['RoboThor', { id: 'RoboThor', label: 'RoboThor' }],
-    ]);
-    const envIndex = new Map();
-    const methodsByEnv = {};
+    const taskIndex = new Map();
+    const modelIndex = new Map();
+    const records = [];
 
     validRows.forEach((row) => {
-      const envMeta = allowedEnvs.get(row.environment);
-      if (!envMeta) {
-        return;
+      const task = row.environment;
+      const model = row.agent;
+
+      if (!taskIndex.has(task)) {
+        taskIndex.set(task, { id: task, label: task });
+      }
+      if (!modelIndex.has(model)) {
+        modelIndex.set(model, { id: model, label: model });
       }
 
-      const environment = envMeta.id;
-      if (!envIndex.has(environment)) {
-        envIndex.set(environment, {
-          id: environment,
-          label: envMeta.label || environment,
-          offset: 0,
-        });
-      }
-      if (!methodsByEnv[environment]) {
-        methodsByEnv[environment] = [];
-      }
-
-      methodsByEnv[environment].push({
-        name: row.agent,
+      records.push({
+        task,
+        model,
         score: Number(row.score || 0),
         reasoning: row.reasoning || 'N/A',
         memory: row.memory || 'N/A',
@@ -150,15 +146,15 @@
       });
     });
 
-    if (envIndex.size === 0) {
-      return null;
-    }
+    const orderedModels = MODEL_ORDER
+      .filter((modelId) => modelIndex.has(modelId))
+      .map((modelId) => modelIndex.get(modelId));
+    const extraModels = Array.from(modelIndex.values()).filter((model) => !MODEL_ORDER.includes(model.id));
 
     return {
-      envs: Array.from(envIndex.values()),
-      methodsByEnv,
-      variation: [],
-      methods: [],
+      tasks: Array.from(taskIndex.values()),
+      models: [...orderedModels, ...extraModels],
+      records,
     };
   }
 

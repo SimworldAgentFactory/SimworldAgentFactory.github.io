@@ -1,13 +1,61 @@
 environment,agent,score,reasoning,memory,reflection
-Minigrid,AgentSquare,72.4,Hybrid search + planner reranking,Graph episodic memory,Self-refine on failed trajectories
-Minigrid,ReAct,64.1,Stepwise ReAct prompting,Short episodic context,Retry-based critique
-Minigrid,CoT,58.7,Single-path chain-of-thought,None,None
-ALFWorld,AgentSquare,69.2,Task decomposition + planner reranking,Long-horizon retrieval memory,Trajectory reflection
-ALFWorld,OPENAGI,62.8,Tool-routed decomposition,Task execution context,Replan after tool failures
-ALFWorld,HuggingGPT,60.9,Planner + model orchestration,Tool-call trace memory,Failure-aware tool reselection
-DeliveryBench,AgentSquare,67.5,Search-guided planning,Graph + recent trajectory memory,Self-correct after failed delivery
-DeliveryBench,DEPS,59.3,Dynamic exemplar policy search,Exemplar retrieval memory,Trajectory-level self-critique
-DeliveryBench,TP,54.6,Explicit task planning,Task-state notes,Plan repair after mismatch
-RoboThor,AgentSquare,70.1,Hybrid search + planner reranking,Visual-episodic memory,Iterative reflection loop
-RoboThor,ToT,61.4,Tree-of-thought branching search,Search tree memory,Branch evaluation and pruning
-RoboThor,Voyager,52.7,Skill curriculum and exploration,Skill library memory,Automatic skill critique and update
+DeliveryBench,GPT-5,21.54,None,Base,None
+DeliveryBench,Gemini-3-Flash,13.73,None,Base,None
+DeliveryBench,Qwen3.5-397B,13.83,None,Base,None
+DeliveryBench,Qwen3.5-9B,7.13,None,Base,None
+DeliveryBench,GPT-5 mini,7.18,None,Base,None
+DeliveryBench,GPT-5,30.39,ReAct,Base,None
+DeliveryBench,Gemini-3-Flash,31.53,ReAct,Base,None
+DeliveryBench,Qwen3.5-397B,26.97,ReAct,Base,None
+DeliveryBench,Qwen3.5-9B,12.64,ReAct,Base,None
+DeliveryBench,GPT-5 mini,8.54,ReAct,Base,None
+DeliveryBench,GPT-5,40.92,ReAct,ChatDB,None
+DeliveryBench,Gemini-3-Flash,10.96,ReAct,ChatDB,None
+DeliveryBench,Qwen3.5-397B,17.63,ReAct,ChatDB,None
+DeliveryBench,Qwen3.5-9B,19.84,ReAct,ChatDB,None
+DeliveryBench,GPT-5 mini,9.35,ReAct,ChatDB,None
+DeliveryBench,GPT-5,53.17,ReAct,DynamicCheatsheet,None
+DeliveryBench,Gemini-3-Flash,28.62,ReAct,DynamicCheatsheet,None
+DeliveryBench,Qwen3.5-397B,36.83,ReAct,DynamicCheatsheet,None
+DeliveryBench,Qwen3.5-9B,14.95,ReAct,DynamicCheatsheet,None
+DeliveryBench,GPT-5 mini,16.46,ReAct,DynamicCheatsheet,None
+DeliveryBench,GPT-5,33.98,ReAct,SimpleMem,None
+DeliveryBench,Gemini-3-Flash,30.38,ReAct,SimpleMem,None
+DeliveryBench,Qwen3.5-397B,20.25,ReAct,SimpleMem,None
+DeliveryBench,Qwen3.5-9B,9.59,ReAct,SimpleMem,None
+DeliveryBench,GPT-5 mini,15.16,ReAct,SimpleMem,None
+DeliveryBench,GPT-5,44.47,ReAct,MemoryBank,None
+DeliveryBench,Gemini-3-Flash,22.75,ReAct,MemoryBank,None
+DeliveryBench,Qwen3.5-397B,26.69,ReAct,MemoryBank,None
+DeliveryBench,Qwen3.5-9B,7.49,ReAct,MemoryBank,None
+DeliveryBench,GPT-5 mini,30.67,ReAct,MemoryBank,None
+DeliveryBench,GPT-5,46.79,ReAct,OpenClaw,None
+DeliveryBench,Gemini-3-Flash,22.84,ReAct,OpenClaw,None
+DeliveryBench,Qwen3.5-397B,19.56,ReAct,OpenClaw,None
+DeliveryBench,Qwen3.5-9B,18.22,ReAct,OpenClaw,None
+DeliveryBench,GPT-5 mini,23.07,ReAct,OpenClaw,None
+DeliveryBench,GPT-5,34.74,CoT,Base,None
+DeliveryBench,Gemini-3-Flash,30.35,CoT,Base,None
+DeliveryBench,Qwen3.5-397B,20.70,CoT,Base,None
+DeliveryBench,Qwen3.5-9B,12.62,CoT,Base,None
+DeliveryBench,GPT-5 mini,12.48,CoT,Base,None
+DeliveryBench,GPT-5,41.29,Plan&Solve,Base,None
+DeliveryBench,Gemini-3-Flash,19.52,Plan&Solve,Base,None
+DeliveryBench,Qwen3.5-397B,20.76,Plan&Solve,Base,None
+DeliveryBench,Qwen3.5-9B,20.91,Plan&Solve,Base,None
+DeliveryBench,GPT-5 mini,6.18,Plan&Solve,Base,None
+DeliveryBench,GPT-5,31.12,MAD,Base,None
+DeliveryBench,Gemini-3-Flash,29.32,MAD,Base,None
+DeliveryBench,Qwen3.5-397B,28.76,MAD,Base,None
+DeliveryBench,Qwen3.5-9B,23.98,MAD,Base,None
+DeliveryBench,GPT-5 mini,22.26,MAD,Base,None
+DeliveryBench,GPT-5,32.74,ReAct,Base,Self-Refine
+DeliveryBench,Gemini-3-Flash,15.87,ReAct,Base,Self-Refine
+DeliveryBench,Qwen3.5-397B,26.44,ReAct,Base,Self-Refine
+DeliveryBench,Qwen3.5-9B,18.36,ReAct,Base,Self-Refine
+DeliveryBench,GPT-5 mini,27.97,ReAct,Base,Self-Refine
+DeliveryBench,GPT-5,40.54,ReAct,Base,Reflexion
+DeliveryBench,Gemini-3-Flash,32.93,ReAct,Base,Reflexion
+DeliveryBench,Qwen3.5-397B,33.58,ReAct,Base,Reflexion
+DeliveryBench,Qwen3.5-9B,14.69,ReAct,Base,Reflexion
+DeliveryBench,GPT-5 mini,20.58,ReAct,Base,Reflexion
