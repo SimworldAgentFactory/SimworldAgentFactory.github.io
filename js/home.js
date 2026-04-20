@@ -15,6 +15,16 @@ let HOME_EVAL = {
 
 const CHART_MAX = 80;
 const AXIS_STEP = 10;
+const ENV_SETUP_FALLBACK_MD = `We evaluate the performance of LLMs for embodied decision making using the Embodied Agent Interface. Below is a detailed description of the evaluation setup.
+
+### Dataset Description
+
+To evaluate embodied intelligence across diverse modalities, we select **DeliveryBench**, **ALFRED**, **MiniGrid**, and **RoboTHOR** as our core benchmarks. These environments require the integration of perception, state tracking, and long-horizon planning.
+
+* **DeliveryBench**: A city-scale evaluation for autonomous delivery agents across nine urban maps. It emphasizes long-horizon planning under discrete resource constraints. Observations consist of structured state data and natural-language descriptions of local topography. Performance is quantified via hourly profit.
+* **ALFRED**: A 3D household environment for multi-step instruction following. Evaluation involves seven task categories requiring compositional object manipulation and state-dependent reasoning. The primary metrics are **Success Rate (SR)** and **Success-weighted Path Length (SPL)**.
+* **RoboTHOR**: Focuses on first-person object navigation within photorealistic 3D indoor scenes. Agents are initialized at a starting pose and must navigate to a target object category within a predefined step budget. Efficiency and accuracy are measured using **SR** and **SPL**.
+* **MiniGrid**: A 2D gridworld with pixel-based observations to test reasoning under partial observability. Across 10 distinct tasks, it evaluates navigation and object interaction. Performance is measured by **SR** and an **SPL-derived reward function** that penalizes inefficient trajectories.`;
 
 function getTaskById(taskId) {
   return HOME_EVAL.tasks.find((task) => task.id === taskId) || HOME_EVAL.tasks[0] || null;
@@ -289,6 +299,90 @@ async function initHomeEvaluation() {
   renderFilters(taskStrip, modelStrip, barsContainer, tableBody, hoverTooltip, chartShell, axis);
 }
 
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function formatInlineMarkdown(text) {
+  return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+}
+
+function renderMarkdown(text) {
+  const lines = text.replace(/\r\n/g, '\n').split('\n');
+  const blocks = [];
+  let paragraph = [];
+  let listItems = [];
+
+  const flushParagraph = () => {
+    if (paragraph.length > 0) {
+      blocks.push(`<p>${formatInlineMarkdown(paragraph.join(' '))}</p>`);
+      paragraph = [];
+    }
+  };
+
+  const flushList = () => {
+    if (listItems.length > 0) {
+      blocks.push(`<ul>${listItems.map((item) => `<li>${formatInlineMarkdown(item)}</li>`).join('')}</ul>`);
+      listItems = [];
+    }
+  };
+
+  lines.forEach((rawLine) => {
+    const line = rawLine.trim();
+    if (!line) {
+      flushParagraph();
+      flushList();
+      return;
+    }
+
+    const headingMatch = line.match(/^(#{1,3})\s+(.*)$/);
+    if (headingMatch) {
+      flushParagraph();
+      flushList();
+      const level = headingMatch[1].length;
+      const titleClass = level === 3 ? 'title is-5' : level === 2 ? 'title is-4' : 'title is-3';
+      blocks.push(`<h${level} class="${titleClass}">${formatInlineMarkdown(headingMatch[2])}</h${level}>`);
+      return;
+    }
+
+    const listMatch = line.match(/^[*-]\s+(.*)$/);
+    if (listMatch) {
+      flushParagraph();
+      listItems.push(listMatch[1]);
+      return;
+    }
+
+    flushList();
+    paragraph.push(line);
+  });
+
+  flushParagraph();
+  flushList();
+  return blocks.join('\n');
+}
+
+async function loadMarkdownSection(selector, src) {
+  const el = document.querySelector(selector);
+  if (!el || !src) {
+    return;
+  }
+
+  try {
+    const response = await fetch(src);
+    if (!response.ok) {
+      throw new Error(`Failed to load markdown: ${response.status}`);
+    }
+
+    const text = (await response.text()).trim();
+    el.innerHTML = renderMarkdown(text);
+  } catch (_err) {
+    el.innerHTML = renderMarkdown(ENV_SETUP_FALLBACK_MD);
+  }
+}
+
 async function loadAbstract() {
   const abstractEl = document.querySelector('#abstract-copy');
   if (!abstractEl) {
@@ -321,4 +415,7 @@ async function loadAbstract() {
 }
 
 document.addEventListener('DOMContentLoaded', initHomeEvaluation);
+document.addEventListener('DOMContentLoaded', () => {
+  loadMarkdownSection('#env-setup-copy', 'lists/env_setup.md');
+});
 document.addEventListener('DOMContentLoaded', loadAbstract);

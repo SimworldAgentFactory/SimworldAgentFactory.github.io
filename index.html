@@ -338,61 +338,9 @@
     <div class="container">
       <div class="mb-4">
         <h2 class="title is-3">Environment Setup</h2>
-        <p class="subtitle is-6">Supported backends and the features they bring into the unified perception stack.</p>
+        <p class="subtitle is-6">Rendered directly from the project markdown so the setup notes stay easy to edit.</p>
       </div>
-      <div class="columns is-multiline">
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-content">
-              <h3 class="title is-5">MiniGrid</h3>
-              <p class="has-text-grey">Fast local validation for discrete embodied tasks.</p>
-              <ul class="env-feature-list">
-                <li>Discrete action schemas</li>
-                <li>Relation extraction</li>
-                <li>Low-latency debugging</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-content">
-              <h3 class="title is-5">AI2-THOR</h3>
-              <p class="has-text-grey">Grounded 3D embodied scenes with richer visual inputs.</p>
-              <ul class="env-feature-list">
-                <li>RGB and depth frames</li>
-                <li>Object and room metadata</li>
-                <li>Camera-based perception</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-content">
-              <h3 class="title is-5">DeliveryBench</h3>
-              <p class="has-text-grey">Long-horizon benchmark with delivery and resource-management signals.</p>
-              <ul class="env-feature-list">
-                <li>Task progress tracking</li>
-                <li>Resource usage metrics</li>
-                <li>Structured episode summaries</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-content">
-              <h3 class="title is-5">Gym-Compatible</h3>
-              <p class="has-text-grey">General interface for custom environments and wrappers.</p>
-              <ul class="env-feature-list">
-                <li>Unified <code>UnifiedAgentInput</code> mapping</li>
-                <li>Pluggable adapters</li>
-                <li>Reusable evaluation pipeline</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="box content env-setup-copy" id="env-setup-copy" data-setup-src="lists/env_setup.md" aria-live="polite">
       </div>
     </div>
   </section>

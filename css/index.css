@@ -89,6 +89,21 @@ body {
   text-align: left;
 }
 
+/* ── Environment setup copy ───────────────────────────────────── */
+.env-setup-copy {
+  max-width: 920px;
+  margin: 0 auto;
+}
+.env-setup-copy h3 {
+  margin-top: 1.4rem;
+}
+.env-setup-copy ul {
+  margin-left: 1.15rem;
+}
+.env-setup-copy li + li {
+  margin-top: 0.45rem;
+}
+
 /* ── Feature cards ────────────────────────────────────────────── */
 .feature-card {
   border-radius: 18px;
