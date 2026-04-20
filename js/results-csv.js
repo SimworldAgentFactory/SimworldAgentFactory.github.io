@@ -113,13 +113,29 @@
       return null;
     }
 
+    const allowedEnvs = new Map([
+      ['Minigrid', { id: 'Minigrid', label: 'MiniGrid' }],
+      ['ALFWorld', { id: 'ALFWorld', label: 'ALFWorld' }],
+      ['DeliveryBench', { id: 'DeliveryBench', label: 'DeliveryBench' }],
+      ['THOR', { id: 'RoboThor' }],
+      ['RoboThor', { id: 'RoboThor', label: 'RoboThor' }],
+    ]);
     const envIndex = new Map();
     const methodsByEnv = {};
 
     validRows.forEach((row) => {
-      const environment = row.environment;
+      const envMeta = allowedEnvs.get(row.environment);
+      if (!envMeta) {
+        return;
+      }
+
+      const environment = envMeta.id;
       if (!envIndex.has(environment)) {
-        envIndex.set(environment, { id: environment, label: environment, offset: 0 });
+        envIndex.set(environment, {
+          id: environment,
+          label: envMeta.label || environment,
+          offset: 0,
+        });
       }
       if (!methodsByEnv[environment]) {
         methodsByEnv[environment] = [];
@@ -133,6 +149,10 @@
         reflection: row.reflection || 'N/A',
       });
     });
+
+    if (envIndex.size === 0) {
+      return null;
+    }
 
     return {
       envs: Array.from(envIndex.values()),

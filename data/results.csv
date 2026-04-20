@@ -8,12 +8,6 @@ ALFWorld,HuggingGPT,60.9,Planner + model orchestration,Tool-call trace memory,Fa
 DeliveryBench,AgentSquare,67.5,Search-guided planning,Graph + recent trajectory memory,Self-correct after failed delivery
 DeliveryBench,DEPS,59.3,Dynamic exemplar policy search,Exemplar retrieval memory,Trajectory-level self-critique
 DeliveryBench,TP,54.6,Explicit task planning,Task-state notes,Plan repair after mismatch
-THOR,AgentSquare,70.1,Hybrid search + planner reranking,Visual-episodic memory,Iterative reflection loop
-THOR,ToT,61.4,Tree-of-thought branching search,Search tree memory,Branch evaluation and pruning
-THOR,Voyager,52.7,Skill curriculum and exploration,Skill library memory,Automatic skill critique and update
-TravelPlanner,AgentSquare,66.8,Constraint-aware planning,Route memory buffer,Self-repair for invalid routes
-TravelPlanner,Bayesian Search,60.2,Bayesian optimization over plans,Short-horizon score buffer,Prompt update via posterior estimate
-TravelPlanner,Step Back,55.9,Abstraction-first prompting,Abstract schema memory,Backtracking over abstract plan
-PDDL,AgentSquare,74.0,Symbolic-guided hybrid planning,Structured state memory,Reflective replanning
-PDDL,Dilu,57.8,Deliberate look-ahead utility search,Action-outcome cache,Look-ahead adjustment loop
-PDDL,Cot-SC,56.1,CoT with self-consistency voting,Sampled answer cache,Vote-based error correction
+RoboThor,AgentSquare,70.1,Hybrid search + planner reranking,Visual-episodic memory,Iterative reflection loop
+RoboThor,ToT,61.4,Tree-of-thought branching search,Search tree memory,Branch evaluation and pruning
+RoboThor,Voyager,52.7,Skill curriculum and exploration,Skill library memory,Automatic skill critique and update

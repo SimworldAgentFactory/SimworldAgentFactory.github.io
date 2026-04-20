@@ -1,12 +1,9 @@
 let HOME_EVAL = {
   envs: [
-    { id: 'avg', label: 'Avg', offset: 0.0 },
-    { id: 'Minigrid', label: 'Minigrid', offset: 2.8 },
-    { id: 'alfworld', label: 'ALFWorld', offset: -2.1 },
+    { id: 'Minigrid', label: 'MiniGrid', offset: 2.8 },
+    { id: 'ALFWorld', label: 'ALFWorld', offset: -2.1 },
     { id: 'DeliveryBench', label: 'DeliveryBench', offset: -1.0 },
-    { id: 'THOR', label: 'THOR', offset: 1.4 },
-    { id: 'travelplanner', label: 'TravelPlanner', offset: -0.5 },
-    { id: 'pddl', label: 'PDDL', offset: 3.6 },
+    { id: 'RoboThor', label: 'RoboThor', offset: 1.4 },
   ],
   variation: [0.0, 0.3, -0.2, 0.1, -0.4, 0.2, -0.1, 0.4, -0.3],
   methods: [

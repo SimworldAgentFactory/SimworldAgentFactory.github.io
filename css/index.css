@@ -71,7 +71,7 @@ body {
 /* ── Design diagram ───────────────────────────────────────────── */
 .design-diagram-image {
   display: block;
-  width: 70%;
+  width: min(50%, 720px);
   height: auto;
   border-radius: 10px;
 }
