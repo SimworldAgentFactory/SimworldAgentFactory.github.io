@@ -55,16 +55,15 @@
   </nav>
 
   <!-- ── Hero ───────────────────────────────────────────────── -->
-  <section class="hero is-medium" style="padding-top: 52px;">
+  <section class="hero is-medium has-navbar-offset">
     <div class="hero-body">
       <div class="container">
         <div class="has-text-centered">
-          <div class="is-flex is-justify-content-center is-align-items-center" style="gap: 16px;">
-            <img src="assests/logo.png" alt="AgentFactory Logo" style="width: 80px; height: auto;" />
+          <div class="hero-brand-row">
+            <img src="assests/logo.png" alt="AgentFactory Logo" class="hero-logo" width="80" height="80" />
             <h1 class="brand-title">AgentFactory</h1>
           </div>
-          <p class="subtitle is-4 mt-4 has-text-weight-bold"
-            style="color: #333; max-width: 780px; margin-left: auto; margin-right: auto;">
+          <p class="subtitle is-4 mt-4 has-text-weight-bold hero-lead">
             Compose perception, reasoning, memory, and reflection for MiniGrid and DeliveryBench.
             Iterate quickly from idea to reproducible evaluation.
           </p>
@@ -101,7 +100,7 @@
   <!-- ── Overview (renamed from Abstract) ───────────────────── -->
   <section class="section">
     <div class="container">
-      <h2 class="title is-2 has-text-centered">Overview</h2>
+      <h2 class="title is-2 has-text-centered heading-display mb-5">Overview</h2>
       <div class="abstract-copy" id="abstract-copy" aria-live="polite">
         <p>LLM-based agents are usually built as tightly coupled pipelines, which makes it hard to isolate component
           contributions or study their interactions. AgentFactory addresses this by introducing a modular framework
@@ -112,24 +111,23 @@
       </div>
       <div class="box mt-5">
         <figure class="image" aria-label="AgentFactory main image">
-          <img src="assests/agentfractory_main.png" alt="AgentFactory main visual" style="border-radius: 12px;" />
+          <img src="assests/agentfractory_main.png" alt="AgentFactory main visual" class="media-rounded" />
         </figure>
       </div>
     </div>
   </section>
 
   <!-- ── Design Diagram (now below Overview) ─────────────────── -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
-      <div class="has-text-centered mb-4">
-        <h2 class="title is-3">Design Diagram</h2>
+      <div class="section-intro section-intro--center mb-5">
+        <h2 class="title is-3 heading-display">Design Diagram</h2>
         <p class="subtitle is-6">Modular flow of perception, reasoning, memory, reflection, and environment interaction.
         </p>
       </div>
       <div class="box has-text-centered">
         <img src="assests/design_diagram1.png" class="design-diagram-image"
-          alt="SimWorld agent framework design diagram showing module connections and closed-loop interaction."
-          style="margin: 0 auto;" />
+          alt="SimWorld agent framework design diagram showing module connections and closed-loop interaction." />
       </div>
     </div>
   </section>
@@ -137,17 +135,16 @@
   <!-- ── Agent Pipeline ─────────────────────────────────────── -->
   <section class="section">
     <div class="container">
-      <div class="has-text-centered mb-4">
-        <h2 class="title is-3">Agent Pipeline</h2>
+      <div class="section-intro section-intro--center mb-5">
+        <h2 class="title is-3 heading-display">Agent Pipeline</h2>
         <p class="subtitle is-6">Vision-driven agent pipeline used in AgentFactory.</p>
       </div>
       <div class="box has-text-centered">
         <!-- Replace src with your final pipeline diagram -->
-        <img src="assests/agent_pipeline.png"
-          alt="Vision-driven agent pipeline showing multimodal inputs, task planner stages, environment feedback loop, and executable plan generation."
-          style="max-width: 100%; height: auto; margin: 0 auto; border-radius: 8px;" />
+        <img src="assests/agent_pipeline.png" class="img-fluid-rounded"
+          alt="Vision-driven agent pipeline showing multimodal inputs, task planner stages, environment feedback loop, and executable plan generation." />
       </div>
-      <div class="content mt-4" style="max-width: 860px; margin: 0 auto;">
+      <div class="content mt-5 pipeline-prose">
         <p>
           To evaluate MLLMs as agents, we design a unified embodied agent pipeline. This pipeline provides
           a robust framework for processing multimodal inputs, reasoning through interactions, and generating
@@ -158,10 +155,10 @@
   </section>
 
   <!-- ── Key Features ───────────────────────────────────────── -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
-      <div class="has-text-centered mb-5">
-        <h2 class="title is-3">Key Features</h2>
+      <div class="section-intro section-intro--center mb-5">
+        <h2 class="title is-3 heading-display">Key Features</h2>
         <p class="subtitle is-6">Core capabilities that make the framework useful for embodied agent research and
           benchmarking.</p>
       </div>
@@ -169,7 +166,7 @@
         <div class="column is-4">
           <div class="card feature-card">
             <div class="card-content">
-              <div class="is-flex is-align-items-start mb-3" style="gap: 12px;">
+              <div class="is-flex is-align-items-start mb-3 flex-gap-xs">
                 <span class="feature-icon">1</span>
                 <h3 class="title is-5 mb-0">Structured Multimodal Interface</h3>
               </div>
@@ -186,7 +183,7 @@
         <div class="column is-4">
           <div class="card feature-card">
             <div class="card-content">
-              <div class="is-flex is-align-items-start mb-3" style="gap: 12px;">
+              <div class="is-flex is-align-items-start mb-3 flex-gap-xs">
                 <span class="feature-icon">2</span>
                 <h3 class="title is-5 mb-0">Pluggable Reasoning and Memory</h3>
               </div>
@@ -203,7 +200,7 @@
         <div class="column is-4">
           <div class="card feature-card">
             <div class="card-content">
-              <div class="is-flex is-align-items-start mb-3" style="gap: 12px;">
+              <div class="is-flex is-align-items-start mb-3 flex-gap-xs">
                 <span class="feature-icon">3</span>
                 <h3 class="title is-5 mb-0">Reusable Evaluation Pipeline</h3>
               </div>
@@ -224,11 +221,10 @@
   <!-- ── Coverage (marquee) ──────────────────────────────────── -->
   <section class="section has-background-white-bis">
     <div class="container">
-      <div class="mb-5">
-        <p class="is-size-7 has-text-weight-bold has-text-info"
-          style="text-transform: uppercase; letter-spacing: 0.1em;">COVERAGE</p>
-        <h2 class="title is-2 mt-2">Covering Every Module and Domain</h2>
-        <p class="subtitle is-6" style="max-width: 800px;">
+      <div class="section-intro section-intro--left section-intro--wide mb-5">
+        <p class="section-eyebrow">Coverage</p>
+        <h2 class="title is-2 heading-display mt-2">Covering Every Module and Domain</h2>
+        <p class="subtitle is-6">
           AgentFactory covers rigorous and adaptable setups for all major agent cognitive loops, spanning from memory
           architectures to reasoning paradigms and reflection mechanisms.
         </p>
@@ -334,10 +330,10 @@
   </section>
 
   <!-- ── Environment Setup ──────────────────────────────────── -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
-      <div class="mb-4">
-        <h2 class="title is-3">Environment Setup</h2>
+      <div class="section-intro section-intro--left mb-5">
+        <h2 class="title is-3 heading-display">Environment Setup</h2>
         <p class="subtitle is-6">Rendered directly from the project markdown so the setup notes stay easy to edit.</p>
       </div>
       <div class="box content env-setup-copy" id="env-setup-copy" data-setup-src="lists/env_setup.md" aria-live="polite">
@@ -348,8 +344,8 @@
   <!-- ── Demo Video ─────────────────────────────────────────── -->
   <section class="section">
     <div class="container">
-      <div class="mb-4">
-        <h2 class="title is-3">Demo Video</h2>
+      <div class="section-intro section-intro--left mb-5">
+        <h2 class="title is-3 heading-display">Demo Video</h2>
         <p class="subtitle is-6">Placeholder player for your upcoming embedded demo.</p>
       </div>
       <div class="box">
@@ -375,10 +371,10 @@
   </section>
 
   <!-- ── Evaluation Results ─────────────────────────────────── -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
-      <div class="mb-4">
-        <h2 class="title is-3">Evaluation Results</h2>
+      <div class="section-intro section-intro--left mb-5">
+        <h2 class="title is-3 heading-display">Evaluation Results</h2>
         <p class="subtitle is-6">Compare performance by task and model. Hover any bar to inspect reasoning, memory,
           and reflection setup.</p>
       </div>
@@ -420,8 +416,8 @@
   <!-- ── Architecture Overview ──────────────────────────────── -->
   <section class="section">
     <div class="container">
-      <div class="mb-4">
-        <h2 class="title is-3">Architecture Overview</h2>
+      <div class="section-intro section-intro--left mb-5">
+        <h2 class="title is-3 heading-display">Architecture Overview</h2>
         <p class="subtitle is-6">Every layer can be independently replaced while keeping the same execution interface.
         </p>
       </div>
@@ -465,10 +461,10 @@
   </section>
 
   <!-- ── From Setup to Evaluation ───────────────────────────── -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
-      <div class="mb-4">
-        <h2 class="title is-3">From Setup to Evaluation</h2>
+      <div class="section-intro section-intro--left mb-5">
+        <h2 class="title is-3 heading-display">From Setup to Evaluation</h2>
         <p class="subtitle is-6">A direct workflow for fast experiments.</p>
       </div>
       <div class="columns">
@@ -504,7 +500,7 @@
   </section>
 
   <!-- ── Footer ─────────────────────────────────────────────── -->
-  <footer class="footer">
+  <footer class="footer site-footer">
     <div class="content has-text-centered">
       <p>&copy; 2026 AgentFactory Team. All rights reserved.</p>
     </div>
@@ -560,7 +556,7 @@
           .map(part => part.trim())
           .filter(Boolean);
 
-        detailEl.innerHTML = `<h3 class="title is-5">${moduleName.charAt(0).toUpperCase() + moduleName.slice(1)} Module</h3>` +
+        detailEl.innerHTML = `<h3 class="title is-5 heading-display">${moduleName.charAt(0).toUpperCase() + moduleName.slice(1)} Module</h3>` +
           paragraphs.map(p => `<p class="mt-2">${p.replace(/\n/g, '<br />')}</p>`).join('');
       } catch (err) {
         detailEl.innerHTML = `<p class="has-text-danger">Error loading details: ${err.message}</p>`;
