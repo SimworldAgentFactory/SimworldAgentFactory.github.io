@@ -461,6 +461,22 @@ body {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(52, 211, 153, 0.14));
 }
 
+.feature-card-figure {
+  margin: 1rem 0 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.feature-card-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 240px;
+  object-fit: contain;
+}
+
 /* ── Environment feature list ─────────────────────────────────── */
 .env-feature-list {
   margin-top: 12px;
