@@ -420,6 +420,28 @@ body {
 }
 
 /* ── Feature cards ────────────────────────────────────────────── */
+.key-features-row {
+  align-items: stretch;
+}
+
+.key-features-row > .column {
+  display: flex;
+}
+
+.key-features-row .feature-card {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.key-features-row .feature-card .card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .feature-card {
   border-radius: 18px;
   background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
@@ -469,16 +491,32 @@ body {
   background: #f8fafc;
 }
 
+.key-features-row .feature-card-figure {
+  margin-top: auto;
+  flex-shrink: 0;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.key-features-row .feature-card-image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
 .feature-card-image {
   display: block;
   width: 100%;
   height: auto;
   max-height: 240px;
   object-fit: contain;
-}
-
-.feature-card-image--tall {
-  max-height: 320px;
 }
 
 /* ── Environment feature list ─────────────────────────────────── */
