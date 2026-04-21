@@ -117,6 +117,81 @@
     </div>
   </section>
 
+  <!-- ── Key Findings (from lists/key_findigs.md) ─────────────── -->
+  <section class="section section-key-findings" aria-labelledby="key-findings-heading">
+    <div class="container">
+      <div class="section-intro section-intro--center mb-5">
+        <h2 id="key-findings-heading" class="title is-3 heading-display">Key Findings</h2>
+        <p class="subtitle is-6">Memory &amp; reasoning in embodied agents</p>
+      </div>
+      <div class="key-findings-grid">
+        <article class="key-finding-card">
+          <div class="key-finding-card__inner">
+            <span class="key-finding-num" aria-hidden="true">1</span>
+            <div class="key-finding-card__body">
+              <h3 class="key-finding-card__title">Memory Architecture &amp; Effectiveness</h3>
+              <p class="key-finding-card__text"><strong>Structure over Volume:</strong> Success is method-dependent;
+                structured, action-oriented mechanisms (e.g., <em>DynamicCheatsheet</em>, <em>MemoryBank</em>) outperform
+                simple context expansion.</p>
+              <p class="key-finding-card__text"><strong>Controllability:</strong> Ineffective or non-selective retrieval
+                introduces noise, necessitating compact, state-relevant guidance for decision-time reliability.</p>
+            </div>
+          </div>
+        </article>
+        <article class="key-finding-card">
+          <div class="key-finding-card__inner">
+            <span class="key-finding-num" aria-hidden="true">2</span>
+            <div class="key-finding-card__body">
+              <h3 class="key-finding-card__title">Abstraction in Planning</h3>
+              <p class="key-finding-card__text"><strong>Policy-Level Guidance:</strong> Planning-based reasoning (e.g.,
+                <em>ReAct</em>) requires abstracted, distilled experience rather than low-level trajectory fragments or
+                raw observations.</p>
+              <p class="key-finding-card__text"><strong>Noise Reduction:</strong> While raw data assists local control,
+                long-horizon planning requires summarized memory to match the needs of plan-then-act reasoning.</p>
+            </div>
+          </div>
+        </article>
+        <article class="key-finding-card">
+          <div class="key-finding-card__inner">
+            <span class="key-finding-num" aria-hidden="true">3</span>
+            <div class="key-finding-card__body">
+              <h3 class="key-finding-card__title">Hybrid &amp; Multi-Granularity Design</h3>
+              <p class="key-finding-card__text"><strong>Cross-Strategy Robustness:</strong> Hybrid modules (e.g.,
+                <em>MemoryBank</em>) are superior because they provide concurrent access to raw trajectories, experience
+                summaries, and environmental insights.</p>
+              <p class="key-finding-card__text"><strong>Adaptability:</strong> Multi-granularity allows different
+                reasoning strategies to consume data at the required level of abstraction.</p>
+            </div>
+          </div>
+        </article>
+        <article class="key-finding-card">
+          <div class="key-finding-card__inner">
+            <span class="key-finding-num" aria-hidden="true">4</span>
+            <div class="key-finding-card__body">
+              <h3 class="key-finding-card__title">Multi-Agent Resilience</h3>
+              <p class="key-finding-card__text"><strong>Error Correction:</strong> Multi-agent systems exhibit lower
+                sensitivity to memory quality than single-agent systems.</p>
+              <p class="key-finding-card__text"><strong>Complementarity:</strong> Collective reasoning preserves decision
+                quality even when retrieved memory is coarse or partially relevant.</p>
+            </div>
+          </div>
+        </article>
+        <article class="key-finding-card">
+          <div class="key-finding-card__inner">
+            <span class="key-finding-num" aria-hidden="true">5</span>
+            <div class="key-finding-card__body">
+              <h3 class="key-finding-card__title">Reflection as a Correction Layer</h3>
+              <p class="key-finding-card__text"><strong>Broad Compatibility:</strong> Reflection acts as a universal
+                reevaluation layer, checking candidate actions against state feedback and failure signals.</p>
+              <p class="key-finding-card__text"><strong>Performance Scaling:</strong> It provides substantial gains for
+                weak reasoning-memory pairs and incremental improvements for strong ones.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Design Diagram (now below Overview) ─────────────────── -->
   <section class="section section-alt">
     <div class="container">
