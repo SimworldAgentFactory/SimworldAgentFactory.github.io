@@ -477,6 +477,10 @@ body {
   object-fit: contain;
 }
 
+.feature-card-image--tall {
+  max-height: 320px;
+}
+
 /* ── Environment feature list ─────────────────────────────────── */
 .env-feature-list {
   margin-top: 12px;
