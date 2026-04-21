@@ -1,7 +1,7 @@
 /* ── AgentFactory – Bulma overrides & project-specific styles ─── */
 
-/* ── Google Font ──────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap');
+/* ── Google Fonts: UI + display headings ─────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Noto+Sans:wght@400;500;600;700&display=swap');
 
 /* ── Design tokens ────────────────────────────────────────────── */
 :root {
@@ -12,16 +12,175 @@
   --accent-glow: rgba(14, 165, 233, .2);
   --mono: 'Courier New', 'Courier', monospace;
   --sans: 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
+  --display: 'Fraunces', 'Georgia', 'Times New Roman', serif;
   --text-muted: #475569;
   --text-dim: #64748b;
+  --text-body: #334155;
   --border: #e2e8f0;
   --shadow-card: 0 2px 8px rgba(15, 23, 42, .06);
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Layout */
+  --navbar-height: 52px;
+  --content-max: 52rem;
+  --content-max-wide: 56rem;
+  --section-y: var(--space-2xl);
+  --section-y-tight: var(--space-xl);
+  --sticky-offset: 2.25rem;
 }
 
 /* ── Global ───────────────────────────────────────────────────── */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   font-family: var(--sans);
+  color: var(--text-body);
+  line-height: 1.6;
   overflow-x: hidden;
+}
+
+/* Section rhythm (Bulma default is 3rem; align with tokens) */
+.section {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+
+.section.is-tight {
+  padding-top: var(--section-y-tight);
+  padding-bottom: var(--section-y-tight);
+}
+
+/* Clear fixed navbar */
+.has-navbar-offset {
+  padding-top: var(--navbar-height);
+}
+
+/* First content block under fixed nav (replaces ad-hoc ~100px section padding) */
+.section.is-first-below-nav {
+  padding-top: calc(var(--navbar-height) + var(--space-2xl));
+}
+
+/* Section intros: title + subtitle */
+.section-intro {
+  margin-bottom: var(--space-xl);
+}
+
+.section-intro--center {
+  text-align: center;
+}
+
+.section-intro--center .subtitle {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 42rem;
+}
+
+.section-intro--left .subtitle {
+  max-width: 40rem;
+}
+
+.section-intro--wide .subtitle {
+  max-width: 50rem;
+}
+
+.section-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-dim);
+  margin-bottom: var(--space-sm);
+}
+
+.section-eyebrow--muted {
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+}
+
+/* Display headings (major sections) */
+.heading-display {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #0f172a;
+}
+
+.title.heading-display {
+  font-family: var(--display);
+}
+
+/* Prose width for long copy */
+.prose-measure {
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flex-gap-sm {
+  gap: var(--space-md);
+}
+
+.flex-gap-md {
+  gap: 1rem;
+}
+
+.flex-gap-xs {
+  gap: 0.75rem;
+}
+
+.flex-gap-tight {
+  gap: 0.5rem;
+}
+
+.media-rounded {
+  border-radius: 12px;
+}
+
+.img-fluid-rounded {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* Docs: sticky sidebar below navbar */
+.docs-sidebar {
+  position: sticky;
+  top: calc(var(--navbar-height) + var(--sticky-offset));
+}
+
+.docs-content-narrow {
+  max-width: 51.25rem;
+}
+
+/* Footer separation */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-2xl);
+  background: #fafbfc;
+}
+
+/* Alternating section band */
+.section.section-alt {
+  background: #f8fafc;
 }
 
 /* Override Bulma navbar background for sticky blur effect */
@@ -39,16 +198,16 @@ body {
 /* ── Hero brand title ─────────────────────────────────────────── */
 .brand-title {
   color: var(--brand-gold);
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 3.6rem;
+  font-family: var(--display);
+  font-size: clamp(2.25rem, 5vw, 3.6rem);
   font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
 }
 
 @media (max-width: 768px) {
   .brand-title {
-    font-size: 2.4rem;
+    font-size: clamp(2rem, 7vw, 2.5rem);
   }
 }
 
@@ -83,10 +242,40 @@ body {
 
 /* ── Abstract copy ────────────────────────────────────────────── */
 .abstract-copy {
-  font-size: clamp(1.03rem, 1.7vw, 1.18rem);
-  line-height: 1.95;
-  color: #525252;
+  font-size: clamp(1.03rem, 1.7vw, 1.125rem);
+  line-height: 1.85;
+  color: var(--text-muted);
   text-align: left;
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-lead {
+  color: #1e293b;
+  max-width: 48.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.55;
+}
+
+.hero-brand-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-logo {
+  width: 80px;
+  height: auto;
+}
+
+.pipeline-prose {
+  max-width: 53.75rem;
+  margin: 0 auto;
+  line-height: 1.75;
+  color: var(--text-muted);
 }
 
 /* ── Environment setup copy ───────────────────────────────────── */
@@ -692,6 +881,11 @@ body {
 }
 
 /* ── Playground-specific ──────────────────────────────────────── */
+.module-label-caps {
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
 .module-icon {
   width: 18px;
   height: 18px;
