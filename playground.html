@@ -54,13 +54,13 @@
   </nav>
 
   <!-- ── Header ─────────────────────────────────────────────── -->
-  <section class="hero is-small is-light" style="padding-top: 52px;">
+  <section class="hero is-small is-light has-navbar-offset">
     <div class="hero-body">
       <div class="container">
-        <div class="is-flex is-align-items-start" style="gap: 16px;">
+        <div class="is-flex is-align-items-start flex-gap-md">
           <span class="icon is-large has-text-info"><i class="fas fa-2x fa-puzzle-piece"></i></span>
           <div>
-            <h1 class="title is-3"><span class="has-text-info">Playground</span></h1>
+            <h1 class="title is-3 heading-display"><span class="has-text-info">Playground</span></h1>
             <p class="subtitle is-6 has-text-grey">
               Pick each module implementation below, then generate runnable Python
               setup code. Copy to clipboard or download as <strong>.py</strong>.
@@ -82,9 +82,9 @@
         <div class="column is-12">
           <div class="card">
             <div class="card-content">
-              <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+              <div class="is-flex is-align-items-center mb-3 flex-gap-tight">
                 <span class="module-icon module-icon--env">&#9881;</span>
-                <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.07em;">Environment</span>
+                <span class="is-size-7 has-text-weight-semibold has-text-grey module-label-caps">Environment</span>
               </div>
               <div class="columns">
                 <div class="column">
@@ -128,9 +128,9 @@
         <div class="column is-6">
           <div class="card">
             <div class="card-content">
-              <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+              <div class="is-flex is-align-items-center mb-3 flex-gap-tight">
                 <span class="module-icon module-icon--perc">&#9673;</span>
-                <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.07em;">Perception</span>
+                <span class="is-size-7 has-text-weight-semibold has-text-grey module-label-caps">Perception</span>
               </div>
               <div class="field">
                 <label class="label is-small" for="sel-perception">Adapter</label>
@@ -156,9 +156,9 @@
         <div class="column is-6">
           <div class="card">
             <div class="card-content">
-              <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+              <div class="is-flex is-align-items-center mb-3 flex-gap-tight">
                 <span class="module-icon module-icon--reas">&#9733;</span>
-                <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.07em;">Reasoning</span>
+                <span class="is-size-7 has-text-weight-semibold has-text-grey module-label-caps">Reasoning</span>
               </div>
               <div class="field">
                 <label class="label is-small" for="sel-reasoning">Method</label>
@@ -186,9 +186,9 @@
         <div class="column is-6">
           <div class="card">
             <div class="card-content">
-              <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+              <div class="is-flex is-align-items-center mb-3 flex-gap-tight">
                 <span class="module-icon module-icon--mem">&#9830;</span>
-                <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.07em;">Memory</span>
+                <span class="is-size-7 has-text-weight-semibold has-text-grey module-label-caps">Memory</span>
               </div>
               <div class="field">
                 <label class="label is-small" for="sel-memory">Backend</label>
@@ -216,9 +216,9 @@
         <div class="column is-6">
           <div class="card">
             <div class="card-content">
-              <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+              <div class="is-flex is-align-items-center mb-3 flex-gap-tight">
                 <span class="module-icon module-icon--refl">&#8634;</span>
-                <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.07em;">Reflection</span>
+                <span class="is-size-7 has-text-weight-semibold has-text-grey module-label-caps">Reflection</span>
               </div>
               <div class="field">
                 <label class="label is-small" for="sel-reflection">Module</label>
@@ -242,7 +242,7 @@
       <!-- Module APIs -->
       <div class="mt-6" aria-label="Module APIs">
         <div class="has-text-centered mb-5">
-          <h2 class="title is-4">Module APIs</h2>
+          <h2 class="title is-4 heading-display">Module APIs</h2>
           <p class="subtitle is-6 has-text-grey">Core method signatures used by the framework. Helpful when implementing custom modules.</p>
         </div>
 
@@ -250,9 +250,9 @@
           <div class="column is-6">
             <div class="card">
               <div class="card-content">
-                <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                <div class="is-flex is-align-items-center mb-3 flex-gap-tight">
                   <span class="module-icon module-icon--perc">&#9673;</span>
-                  <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase;">Perception API</span>
+                  <span class="is-size-7 has-text-weight-semibold has-text-grey module-label-caps">Perception API</span>
                 </div>
                 <pre class="api-pre"><code>encode(
   raw_obs: Any,
@@ -273,9 +273,9 @@ reset() -&gt; None</code></pre>
           <div class="column is-6">
             <div class="card">
               <div class="card-content">
-                <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                <div class="is-flex is-align-items-center mb-3 flex-gap-tight">
                   <span class="module-icon module-icon--reas">&#9733;</span>
-                  <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase;">Reasoning API</span>
+                  <span class="is-size-7 has-text-weight-semibold has-text-grey module-label-caps">Reasoning API</span>
                 </div>
                 <pre class="api-pre"><code>reason(
   input: UnifiedAgentInput,
@@ -293,9 +293,9 @@ reset() -&gt; None</code></pre>
           <div class="column is-6">
             <div class="card">
               <div class="card-content">
-                <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                <div class="is-flex is-align-items-center mb-3 flex-gap-tight">
                   <span class="module-icon module-icon--mem">&#9830;</span>
-                  <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase;">Memory API</span>
+                  <span class="is-size-7 has-text-weight-semibold has-text-grey module-label-caps">Memory API</span>
                 </div>
                 <pre class="api-pre"><code>retrieve(
   query: UnifiedAgentInput,
@@ -320,9 +320,9 @@ reset() -&gt; None</code></pre>
           <div class="column is-6">
             <div class="card">
               <div class="card-content">
-                <div class="is-flex is-align-items-center mb-3" style="gap: 8px;">
+                <div class="is-flex is-align-items-center mb-3 flex-gap-tight">
                   <span class="module-icon module-icon--refl">&#8634;</span>
-                  <span class="is-size-7 has-text-weight-semibold has-text-grey" style="text-transform: uppercase;">Reflection API</span>
+                  <span class="is-size-7 has-text-weight-semibold has-text-grey module-label-caps">Reflection API</span>
                 </div>
                 <pre class="api-pre"><code>reflect(
   reasoning_output: Dict[str, Any],
@@ -341,7 +341,7 @@ reset() -&gt; None</code></pre>
       </div>
 
       <!-- Generate button -->
-      <div class="is-flex is-align-items-center mt-5" style="gap: 16px;">
+      <div class="is-flex is-align-items-center mt-5 flex-gap-md">
         <button id="btn-generate" class="button is-link is-medium" aria-label="Generate Python agent code">
           <span class="icon"><i class="fas fa-play"></i></span>
           <span>Generate Code</span>
@@ -411,7 +411,7 @@ reset() -&gt; None</code></pre>
   </section>
 
   <!-- ── Footer ─────────────────────────────────────────────── -->
-  <footer class="footer">
+  <footer class="footer site-footer">
     <div class="content has-text-centered">
       <p>
         AgentFactory &mdash;
