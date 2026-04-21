@@ -58,6 +58,12 @@ const els = {
   copyBtn:     $('#btn-copy'),
   downloadBtn: $('#btn-download'),
   statusText:  $('#status-text'),
+  ideFilename: $('#ide-filename'),
+};
+
+const IDE_TAB_FILES = {
+  python: 'generated_agent.py',
+  shell: 'run_agent.sh',
 };
 
 /* ── Helpers ─────────────────────────────────────────────── */
@@ -285,18 +291,24 @@ let lastCodePython = '';
 let lastCodeShell = '';
 let currentTab = 'python';
 
+function syncIdeFilename() {
+  if (els.ideFilename) {
+    els.ideFilename.textContent = IDE_TAB_FILES[currentTab] || IDE_TAB_FILES.python;
+  }
+}
+
 function switchTab(target) {
   currentTab = target;
   els.tabs.forEach((tab) => {
     const isMatch = tab.dataset.target === target;
-    tab.classList.toggle('active', isMatch);
-    // Also toggle Bulma is-active on parent <li> if present
+    tab.setAttribute('aria-selected', isMatch ? 'true' : 'false');
     if (tab.parentElement && tab.parentElement.tagName === 'LI') {
       tab.parentElement.classList.toggle('is-active', isMatch);
     }
   });
-  els.displayPython.style.display = target === 'python' ? 'flex' : 'none';
-  els.displayShell.style.display = target === 'shell' ? 'flex' : 'none';
+  els.displayPython.classList.toggle('is-hidden', target !== 'python');
+  els.displayShell.classList.toggle('is-hidden', target !== 'shell');
+  syncIdeFilename();
 }
 
 function generate() {
@@ -333,6 +345,7 @@ function generate() {
 
   els.codeSection.classList.add('fade-in');
   els.codeSection.style.display = 'block';
+  syncIdeFilename();
 }
 
 /* ── Actions ─────────────────────────────────────────────── */
@@ -341,12 +354,17 @@ function copyCode() {
   const codeToCopy = currentTab === 'python' ? lastCodePython : lastCodeShell;
   navigator.clipboard.writeText(codeToCopy).then(() => {
     flashStatus('Copied to clipboard');
-    // Brief visual feedback on copy button
     const btn = els.copyBtn;
-    const orig = btn.textContent;
-    btn.textContent = 'Copied!';
+    const label = btn && btn.querySelector('.ide-action-label');
+    const orig = label ? label.textContent : btn.textContent;
+    if (label) label.textContent = 'Copied!';
+    else btn.textContent = 'Copied!';
     btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+    setTimeout(() => {
+      if (label) label.textContent = orig;
+      else btn.textContent = orig;
+      btn.classList.remove('copied');
+    }, 1500);
   });
 }
 
