@@ -349,30 +349,43 @@ reset() -&gt; None</code></pre>
         <span id="status-text" class="status-text" role="status" aria-live="polite"></span>
       </div>
 
-      <!-- Code output -->
-      <section id="code-section" class="mt-5" style="display:none;" aria-label="Generated code">
-        <div class="code-panel-v2">
-          <!-- Tabs -->
-          <div class="tabs is-small mb-0">
-            <ul>
-              <li class="is-active" data-target="python"><a class="code-tab" data-target="python">Python</a></li>
-              <li data-target="shell"><a class="code-tab" data-target="shell">Shell</a></li>
-            </ul>
+      <!-- Code output (IDE-style viewer) -->
+      <section id="code-section" class="mt-5 code-section-output" style="display:none;" aria-label="Generated code">
+        <div class="code-panel-v2 ide-panel">
+          <div class="ide-titlebar">
+            <div class="ide-titlebar-main">
+              <ul class="ide-tabs" role="tablist" aria-label="Buffer">
+                <li class="is-active" role="none">
+                  <button type="button" class="code-tab ide-tab" data-target="python" role="tab" id="tab-python"
+                    aria-selected="true" aria-controls="display-python">Python</button>
+                </li>
+                <li role="none">
+                  <button type="button" class="code-tab ide-tab" data-target="shell" role="tab" id="tab-shell"
+                    aria-selected="false" aria-controls="display-shell">Shell</button>
+                </li>
+              </ul>
+              <span class="ide-filename" id="ide-filename" aria-live="polite">generated_agent.py</span>
+            </div>
+            <div class="ide-titlebar-actions">
+              <button type="button" id="btn-copy" class="ide-action-btn" aria-label="Copy code" title="Copy to clipboard">
+                <span class="icon is-small"><i class="fas fa-copy"></i></span>
+                <span class="ide-action-label">Copy</span>
+              </button>
+              <button type="button" id="btn-download" class="ide-action-btn" aria-label="Download" title="Download">
+                <span class="icon is-small"><i class="fas fa-download"></i></span>
+                <span class="ide-action-label">Download</span>
+              </button>
+            </div>
           </div>
-          <!-- Hover-reveal action buttons -->
-          <div class="code-float-actions">
-            <button id="btn-copy" class="code-float-btn" aria-label="Copy code" title="Copy to clipboard">Copy</button>
-            <button id="btn-download" class="code-float-btn" aria-label="Download" title="Download">Download</button>
-          </div>
-          <!-- Code display: Python -->
-          <div class="code-display" id="display-python">
-            <div class="code-gutter" id="line-numbers-python" aria-hidden="true"></div>
-            <pre class="code-pre"><code id="code-output" class="code-src"></code></pre>
-          </div>
-          <!-- Code display: Shell -->
-          <div class="code-display" id="display-shell" style="display:none;">
-            <div class="code-gutter" id="line-numbers-shell" aria-hidden="true"></div>
-            <pre class="code-pre"><code id="shell-output" class="code-src"></code></pre>
+          <div class="ide-editor">
+            <div class="code-display" id="display-python" role="tabpanel" aria-labelledby="tab-python">
+              <div class="code-gutter" id="line-numbers-python" aria-hidden="true"></div>
+              <pre class="code-pre"><code id="code-output" class="code-src"></code></pre>
+            </div>
+            <div class="code-display is-hidden" id="display-shell" role="tabpanel" aria-labelledby="tab-shell">
+              <div class="code-gutter" id="line-numbers-shell" aria-hidden="true"></div>
+              <pre class="code-pre"><code id="shell-output" class="code-src"></code></pre>
+            </div>
           </div>
         </div>
       </section>
