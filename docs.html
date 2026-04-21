@@ -53,13 +53,13 @@
   </nav>
 
   <!-- ── Main content ───────────────────────────────────────── -->
-  <section class="section" style="padding-top: 100px;">
+  <section class="section is-first-below-nav">
     <div class="container">
       <div class="columns">
 
         <!-- Sidebar -->
         <div class="column is-3">
-          <aside class="menu is-sticky" style="position: sticky; top: 88px;">
+          <aside class="menu docs-sidebar">
             <p class="menu-label">Getting Started</p>
             <ul class="menu-list">
               <li><a class="is-active" href="#overview">Overview</a></li>
@@ -82,12 +82,12 @@
 
         <!-- Content -->
         <div class="column is-9">
-          <div class="content" style="max-width: 820px;">
+          <div class="content docs-content-narrow">
 
             <!-- Header -->
             <header id="overview" class="mb-6">
-              <p class="is-size-7 has-text-weight-bold has-text-grey" style="text-transform: uppercase; letter-spacing: 0.08em;">Getting Started</p>
-              <h1 class="title is-2 mt-2">Docs</h1>
+              <p class="section-eyebrow section-eyebrow--muted">Getting Started</p>
+              <h1 class="title is-2 mt-2 heading-display">Docs</h1>
               <p class="subtitle is-5 has-text-grey">
                 Get the framework running on your machine in a few minutes. Install the base package,
                 enable the extras you need, and run a working agent loop against MiniGrid or DeliveryBench.
@@ -96,7 +96,7 @@
 
             <!-- Overview -->
             <section class="mb-6">
-              <h2 class="title is-4">Overview</h2>
+              <h2 class="title is-4 heading-display">Overview</h2>
               <p>
                 AgentFactory lets you combine environment adapters, perception,
                 reasoning, memory, and reflection modules into a single agent runtime. The setup flow
@@ -112,7 +112,7 @@
             <!-- Installation -->
             <hr />
             <section id="installation" class="mb-6">
-              <h2 class="title is-4">Installation</h2>
+              <h2 class="title is-4 heading-display">Installation</h2>
               <p>
                 Clone the repository and install it in editable mode. Add optional extras depending on
                 the environment stack you plan to use.
@@ -139,7 +139,7 @@ pip install -e <span class="str">".[gym]"</span>       <span class="cmt"># Gym /
             <!-- Quick Start -->
             <hr />
             <section id="quick-start" class="mb-6">
-              <h2 class="title is-4">Quick Start</h2>
+              <h2 class="title is-4 heading-display">Quick Start</h2>
               <p>
                 Set <code class="setup-inline-code">OPENAI_API_KEY</code> if you plan to use
                 LLM-backed reasoning. MiniGrid and AI2-THOR can then be installed independently.
@@ -170,7 +170,7 @@ pip install ai2thor</pre>
             <!-- Environment Overview -->
             <hr />
             <section id="environment-overview" class="mb-6">
-              <h2 class="title is-4">Environment Overview</h2>
+              <h2 class="title is-4 heading-display">Environment Overview</h2>
               <p>
                 MiniGrid is the fastest way to validate an agent configuration locally. DeliveryBench
                 is useful when you want a richer benchmark flow, while THOR is best when you need a
@@ -181,11 +181,11 @@ pip install ai2thor</pre>
             <!-- MiniGrid Environments -->
             <hr />
             <section id="minigrid-environments" class="mb-6">
-              <h2 class="title is-4">MiniGrid Environments</h2>
+              <h2 class="title is-4 heading-display">MiniGrid Environments</h2>
               <p>
                 The following presets are exposed directly in the playground and example scripts.
               </p>
-              <div class="box mt-4 p-0" style="overflow: hidden;">
+              <div class="box mt-4 p-0 overflow-hidden">
                 <table class="table is-striped is-fullwidth mb-0">
                   <thead>
                     <tr>
@@ -226,7 +226,7 @@ pip install ai2thor</pre>
             <!-- Run Your First Agent -->
             <hr />
             <section id="run-first-agent" class="mb-6">
-              <h2 class="title is-4">Run Your First Agent</h2>
+              <h2 class="title is-4 heading-display">Run Your First Agent</h2>
               <p>
                 Start with a simple MiniGrid loop, then move to a more capable reasoning module once
                 your environment and API key are configured.
@@ -254,7 +254,7 @@ python examples/deliverybench_example.py --reasoning-method react</pre>
             <!-- Quick Start Code -->
             <hr />
             <section id="quick-start-code" class="mb-6">
-              <h2 class="title is-4">Quick Start Code</h2>
+              <h2 class="title is-4 heading-display">Quick Start Code</h2>
               <p>
                 You can also compose the framework programmatically by importing the modules directly
                 and wiring them into an <code class="setup-inline-code">EmbodiedAgent</code>.
@@ -291,7 +291,7 @@ agent = EmbodiedAgent(
             <!-- Interactive Demo -->
             <hr />
             <section id="interactive-demo" class="mb-6">
-              <h2 class="title is-4">Playground</h2>
+              <h2 class="title is-4 heading-display">Playground</h2>
               <p>
                 Prefer a guided flow? Use the <a href="playground.html">playground</a>
                 to visually choose your modules and download a generated script.
@@ -305,7 +305,7 @@ agent = EmbodiedAgent(
   </section>
 
   <!-- ── Footer ─────────────────────────────────────────────── -->
-  <footer class="footer">
+  <footer class="footer site-footer">
     <div class="content has-text-centered">
       <p>
         AgentFactory &mdash;
