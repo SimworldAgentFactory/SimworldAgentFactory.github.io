@@ -2167,6 +2167,39 @@ body.docs-page--setup {
   gap: 10px;
 }
 
+.eval-bars-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.eval-bars-table .eval-input-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: auto;
+}
+
+.eval-bars-table .eval-input-table th,
+.eval-bars-table .eval-input-table td {
+  border: 1px solid #d8dee8;
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.eval-bars-table .eval-input-table th {
+  background: #eef2f7;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.eval-bars-table .eval-input-table td {
+  color: #334155;
+}
+
+.eval-bars-table .eval-input-table td:last-child {
+  font-family: var(--mono);
+}
+
 .eval-bar-row {
   width: 100%;
   border: 0;
