@@ -47,10 +47,72 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   font-family: var(--sans);
   color: var(--text-body);
   line-height: 1.6;
   overflow-x: hidden;
+}
+
+body > * {
+  width: 100%;
+}
+
+body > .navbar.is-fixed-top {
+  order: -1;
+}
+
+body > .hero {
+  order: 0;
+}
+
+body > section:nth-of-type(1) {
+  order: 0;
+}
+
+body > section:nth-of-type(2) {
+  order: 1;
+}
+
+body > section:nth-of-type(3) {
+  order: 2;
+}
+
+body > section:nth-of-type(4) {
+  order: 7;
+}
+
+body > section:nth-of-type(5) {
+  order: 9;
+}
+
+body > section:nth-of-type(6) {
+  order: 4;
+}
+
+body > section:nth-of-type(7) {
+  order: 3;
+}
+
+body > section:nth-of-type(8) {
+  order: 6;
+}
+
+body > section:nth-of-type(9) {
+  order: 5;
+}
+
+body > section:nth-of-type(10) {
+  order: 8;
+}
+
+body > section:nth-of-type(11) {
+  order: 10;
+}
+
+body > footer {
+  order: 20;
 }
 
 /* Section rhythm (Bulma default is 3rem; align with tokens) */

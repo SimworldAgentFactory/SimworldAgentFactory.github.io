@@ -120,6 +120,101 @@
     </div>
   </section>
 
+  <!-- ── Architecture Overview ──────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-intro section-intro--left mb-5">
+        <h2 class="title is-3 heading-display">Architecture Overview</h2>
+        <p class="subtitle is-6">Every layer can be independently replaced while keeping the same execution interface.
+        </p>
+      </div>
+      <div class="module-slider">
+        <div class="module-track" aria-label="Architecture modules">
+          <div class="module-card card surface-card" data-module="perception" onclick="loadArchitecture('perception')"
+            role="button" tabindex="0" aria-label="Open Perception module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 01</p>
+              <h3 class="title is-5 mb-2">Perception</h3>
+              <p class="has-text-grey">Adapters normalize raw observations into a common agent input schema, including
+                task state, visual input, and environment metadata.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="reasoning" onclick="loadArchitecture('reasoning')"
+            role="button" tabindex="0" aria-label="Open Reasoning module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 02</p>
+              <h3 class="title is-5 mb-2">Reasoning</h3>
+              <p class="has-text-grey">Run Simple, ReAct, CoT, ToT, RAP, or Guided Search with minimal config changes
+                while preserving a stable agent interface.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="memory" onclick="loadArchitecture('memory')"
+            role="button" tabindex="0" aria-label="Open Memory module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 03</p>
+              <h3 class="title is-5 mb-2">Memory</h3>
+              <p class="has-text-grey">Choose stateless execution or pluggable memory backends for longer-horizon
+                behavior, reuse, and cross-step context retention.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="reflection" onclick="loadArchitecture('reflection')"
+            role="button" tabindex="0" aria-label="Open Reflection module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 04</p>
+              <h3 class="title is-5 mb-2">Reflection</h3>
+              <p class="has-text-grey">Attach self-refinement loops to improve decision quality, verify prior actions,
+                and correct low-confidence trajectories.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="perception" onclick="loadArchitecture('perception')"
+            role="button" tabindex="0" aria-label="Open Perception module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 01</p>
+              <h3 class="title is-5 mb-2">Perception</h3>
+              <p class="has-text-grey">Adapters normalize raw observations into a common agent input schema, including
+                task state, visual input, and environment metadata.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="reasoning" onclick="loadArchitecture('reasoning')"
+            role="button" tabindex="0" aria-label="Open Reasoning module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 02</p>
+              <h3 class="title is-5 mb-2">Reasoning</h3>
+              <p class="has-text-grey">Run Simple, ReAct, CoT, ToT, RAP, or Guided Search with minimal config changes
+                while preserving a stable agent interface.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="memory" onclick="loadArchitecture('memory')"
+            role="button" tabindex="0" aria-label="Open Memory module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 03</p>
+              <h3 class="title is-5 mb-2">Memory</h3>
+              <p class="has-text-grey">Choose stateless execution or pluggable memory backends for longer-horizon
+                behavior, reuse, and cross-step context retention.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="reflection" onclick="loadArchitecture('reflection')"
+            role="button" tabindex="0" aria-label="Open Reflection module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 04</p>
+              <h3 class="title is-5 mb-2">Reflection</h3>
+              <p class="has-text-grey">Attach self-refinement loops to improve decision quality, verify prior actions,
+                and correct low-confidence trajectories.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="architecture-framework mt-5">
+        <div class="section-intro section-intro--left mb-4">
+          <h3 class="title is-4 heading-display mt-2">Our Framework</h3>
+        </div>
+        <div class="content architecture-framework-copy" id="framework-copy"
+          data-framework-src="lists/framework.md" aria-live="polite"></div>
+      </div>
+      <div id="architecture-detail" class="box mt-4" style="display: none;"></div>
+    </div>
+  </section>
+
   <!-- ── Key Findings (from lists/key_findigs.md) ─────────────── -->
   <section class="section section-key-findings" aria-labelledby="key-findings-heading">
     <div class="container">
@@ -188,6 +283,18 @@
                 reevaluation layer, checking candidate actions against state feedback and failure signals.</p>
               <p class="key-finding-card__text"><strong>Performance Scaling:</strong> It provides substantial gains for
                 weak reasoning-memory pairs and incremental improvements for strong ones.</p>
+            </div>
+          </div>
+        </article>
+        <article class="key-finding-card">
+          <div class="key-finding-card__inner">
+            <span class="key-finding-num" aria-hidden="true">6</span>
+            <div class="key-finding-card__body">
+              <h3 class="key-finding-card__title">Environment-Driven Module Efficacy</h3>
+              <p class="key-finding-card__text"><strong>Variable Performance:</strong> Optimal module combinations are
+                task-specific; configurations that excel in one environment often fail to transfer to others.</p>
+              <p class="key-finding-card__text"><strong>Structural Matching:</strong> Design must align module strengths
+                such as long-horizon memory versus local reasoning with the structural characteristics of the task.</p>
             </div>
           </div>
         </article>
@@ -540,101 +647,6 @@
           <div id="eval-hover-tooltip" class="eval-hover-tooltip" role="tooltip" aria-hidden="true"></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ── Architecture Overview ──────────────────────────────── -->
-  <section class="section">
-    <div class="container">
-      <div class="section-intro section-intro--left mb-5">
-        <h2 class="title is-3 heading-display">Architecture Overview</h2>
-        <p class="subtitle is-6">Every layer can be independently replaced while keeping the same execution interface.
-        </p>
-      </div>
-      <div class="module-slider">
-        <div class="module-track" aria-label="Architecture modules">
-          <div class="module-card card surface-card" data-module="perception" onclick="loadArchitecture('perception')"
-            role="button" tabindex="0" aria-label="Open Perception module details">
-            <div class="card-content">
-              <p class="module-card__eyebrow">Module 01</p>
-              <h3 class="title is-5 mb-2">Perception</h3>
-              <p class="has-text-grey">Adapters normalize raw observations into a common agent input schema, including
-                task state, visual input, and environment metadata.</p>
-            </div>
-          </div>
-          <div class="module-card card surface-card" data-module="reasoning" onclick="loadArchitecture('reasoning')"
-            role="button" tabindex="0" aria-label="Open Reasoning module details">
-            <div class="card-content">
-              <p class="module-card__eyebrow">Module 02</p>
-              <h3 class="title is-5 mb-2">Reasoning</h3>
-              <p class="has-text-grey">Run Simple, ReAct, CoT, ToT, RAP, or Guided Search with minimal config changes
-                while preserving a stable agent interface.</p>
-            </div>
-          </div>
-          <div class="module-card card surface-card" data-module="memory" onclick="loadArchitecture('memory')"
-            role="button" tabindex="0" aria-label="Open Memory module details">
-            <div class="card-content">
-              <p class="module-card__eyebrow">Module 03</p>
-              <h3 class="title is-5 mb-2">Memory</h3>
-              <p class="has-text-grey">Choose stateless execution or pluggable memory backends for longer-horizon
-                behavior, reuse, and cross-step context retention.</p>
-            </div>
-          </div>
-          <div class="module-card card surface-card" data-module="reflection" onclick="loadArchitecture('reflection')"
-            role="button" tabindex="0" aria-label="Open Reflection module details">
-            <div class="card-content">
-              <p class="module-card__eyebrow">Module 04</p>
-              <h3 class="title is-5 mb-2">Reflection</h3>
-              <p class="has-text-grey">Attach self-refinement loops to improve decision quality, verify prior actions,
-                and correct low-confidence trajectories.</p>
-            </div>
-          </div>
-          <div class="module-card card surface-card" data-module="perception" onclick="loadArchitecture('perception')"
-            role="button" tabindex="0" aria-label="Open Perception module details">
-            <div class="card-content">
-              <p class="module-card__eyebrow">Module 01</p>
-              <h3 class="title is-5 mb-2">Perception</h3>
-              <p class="has-text-grey">Adapters normalize raw observations into a common agent input schema, including
-                task state, visual input, and environment metadata.</p>
-            </div>
-          </div>
-          <div class="module-card card surface-card" data-module="reasoning" onclick="loadArchitecture('reasoning')"
-            role="button" tabindex="0" aria-label="Open Reasoning module details">
-            <div class="card-content">
-              <p class="module-card__eyebrow">Module 02</p>
-              <h3 class="title is-5 mb-2">Reasoning</h3>
-              <p class="has-text-grey">Run Simple, ReAct, CoT, ToT, RAP, or Guided Search with minimal config changes
-                while preserving a stable agent interface.</p>
-            </div>
-          </div>
-          <div class="module-card card surface-card" data-module="memory" onclick="loadArchitecture('memory')"
-            role="button" tabindex="0" aria-label="Open Memory module details">
-            <div class="card-content">
-              <p class="module-card__eyebrow">Module 03</p>
-              <h3 class="title is-5 mb-2">Memory</h3>
-              <p class="has-text-grey">Choose stateless execution or pluggable memory backends for longer-horizon
-                behavior, reuse, and cross-step context retention.</p>
-            </div>
-          </div>
-          <div class="module-card card surface-card" data-module="reflection" onclick="loadArchitecture('reflection')"
-            role="button" tabindex="0" aria-label="Open Reflection module details">
-            <div class="card-content">
-              <p class="module-card__eyebrow">Module 04</p>
-              <h3 class="title is-5 mb-2">Reflection</h3>
-              <p class="has-text-grey">Attach self-refinement loops to improve decision quality, verify prior actions,
-                and correct low-confidence trajectories.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="architecture-framework mt-5">
-        <div class="section-intro section-intro--left mb-4">
-          <h3 class="title is-4 heading-display mt-2">Our Framework</h3>
-        </div>
-        <div class="content architecture-framework-copy" id="framework-copy"
-          data-framework-src="lists/framework.md" aria-live="polite"></div>
-      </div>
-      <div id="architecture-detail" class="box mt-4" style="display: none;"></div>
     </div>
   </section>
 

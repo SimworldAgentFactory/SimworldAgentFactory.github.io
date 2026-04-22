@@ -20,4 +20,8 @@
 
 #### **5. Reflection as a Correction Layer**
 * **Broad Compatibility:** Reflection acts as a universal reevaluation layer, checking candidate actions against state feedback and failure signals.
-* **Performance Scaling:** It provides substantial gains for weak reasoning-memory pairs and incremental improvements for strong ones.
+* **Performance Scaling:** It provides substantial gains for weak reasoning-memory pairs and incremental improvements for strong ones. 
+
+#### **6. Environment-Driven Module Efficacy**
+* **Variable Performance:** Optimal module combinations are task-specific; configurations that excel in one environment often fail to transfer to others.
+* **Structural Matching:** Design must align module strengths (e.g., long-horizon memory vs. local reasoning) with the structural characteristics of the task.
