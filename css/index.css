@@ -301,11 +301,20 @@ body {
   margin-right: auto;
 }
 
-.pipeline-prose {
-  max-width: 53.75rem;
-  margin: 0 auto;
-  line-height: 1.75;
-  color: var(--text-muted);
+.overview-figure {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.overview-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overview-conclusion {
+  margin-top: 1.25rem;
 }
 
 /* ── Case Study ─────────────────────────────────────────────── */
@@ -1004,6 +1013,36 @@ body {
 
 .module-card .title {
   margin-bottom: 0.5rem;
+}
+
+/* ── Architecture framework writeup ───────────────────────────── */
+.architecture-framework {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem 1.5rem 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.architecture-framework-copy {
+  color: #374151;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.architecture-framework-copy p + p {
+  margin-top: 1rem;
+}
+
+.architecture-framework-copy strong {
+  color: #111827;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .architecture-framework {
+    padding: 1.25rem 0 0;
+  }
 }
 
 @keyframes module-scroll {

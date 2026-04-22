@@ -104,18 +104,18 @@
   <section class="section">
     <div class="container">
       <h2 class="title is-2 has-text-centered heading-display mb-5">Overview</h2>
-      <div class="abstract-copy" id="abstract-copy" aria-live="polite">
-        <p>LLM-based agents are usually built as tightly coupled pipelines, which makes it hard to isolate component
-          contributions or study their interactions. AgentFactory addresses this by introducing a modular framework
-          where agents are composed of reusable components with standardized interfaces, enabling flexible recombination
-          and systematic analysis. Experiments across multiple benchmarks show that performance depends not only on
-          individual components but also on their interactions, and that modular designs can outperform monolithic
-          systems.</p>
-      </div>
-      <div class="box mt-5">
-        <figure class="image" aria-label="AgentFactory main image">
-          <img src="assests/agentfractory_main.png" alt="AgentFactory main visual" class="media-rounded" />
-        </figure>
+      <div class="abstract-copy" id="abstract-copy" data-abstract-src="lists/abstract.md" aria-live="polite"></div>
+      <figure class="overview-figure mt-5">
+        <img src="assests/agentfractory_main.png" alt="AgentFactory framework diagram"
+          class="overview-diagram media-rounded" loading="lazy" decoding="async" />
+      </figure>
+      <div class="abstract-copy overview-conclusion mt-4">
+        <p>Evaluations across DeliveryBench, ALFRED, MiniGrid, and RoboTHOR show that performance depends not only on
+          the strength of individual components but also on their interactions. Modular recomposition can outperform
+          monolithic baselines, especially in long-horizon embodied tasks that benefit from state-aware,
+          trajectory-level memory and structured decision making. By exposing a clear design space, AgentFactory
+          provides a foundation for agents that are more capable, more analyzable, and more scientifically grounded.
+        </p>
       </div>
     </div>
   </section>
@@ -231,28 +231,6 @@
           <img id="case-study-image" src="assests/case_study/minigrid.png" alt="MiniGrid case study figure"
             class="case-study-image" loading="lazy" decoding="async" />
         </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Agent Pipeline ─────────────────────────────────────── -->
-  <section class="section">
-    <div class="container">
-      <div class="section-intro section-intro--center mb-5">
-        <h2 class="title is-3 heading-display">Agent Pipeline</h2>
-        <p class="subtitle is-6">Vision-driven agent pipeline used in AgentFactory.</p>
-      </div>
-      <div class="box has-text-centered">
-        <!-- Replace src with your final pipeline diagram -->
-        <img src="assests/agent_pipeline.png" class="img-fluid-rounded"
-          alt="Vision-driven agent pipeline showing multimodal inputs, task planner stages, environment feedback loop, and executable plan generation." />
-      </div>
-      <div class="content mt-5 pipeline-prose">
-        <p>
-          To evaluate MLLMs as agents, we design a unified embodied agent pipeline. This pipeline provides
-          a robust framework for processing multimodal inputs, reasoning through interactions, and generating
-          structured, executable plans composed of sequential actions.
-        </p>
       </div>
     </div>
   </section>
@@ -649,6 +627,13 @@
           </div>
         </div>
       </div>
+      <div class="architecture-framework mt-5">
+        <div class="section-intro section-intro--left mb-4">
+          <h3 class="title is-4 heading-display mt-2">Our Framework</h3>
+        </div>
+        <div class="content architecture-framework-copy" id="framework-copy"
+          data-framework-src="lists/framework.md" aria-live="polite"></div>
+      </div>
       <div id="architecture-detail" class="box mt-4" style="display: none;"></div>
     </div>
   </section>
@@ -764,6 +749,10 @@
       });
 
       showCaseStudy(document.querySelector('.case-study-chip.is-active') || chips[0]);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadMarkdownSection('#framework-copy', 'lists/framework.md');
     });
 
     async function loadArchitecture(moduleName) {
