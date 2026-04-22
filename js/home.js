@@ -157,30 +157,46 @@ function renderChartRows(containerEl, tooltipEl, shellEl, taskId, modelId) {
   const maxValue = getResultsMax(task?.id, modelId);
 
   containerEl.innerHTML = '';
+  containerEl.className = 'eval-bars-table';
+
+  const table = document.createElement('table');
+  table.className = 'eval-input-table';
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Models</th>
+        <th>Reasoning</th>
+        <th>Memory</th>
+        <th>Reflection</th>
+        <th>Performance</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+  const tbody = table.querySelector('tbody');
 
   results.forEach((entry) => {
-    const pct = (entry.score / maxValue) * 100;
-    const barColor = getBarColor(entry.score, maxValue);
-    const row = document.createElement('button');
-    row.type = 'button';
-    row.className = 'eval-bar-row';
-    row.innerHTML = `
-      <span class="eval-bar-label">${entry.model}</span>
-      <span class="eval-bar-track" style="--bar-pct:${pct.toFixed(2)}%;">
-        <span class="eval-bar-fill" style="width:${pct.toFixed(2)}%; background:${barColor};"></span>
-        <span class="eval-bar-end">${entry.score.toFixed(2)}</span>
-      </span>
+    const performance = window.HomeEvalCsv && window.HomeEvalCsv.colorFormatter
+      ? window.HomeEvalCsv.colorFormatter(entry.score, { min: 0, max: maxValue })
+      : entry.score.toFixed(1);
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${entry.model}</td>
+      <td>${entry.reasoning}</td>
+      <td>${entry.memory}</td>
+      <td>${entry.reflection}</td>
+      <td>${performance}</td>
     `;
-
-    const showDetails = (event) => showTooltip(tooltipEl, shellEl, row, entry, task.label, event?.clientX);
-    row.addEventListener('mouseenter', showDetails);
-    row.addEventListener('mousemove', showDetails);
-    row.addEventListener('focus', showDetails);
-    row.addEventListener('mouseleave', () => hideTooltip(tooltipEl));
-    row.addEventListener('blur', () => hideTooltip(tooltipEl));
-
-    containerEl.appendChild(row);
+    tbody.appendChild(tr);
   });
+
+  containerEl.appendChild(table);
+
+  const axis = document.querySelector('#eval-axis');
+  if (axis) axis.style.display = 'none';
+  const axisRow = containerEl.closest('.eval-chart-shell')?.querySelector('.eval-axis-row');
+  if (axisRow) axisRow.style.display = 'none';
 }
 
 function buildButton(stripEl, id, label, activeClass, role, onClick) {
