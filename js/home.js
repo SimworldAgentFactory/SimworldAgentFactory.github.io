@@ -12,6 +12,13 @@ const MODEL_ORDER = [
   'Qwen3.5-9B',
   'GPT-5 mini',
 ];
+const MODEL_LOGOS = {
+  gpt: 'assests/logos/gpt.png',
+  gemini: 'assests/logos/gemini.png',
+  qwen: 'assests/logos/qwen.png',
+  claude: 'assests/logos/claude.png',
+  grok: 'assests/logos/grok.png',
+};
 
 let HOME_EVAL = {
   tasks: [],
@@ -106,6 +113,20 @@ function getBarColor(score, maxValue = CHART_MAX) {
   const lightness = 76 - ratio * 22;
   const saturation = 70 + ratio * 14;
   return `hsl(211 ${saturation.toFixed(1)}% ${lightness.toFixed(1)}%)`;
+}
+
+function getModelLogoSrc(modelName) {
+  const normalized = String(modelName || '').trim().toLowerCase();
+  if (!normalized) {
+    return null;
+  }
+
+  if (normalized.includes('gpt')) return MODEL_LOGOS.gpt;
+  if (normalized.includes('gemini')) return MODEL_LOGOS.gemini;
+  if (normalized.includes('qwen')) return MODEL_LOGOS.qwen;
+  if (normalized.includes('claude')) return MODEL_LOGOS.claude;
+  if (normalized.includes('grok')) return MODEL_LOGOS.grok;
+  return null;
 }
 
 function renderTooltipContent(tooltipEl, entry, taskLabel) {
@@ -248,15 +269,34 @@ function renderChartRows(containerEl, tooltipEl, shellEl, taskId, modelId) {
   if (axisRow) axisRow.style.display = 'grid';
 }
 
-function buildButton(stripEl, id, label, activeClass, role, onClick) {
+function buildButton(stripEl, id, label, activeClass, role, onClick, options = {}) {
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'eval-filter-btn';
   btn.dataset[role] = id;
-  btn.textContent = label;
   btn.setAttribute('role', 'tab');
   btn.setAttribute('aria-selected', 'false');
   btn.addEventListener('click', onClick);
+
+  if (options.iconSrc) {
+    btn.classList.add('eval-filter-btn--with-logo');
+    const icon = document.createElement('img');
+    icon.className = 'eval-filter-btn__logo';
+    icon.src = options.iconSrc;
+    icon.alt = `${label} logo`;
+    icon.loading = 'lazy';
+    icon.decoding = 'async';
+
+    const text = document.createElement('span');
+    text.className = 'eval-filter-btn__label';
+    text.textContent = label;
+
+    btn.appendChild(icon);
+    btn.appendChild(text);
+  } else {
+    btn.textContent = label;
+  }
+
   stripEl.appendChild(btn);
   return btn;
 }
@@ -286,10 +326,18 @@ function renderModelButtons(stripEl, state, updateView) {
   });
 
   getModelsForTask(state.taskId).forEach((model) => {
-    buildButton(stripEl, model.id, model.label, 'model', 'model', () => {
-      state.modelId = model.id;
-      updateView();
-    });
+    buildButton(
+      stripEl,
+      model.id,
+      model.label,
+      'model',
+      'model',
+      () => {
+        state.modelId = model.id;
+        updateView();
+      },
+      { iconSrc: getModelLogoSrc(model.label || model.id) },
+    );
   });
 }
 
