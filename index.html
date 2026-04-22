@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- <title>AgentFactory — Home</title> -->
-  <title>AgentFactory: Compose perception, reasoning, memory, and reflection for MiniGrid and DeliveryBench</title>
+  <title>AgentFactory: A Modular Framework for Composable and Scientifically Grounded LLM-Based Agents</title>
   <meta name="description"
     content="AgentFactory main page: modular architecture, benchmark-ready environments, docs, and playground." />
 
@@ -66,9 +66,9 @@
             </p>
           </div>
           <h1 class="hero-headline">
-            <span class="hero-headline__line">Compose perception, reasoning, memory, and reflection for MiniGrid and
-              DeliveryBench.</span>
-            <span class="hero-headline__line">Iterate quickly from idea to reproducible evaluation.</span>
+            <span class="hero-headline__line">A Modular Framework for</span>
+            <span class="hero-headline__line">Composable and Scientifically</span>
+            <span class="hero-headline__line">Grounded LLM-Based Agents</span>
           </h1>
         </div>
 
@@ -195,17 +195,42 @@
     </div>
   </section>
 
-  <!-- ── Design Diagram (now below Overview) ─────────────────── -->
-  <section class="section section-alt">
+  <!-- ── Case Study ─────────────────────────────────────────── -->
+  <section class="section section-case-study" id="case-study">
     <div class="container">
       <div class="section-intro section-intro--center mb-5">
-        <h2 class="title is-3 heading-display">Design Diagram</h2>
-        <p class="subtitle is-6">Modular flow of perception, reasoning, memory, reflection, and environment interaction.
-        </p>
+        <p class="section-eyebrow">Case Study</p>
+        <h2 class="title is-3 heading-display mt-2">Environment-Specific Examples</h2>
+        <p class="subtitle is-6">Click an environment to preview a representative case study figure.</p>
       </div>
-      <div class="box has-text-centered">
-        <img src="assests/design_diagram1.png" class="design-diagram-image"
-          alt="SimWorld agent framework design diagram showing module connections and closed-loop interaction." />
+
+      <div class="case-study-switcher" role="tablist" aria-label="Case study environments">
+        <button type="button" class="case-study-chip is-active" role="tab" aria-selected="true"
+          data-case-study-target="minigrid" data-case-study-label="MiniGrid"
+          data-case-study-src="assests/case_study/minigrid.png">MiniGrid</button>
+        <button type="button" class="case-study-chip" role="tab" aria-selected="false"
+          data-case-study-target="alfred" data-case-study-label="ALFRED"
+          data-case-study-src="assests/case_study/minigrid.png">ALFRED</button>
+        <button type="button" class="case-study-chip" role="tab" aria-selected="false"
+          data-case-study-target="robothor" data-case-study-label="RoboTHOR"
+          data-case-study-src="assests/case_study/minigrid.png">RoboTHOR</button>
+        <button type="button" class="case-study-chip" role="tab" aria-selected="false"
+          data-case-study-target="deliverybench" data-case-study-label="DeliveryBench"
+          data-case-study-src="assests/case_study/minigrid.png">DeliveryBench</button>
+      </div>
+
+      <div class="box case-study-panel">
+        <div class="case-study-panel__header">
+          <div>
+            <p class="case-study-kicker">Selected environment</p>
+            <h3 id="case-study-title" class="title is-5 heading-display mb-0">MiniGrid</h3>
+          </div>
+          <span class="tag is-light is-rounded">Representative figure</span>
+        </div>
+        <figure class="case-study-figure">
+          <img id="case-study-image" src="assests/case_study/minigrid.png" alt="MiniGrid case study figure"
+            class="case-study-image" loading="lazy" decoding="async" />
+        </figure>
       </div>
     </div>
   </section>
@@ -416,11 +441,54 @@
   <!-- ── Environment Setup ──────────────────────────────────── -->
   <section class="section section-alt">
     <div class="container">
-      <div class="section-intro section-intro--left mb-5">
+      <div class="section-intro section-intro--left mb-4">
         <h2 class="title is-3 heading-display">Environment Setup</h2>
-        <p class="subtitle is-6">Rendered directly from the project markdown so the setup notes stay easy to edit.</p>
       </div>
-      <div class="box content env-setup-copy" id="env-setup-copy" data-setup-src="lists/env_setup.md" aria-live="polite">
+      <div class="content env-setup-copy" id="env-setup-copy" data-setup-src="lists/env_setup.md"
+        aria-live="polite"></div>
+      <div class="env-gallery-wrap mt-5">
+        <div class="env-gallery-track" aria-label="Environment image gallery">
+          <figure class="env-gallery-card">
+            <img src="assests/environments/minigrid_env.png" alt="MiniGrid environment preview"
+              class="env-gallery-image" loading="lazy" decoding="async" />
+            <figcaption>MiniGrid</figcaption>
+          </figure>
+          <figure class="env-gallery-card">
+            <img src="assests/environments/alfred_env.png" alt="ALFRED environment preview"
+              class="env-gallery-image" loading="lazy" decoding="async" />
+            <figcaption>ALFRED</figcaption>
+          </figure>
+          <figure class="env-gallery-card">
+            <img src="assests/environments/robothor_env.png" alt="RoboTHOR environment preview"
+              class="env-gallery-image" loading="lazy" decoding="async" />
+            <figcaption>RoboTHOR</figcaption>
+          </figure>
+          <figure class="env-gallery-card">
+            <img src="assests/environments/delivery_bench_env.png" alt="DeliveryBench environment preview"
+              class="env-gallery-image" loading="lazy" decoding="async" />
+            <figcaption>DeliveryBench</figcaption>
+          </figure>
+          <figure class="env-gallery-card">
+            <img src="assests/environments/minigrid_env.png" alt="MiniGrid environment preview"
+              class="env-gallery-image" loading="lazy" decoding="async" />
+            <figcaption>MiniGrid</figcaption>
+          </figure>
+          <figure class="env-gallery-card">
+            <img src="assests/environments/alfred_env.png" alt="ALFRED environment preview"
+              class="env-gallery-image" loading="lazy" decoding="async" />
+            <figcaption>ALFRED</figcaption>
+          </figure>
+          <figure class="env-gallery-card">
+            <img src="assests/environments/robothor_env.png" alt="RoboTHOR environment preview"
+              class="env-gallery-image" loading="lazy" decoding="async" />
+            <figcaption>RoboTHOR</figcaption>
+          </figure>
+          <figure class="env-gallery-card">
+            <img src="assests/environments/delivery_bench_env.png" alt="DeliveryBench environment preview"
+              class="env-gallery-image" loading="lazy" decoding="async" />
+            <figcaption>DeliveryBench</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
@@ -505,37 +573,78 @@
         <p class="subtitle is-6">Every layer can be independently replaced while keeping the same execution interface.
         </p>
       </div>
-      <div class="columns is-multiline">
-        <div class="column is-6">
-          <div class="card surface-card" data-module="perception" onclick="loadArchitecture('perception')">
+      <div class="module-slider">
+        <div class="module-track" aria-label="Architecture modules">
+          <div class="module-card card surface-card" data-module="perception" onclick="loadArchitecture('perception')"
+            role="button" tabindex="0" aria-label="Open Perception module details">
             <div class="card-content">
-              <h3 class="title is-5">Perception</h3>
-              <p class="has-text-grey">Adapters normalize raw observations into a common agent input schema.</p>
+              <p class="module-card__eyebrow">Module 01</p>
+              <h3 class="title is-5 mb-2">Perception</h3>
+              <p class="has-text-grey">Adapters normalize raw observations into a common agent input schema, including
+                task state, visual input, and environment metadata.</p>
             </div>
           </div>
-        </div>
-        <div class="column is-6">
-          <div class="card surface-card" data-module="reasoning" onclick="loadArchitecture('reasoning')">
+          <div class="module-card card surface-card" data-module="reasoning" onclick="loadArchitecture('reasoning')"
+            role="button" tabindex="0" aria-label="Open Reasoning module details">
             <div class="card-content">
-              <h3 class="title is-5">Reasoning</h3>
-              <p class="has-text-grey">Run Simple, ReAct, CoT, ToT, RAP, or Guided Search with minimal config changes.
-              </p>
+              <p class="module-card__eyebrow">Module 02</p>
+              <h3 class="title is-5 mb-2">Reasoning</h3>
+              <p class="has-text-grey">Run Simple, ReAct, CoT, ToT, RAP, or Guided Search with minimal config changes
+                while preserving a stable agent interface.</p>
             </div>
           </div>
-        </div>
-        <div class="column is-6">
-          <div class="card surface-card" data-module="memory" onclick="loadArchitecture('memory')">
+          <div class="module-card card surface-card" data-module="memory" onclick="loadArchitecture('memory')"
+            role="button" tabindex="0" aria-label="Open Memory module details">
             <div class="card-content">
-              <h3 class="title is-5">Memory</h3>
-              <p class="has-text-grey">Pick stateless mode or pluggable memory backends for longer-horizon behavior.</p>
+              <p class="module-card__eyebrow">Module 03</p>
+              <h3 class="title is-5 mb-2">Memory</h3>
+              <p class="has-text-grey">Choose stateless execution or pluggable memory backends for longer-horizon
+                behavior, reuse, and cross-step context retention.</p>
             </div>
           </div>
-        </div>
-        <div class="column is-6">
-          <div class="card surface-card" data-module="reflection" onclick="loadArchitecture('reflection')">
+          <div class="module-card card surface-card" data-module="reflection" onclick="loadArchitecture('reflection')"
+            role="button" tabindex="0" aria-label="Open Reflection module details">
             <div class="card-content">
-              <h3 class="title is-5">Reflection</h3>
-              <p class="has-text-grey">Attach self-refinement loops to improve decision quality over iterations.</p>
+              <p class="module-card__eyebrow">Module 04</p>
+              <h3 class="title is-5 mb-2">Reflection</h3>
+              <p class="has-text-grey">Attach self-refinement loops to improve decision quality, verify prior actions,
+                and correct low-confidence trajectories.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="perception" onclick="loadArchitecture('perception')"
+            role="button" tabindex="0" aria-label="Open Perception module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 01</p>
+              <h3 class="title is-5 mb-2">Perception</h3>
+              <p class="has-text-grey">Adapters normalize raw observations into a common agent input schema, including
+                task state, visual input, and environment metadata.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="reasoning" onclick="loadArchitecture('reasoning')"
+            role="button" tabindex="0" aria-label="Open Reasoning module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 02</p>
+              <h3 class="title is-5 mb-2">Reasoning</h3>
+              <p class="has-text-grey">Run Simple, ReAct, CoT, ToT, RAP, or Guided Search with minimal config changes
+                while preserving a stable agent interface.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="memory" onclick="loadArchitecture('memory')"
+            role="button" tabindex="0" aria-label="Open Memory module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 03</p>
+              <h3 class="title is-5 mb-2">Memory</h3>
+              <p class="has-text-grey">Choose stateless execution or pluggable memory backends for longer-horizon
+                behavior, reuse, and cross-step context retention.</p>
+            </div>
+          </div>
+          <div class="module-card card surface-card" data-module="reflection" onclick="loadArchitecture('reflection')"
+            role="button" tabindex="0" aria-label="Open Reflection module details">
+            <div class="card-content">
+              <p class="module-card__eyebrow">Module 04</p>
+              <h3 class="title is-5 mb-2">Reflection</h3>
+              <p class="has-text-grey">Attach self-refinement loops to improve decision quality, verify prior actions,
+                and correct low-confidence trajectories.</p>
             </div>
           </div>
         </div>
@@ -607,6 +716,54 @@
           target.classList.toggle('is-active');
         });
       });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.module-card[data-module]').forEach((card) => {
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            card.click();
+          }
+        });
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const chips = document.querySelectorAll('[data-case-study-target]');
+      const image = document.getElementById('case-study-image');
+      const title = document.getElementById('case-study-title');
+
+      if (!chips.length || !image || !title) return;
+
+      const setActiveChip = (activeChip) => {
+        chips.forEach((chip) => {
+          const isActive = chip === activeChip;
+          chip.classList.toggle('is-active', isActive);
+          chip.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+      };
+
+      const showCaseStudy = (chip) => {
+        const label = chip.dataset.caseStudyLabel || chip.textContent.trim();
+        const src = chip.dataset.caseStudySrc || image.src;
+        image.src = src;
+        image.alt = `${label} case study figure`;
+        title.textContent = label;
+        setActiveChip(chip);
+      };
+
+      chips.forEach((chip) => {
+        chip.addEventListener('click', () => showCaseStudy(chip));
+        chip.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            showCaseStudy(chip);
+          }
+        });
+      });
+
+      showCaseStudy(document.querySelector('.case-study-chip.is-active') || chips[0]);
     });
 
     async function loadArchitecture(moduleName) {

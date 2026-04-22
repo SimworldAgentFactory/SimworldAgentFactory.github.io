@@ -15,16 +15,39 @@ let HOME_EVAL = {
 
 const CHART_MAX = 80;
 const AXIS_STEP = 10;
-const ENV_SETUP_FALLBACK_MD = `We evaluate the performance of LLMs for embodied decision making using the Embodied Agent Interface. Below is a detailed description of the evaluation setup.
+const ENV_SETUP_FALLBACK_MD = `AgentFactory is evaluated across four diverse benchmarks that test long-horizon planning, spatial reasoning, and resource management. Each environment is integrated into a unified runner so modular agent configurations can be compared under the same evaluation protocol.
 
-### Dataset Description
+# Dataset Description
 
-To evaluate embodied intelligence across diverse modalities, we select **DeliveryBench**, **ALFRED**, **MiniGrid**, and **RoboTHOR** as our core benchmarks. These environments require the integration of perception, state tracking, and long-horizon planning.
+To evaluate embodied intelligence across diverse modalities, we select **DeliveryBench**, **MiniGrid**, **ALFRED**, and **RoboTHOR** as our core benchmarks. These environments require a mix of perception, state tracking, planning, and action selection, but they differ substantially in horizon length and scene complexity.
 
-* **DeliveryBench**: A city-scale evaluation for autonomous delivery agents across nine urban maps. It emphasizes long-horizon planning under discrete resource constraints. Observations consist of structured state data and natural-language descriptions of local topography. Performance is quantified via hourly profit.
-* **ALFRED**: A 3D household environment for multi-step instruction following. Evaluation involves seven task categories requiring compositional object manipulation and state-dependent reasoning. The primary metrics are **Success Rate (SR)** and **Success-weighted Path Length (SPL)**.
-* **RoboTHOR**: Focuses on first-person object navigation within photorealistic 3D indoor scenes. Agents are initialized at a starting pose and must navigate to a target object category within a predefined step budget. Efficiency and accuracy are measured using **SR** and **SPL**.
-* **MiniGrid**: A 2D gridworld with pixel-based observations to test reasoning under partial observability. Across 10 distinct tasks, it evaluates navigation and object interaction. Performance is measured by **SR** and an **SPL-derived reward function** that penalizes inefficient trajectories.`;
+**DeliveryBench** is a city-scale embodied benchmark where agents operate as autonomous food couriers in procedurally generated urban environments. It emphasizes sustained operational efficiency under realistic constraints.
+
+Task Setting: Agents must maximize profit by selecting lucrative orders, navigating to restaurants and customer locations, and managing finite resources such as time, energy, and transportation costs.
+Metrics:
+* Hourly Profit (Primary): Net earnings generated per hour of operation.
+* Secondary Diagnostics: Order quality, time efficiency, on-time delivery rates, and resource utilization indicators.
+
+**MiniGrid** provides a suite of grid-world tasks designed to test navigation, object interaction, and compositional reasoning in partially observable environments.
+
+Task Setting: Evaluation spans ten distinct tasks ranging from simple navigation to hazardous crossing and multi-room exploration. Agents receive first-person RGB observations and textual prompts under a fixed step budget.
+Metrics:
+* Success Rate (SR): The percentage of episodes where the agent reaches the goal.
+* Step Efficiency: The number of steps taken to complete the task relative to the budget.
+
+**ALFRED** focuses on domestic task completion through multimodal observations and long-horizon interaction.
+
+Task Setting: The benchmark includes seven representative tasks covering pick-and-place, heating and cooling, and cleaning. The agent perceives RGB frames and a structured list of visible objects within a limited field of view.
+Metrics:
+* Task Completion: Successful execution of the multi-step instruction.
+* State Consistency: Ability to maintain task-relevant focus across state-dependent reasoning requirements.
+
+**RoboTHOR** evaluates agents in indoor 3D environments where they must navigate to a target object category from a first-person perspective.
+
+Task Setting: Agents use a discrete action space and must explicitly issue a stop command upon reaching the target within a distance threshold.
+Metrics:
+* Success Rate (SR): Percentage of episodes where the agent stops within the success threshold.
+* Success weighted by Path Length (SPL): A measure of path efficiency.`;
 
 function getTaskById(taskId) {
   return HOME_EVAL.tasks.find((task) => task.id === taskId) || HOME_EVAL.tasks[0] || null;
