@@ -1,4 +1,10 @@
 const MODEL_ALL = '__all__';
+const TASK_ORDER = [
+  'DeliveryBench',
+  'RoboTHOR',
+  'ALFRED',
+  'MiniGrid',
+];
 const MODEL_ORDER = [
   'GPT-5',
   'Gemini-3-Flash',
@@ -51,6 +57,11 @@ Metrics:
 
 function getTaskById(taskId) {
   return HOME_EVAL.tasks.find((task) => task.id === taskId) || HOME_EVAL.tasks[0] || null;
+}
+
+function getOrderedTasks(tasks) {
+  const taskMap = new Map((tasks || []).map((task) => [task.id, task]));
+  return TASK_ORDER.map((taskId) => taskMap.get(taskId) || { id: taskId, label: taskId });
 }
 
 function getModelsForTask(taskId) {
@@ -157,6 +168,17 @@ function renderTableRows(tableBodyEl, taskId, modelId) {
   const maxValue = getResultsMax(task?.id, modelId);
   tableBodyEl.innerHTML = '';
 
+  if (!results.length) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td colspan="5" class="has-text-centered has-text-grey">
+        No evaluation rows available for ${task?.label || taskId}.
+      </td>
+    `;
+    tableBodyEl.appendChild(tr);
+    return;
+  }
+
   results.forEach((entry) => {
     const performance = window.HomeEvalCsv && window.HomeEvalCsv.colorFormatter
       ? window.HomeEvalCsv.colorFormatter(entry.score, { min: 0, max: maxValue })
@@ -182,44 +204,48 @@ function renderChartRows(containerEl, tooltipEl, shellEl, taskId, modelId) {
   containerEl.innerHTML = '';
   containerEl.className = 'eval-bars-table';
 
-  const table = document.createElement('table');
-  table.className = 'eval-input-table';
-  table.innerHTML = `
-    <thead>
-      <tr>
-        <th>Models</th>
-        <th>Reasoning</th>
-        <th>Memory</th>
-        <th>Reflection</th>
-        <th>Performance</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  `;
-  const tbody = table.querySelector('tbody');
+  if (!results.length) {
+    const emptyEl = document.createElement('div');
+    emptyEl.className = 'eval-empty-state';
+    emptyEl.textContent = `No evaluation rows available for ${task?.label || taskId}.`;
+    containerEl.appendChild(emptyEl);
+    const axis = document.querySelector('#eval-axis');
+    if (axis) axis.style.display = 'none';
+    const axisRow = containerEl.closest('.eval-chart-shell')?.querySelector('.eval-axis-row');
+    if (axisRow) axisRow.style.display = 'none';
+    return;
+  }
 
   results.forEach((entry) => {
-    const performance = window.HomeEvalCsv && window.HomeEvalCsv.colorFormatter
-      ? window.HomeEvalCsv.colorFormatter(entry.score, { min: 0, max: maxValue })
-      : entry.score.toFixed(1);
+    const displayScore = Number(entry.score).toFixed(1);
+    const pct = Math.max(0, Math.min(100, (entry.score / maxValue) * 100));
 
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${entry.model}</td>
-      <td>${entry.reasoning}</td>
-      <td>${entry.memory}</td>
-      <td>${entry.reflection}</td>
-      <td>${performance}</td>
+    const row = document.createElement('button');
+    row.type = 'button';
+    row.className = 'eval-bar-row';
+    row.setAttribute('aria-label', `${entry.model} performance ${entry.score.toFixed(1)}`);
+    row.innerHTML = `
+      <span class="eval-bar-label">${entry.model}</span>
+      <span class="eval-bar-track">
+        <span class="eval-bar-fill" style="width: ${pct}%; background: ${getBarColor(entry.score, maxValue)}"></span>
+        <span class="eval-bar-end">${displayScore}</span>
+      </span>
     `;
-    tbody.appendChild(tr);
+
+    const show = (event) => showTooltip(tooltipEl, shellEl, row, entry, task.label, event?.clientX);
+    row.addEventListener('mouseenter', show);
+    row.addEventListener('mousemove', show);
+    row.addEventListener('focus', show);
+    row.addEventListener('blur', () => hideTooltip(tooltipEl));
+    row.addEventListener('mouseleave', () => hideTooltip(tooltipEl));
+    row.addEventListener('click', show);
+    containerEl.appendChild(row);
   });
 
-  containerEl.appendChild(table);
-
   const axis = document.querySelector('#eval-axis');
-  if (axis) axis.style.display = 'none';
+  if (axis) axis.style.display = 'block';
   const axisRow = containerEl.closest('.eval-chart-shell')?.querySelector('.eval-axis-row');
-  if (axisRow) axisRow.style.display = 'none';
+  if (axisRow) axisRow.style.display = 'grid';
 }
 
 function buildButton(stripEl, id, label, activeClass, role, onClick) {
@@ -310,7 +336,10 @@ async function loadHomeEvaluationFromCsv() {
   try {
     const csvEval = await window.HomeEvalCsv.loadHomeEvalData('data/results.csv');
     if (csvEval && Array.isArray(csvEval.tasks) && csvEval.tasks.length > 0) {
-      HOME_EVAL = csvEval;
+      HOME_EVAL = {
+        ...csvEval,
+        tasks: getOrderedTasks(csvEval.tasks),
+      };
     }
   } catch (_err) {
     // Keep built-in fallback data.

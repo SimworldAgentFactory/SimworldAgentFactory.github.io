@@ -770,6 +770,14 @@ body {
   position: relative;
 }
 
+.eval-empty-state {
+  padding: 1.1rem 0.25rem;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
 .eval-table-wrap {
   margin-top: 14px;
   border: 1px solid var(--border);
