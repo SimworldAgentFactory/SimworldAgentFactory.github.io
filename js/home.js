@@ -184,6 +184,7 @@ function hideTooltip(tooltipEl) {
 }
 
 function renderTableRows(tableBodyEl, taskId, modelId) {
+  if (!tableBodyEl) return;
   const task = getTaskById(taskId);
   const results = getResultsBySelection(task?.id, modelId);
   const maxValue = getResultsMax(task?.id, modelId);
@@ -217,39 +218,127 @@ function renderTableRows(tableBodyEl, taskId, modelId) {
   });
 }
 
+function pillClassFor(column, value) {
+  const v = String(value || '').trim().toLowerCase();
+  if (column === 'reasoning') {
+    if (v.includes('plan')) return 'eval-tpc-pill--orange';
+    if (v.includes('cot')) return 'eval-tpc-pill--purple';
+    if (v.includes('mad')) return 'eval-tpc-pill--indigo';
+    if (v.includes('tot')) return 'eval-tpc-pill--purple';
+    if (v.includes('rap')) return 'eval-tpc-pill--indigo';
+    return 'eval-tpc-pill--blue';
+  }
+  if (column === 'memory') {
+    return 'eval-tpc-pill--green';
+  }
+  if (column === 'reflection') {
+    if (!v || v === 'none' || v === 'n/a') return 'eval-tpc-pill--gray';
+    return 'eval-tpc-pill--violet';
+  }
+  return 'eval-tpc-pill--gray';
+}
+
+function rankBadgeClass(rank) {
+  if (rank === 1) return 'eval-tpc-rank--gold';
+  if (rank === 2) return 'eval-tpc-rank--silver';
+  if (rank === 3) return 'eval-tpc-rank--bronze';
+  return '';
+}
+
+function topResultsPerModel(results, perModelLimit = 10) {
+  const grouped = new Map();
+  results.forEach((entry) => {
+    if (!grouped.has(entry.model)) grouped.set(entry.model, []);
+    const bucket = grouped.get(entry.model);
+    if (bucket.length < perModelLimit) bucket.push(entry);
+  });
+  return Array.from(grouped.values()).flat().sort((a, b) => b.score - a.score);
+}
+
 function renderChartRows(containerEl, tooltipEl, shellEl, taskId, modelId) {
   const task = getTaskById(taskId);
-  const results = getResultsBySelection(task?.id, modelId);
-  const maxValue = getResultsMax(task?.id, modelId);
+  const allResults = getResultsBySelection(task?.id, modelId);
+  const results = topResultsPerModel(allResults, 10);
+
+  const maxScore = results.reduce((acc, r) => Math.max(acc, Number(r.score) || 0), 0);
+  const maxValue = maxScore <= CHART_MAX ? CHART_MAX : Math.ceil(maxScore / 10) * 10;
 
   containerEl.innerHTML = '';
-  containerEl.className = 'eval-bars-table';
+  containerEl.className = 'eval-bars eval-tpc';
+
+  const axisRow = containerEl.closest('.eval-chart-shell')?.querySelector('.eval-axis-row');
+  if (axisRow) axisRow.style.display = 'none';
+
+  const titleEl = document.createElement('div');
+  titleEl.className = 'eval-tpc-title';
+  titleEl.innerHTML = `
+    <span class="eval-tpc-title__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 21h8"/>
+        <path d="M12 17v4"/>
+        <path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/>
+        <path d="M7 4H4v3a3 3 0 0 0 3 3"/>
+        <path d="M17 4h3v3a3 3 0 0 1-3 3"/>
+      </svg>
+    </span>
+    <span class="eval-tpc-title__text">Top Performing Configurations</span>
+  `;
+  containerEl.appendChild(titleEl);
+
+  const headerEl = document.createElement('div');
+  headerEl.className = 'eval-tpc-header';
+  headerEl.innerHTML = `
+    <span class="eval-tpc-th eval-tpc-th--rank">Rank</span>
+    <span class="eval-tpc-th">Model</span>
+    <span class="eval-tpc-th">Reasoning</span>
+    <span class="eval-tpc-th">Memory</span>
+    <span class="eval-tpc-th">Reflection</span>
+    <span class="eval-tpc-th eval-tpc-th--perf">Performance Score</span>
+  `;
+  containerEl.appendChild(headerEl);
 
   if (!results.length) {
     const emptyEl = document.createElement('div');
     emptyEl.className = 'eval-empty-state';
     emptyEl.textContent = `No evaluation rows available for ${task?.label || taskId}.`;
     containerEl.appendChild(emptyEl);
-    const axis = document.querySelector('#eval-axis');
-    if (axis) axis.style.display = 'none';
-    const axisRow = containerEl.closest('.eval-chart-shell')?.querySelector('.eval-axis-row');
-    if (axisRow) axisRow.style.display = 'none';
     return;
   }
 
-  results.forEach((entry) => {
+  results.forEach((entry, idx) => {
+    const rank = idx + 1;
     const displayScore = Number(entry.score).toFixed(1);
     const pct = Math.max(0, Math.min(100, (entry.score / maxValue) * 100));
+    const logoSrc = getModelLogoSrc(entry.model);
 
     const row = document.createElement('button');
     row.type = 'button';
-    row.className = 'eval-bar-row';
-    row.setAttribute('aria-label', `${entry.model} performance ${entry.score.toFixed(1)}`);
+    row.className = 'eval-tpc-row';
+    row.setAttribute('aria-label',
+      `Rank ${rank}: ${entry.model}, score ${entry.score.toFixed(1)}`);
     row.innerHTML = `
-      <span class="eval-bar-label">${entry.model}</span>
-      <span class="eval-bar-track">
-        <span class="eval-bar-fill" style="width: ${pct}%; background: ${getBarColor(entry.score, maxValue)}"></span>
-        <span class="eval-bar-end">${displayScore}</span>
+      <span class="eval-tpc-cell eval-tpc-cell--rank">
+        <span class="eval-tpc-rank ${rankBadgeClass(rank)}">${rank}</span>
+      </span>
+      <span class="eval-tpc-cell eval-tpc-cell--model">
+        ${logoSrc ? `<img class="eval-tpc-model__logo" src="${logoSrc}" alt="" loading="lazy" decoding="async" />` : ''}
+        <span class="eval-tpc-model__name">${entry.model}</span>
+      </span>
+      <span class="eval-tpc-cell">
+        <span class="eval-tpc-pill ${pillClassFor('reasoning', entry.reasoning)}">${entry.reasoning}</span>
+      </span>
+      <span class="eval-tpc-cell">
+        <span class="eval-tpc-pill ${pillClassFor('memory', entry.memory)}">${entry.memory}</span>
+      </span>
+      <span class="eval-tpc-cell">
+        <span class="eval-tpc-pill ${pillClassFor('reflection', entry.reflection)}">${entry.reflection}</span>
+      </span>
+      <span class="eval-tpc-cell eval-tpc-cell--perf">
+        <span class="eval-tpc-perf__value">${displayScore}</span>
+        <span class="eval-tpc-perf__track">
+          <span class="eval-tpc-perf__fill" style="width:${pct}%"></span>
+        </span>
       </span>
     `;
 
@@ -262,11 +351,6 @@ function renderChartRows(containerEl, tooltipEl, shellEl, taskId, modelId) {
     row.addEventListener('click', show);
     containerEl.appendChild(row);
   });
-
-  const axis = document.querySelector('#eval-axis');
-  if (axis) axis.style.display = 'block';
-  const axisRow = containerEl.closest('.eval-chart-shell')?.querySelector('.eval-axis-row');
-  if (axisRow) axisRow.style.display = 'grid';
 }
 
 function buildButton(stripEl, id, label, activeClass, role, onClick, options = {}) {
@@ -403,7 +487,7 @@ async function initHomeEvaluation() {
   const hoverTooltip = document.querySelector('#eval-hover-tooltip');
   const chartShell = document.querySelector('.eval-chart-shell');
 
-  if (!taskStrip || !modelStrip || !barsContainer || !axis || !tableBody || !hoverTooltip || !chartShell) {
+  if (!taskStrip || !modelStrip || !barsContainer || !axis || !hoverTooltip || !chartShell) {
     return;
   }
 
