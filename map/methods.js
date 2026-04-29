@@ -1,5 +1,16 @@
 const AGENT_METHOD_CATEGORIES = new Map([
 
+  ["perception", new Map([
+
+    ["unified_agent_input", [
+      "State Map",
+      "Action Schema",
+      "Image",
+      "Text Summary"
+    ]]
+
+  ])],
+
   ["reasoning", new Map([
 
     ["sequential_decomposition_acting", [
