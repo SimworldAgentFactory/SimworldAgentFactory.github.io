@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Playground — AgentFactory</title>
+  <link rel="stylesheet" href="../css/fontawesome.all.min.css" />
+  <link rel="stylesheet" href="playground.css" />
+</head>
+<body>
+
+<a href="../index.html" class="pg-home-btn"><i class="fas fa-arrow-left"></i> Home</a>
+
+<div class="pg-layout">
+
+  <!-- ═══════════ LEFT: Agent Setup ═══════════ -->
+  <aside class="pg-left">
+    <div class="pg-panel">
+      <div class="pg-panel-head">
+        <i class="fas fa-cogs pg-panel-head-icon"></i>
+        <h2>Agent Setup</h2>
+      </div>
+
+      <!-- Environment -->
+      <section class="pg-mod">
+        <div class="pg-mod-head"><span class="pg-dot pg-dot--env"></span><span class="pg-mod-label">Environment</span></div>
+        <label class="pg-field-label" for="sel-env">Adapter</label>
+        <div class="pg-select"><select id="sel-env">
+          <option value="minigrid">MiniGrid</option>
+          <option value="deliverybench">DeliveryBench</option>
+        </select></div>
+        <div id="env-name-wrap">
+          <label class="pg-field-label" for="sel-env-name">Environment Name</label>
+          <div class="pg-select"><select id="sel-env-name">
+            <option value="MiniGrid-DoorKey-5x5-v0">DoorKey-5x5</option>
+            <option value="MiniGrid-DoorKey-6x6-v0">DoorKey-6x6</option>
+            <option value="MiniGrid-Empty-5x5-v0">Empty-5x5</option>
+            <option value="MiniGrid-DoorKey-8x8-v0">DoorKey-8x8</option>
+            <option value="MiniGrid-MultiRoom-N2-S4-v0">MultiRoom-N2-S4</option>
+            <option value="MiniGrid-MemoryS17Random-v0">MemoryS17Random</option>
+          </select></div>
+        </div>
+        <p class="pg-hint">Defines the world and task the agent will operate in.</p>
+      </section>
+
+      <!-- Perception -->
+      <section class="pg-mod">
+        <div class="pg-mod-head"><span class="pg-dot pg-dot--perc"></span><span class="pg-mod-label">Perception</span></div>
+        <label class="pg-field-label" for="sel-perception">Adapter</label>
+        <div class="pg-select"><select id="sel-perception">
+          <option value="minigrid">MiniGrid (basic)</option>
+          <option value="minigrid_relation">MiniGrid (relation)</option>
+          <option value="deliverybench">DeliveryBench</option>
+          <option value="gym">Gym</option>
+          <option value="thor">THOR</option>
+        </select></div>
+        <p class="pg-hint">Converts raw observations into <code>UnifiedAgentInput</code>.</p>
+      </section>
+
+      <!-- Reasoning -->
+      <section class="pg-mod">
+        <div class="pg-mod-head"><span class="pg-dot pg-dot--reas"></span><span class="pg-mod-label">Reasoning</span></div>
+        <label class="pg-field-label" for="sel-reasoning">Method</label>
+        <div class="pg-select"><select id="sel-reasoning">
+          <option value="simple">Simple (no LLM)</option>
+          <option value="llm">LLM direct</option>
+          <option value="react">ReAct</option>
+          <option value="cot">Chain-of-Thought</option>
+          <option value="tot">Tree of Thoughts</option>
+          <option value="guided_search">Guided Search</option>
+          <option value="rap">RAP (MCTS)</option>
+        </select></div>
+        <p class="pg-hint">LLM-based methods require <code>OPENAI_API_KEY</code>.</p>
+      </section>
+
+      <!-- Memory -->
+      <section class="pg-mod">
+        <div class="pg-mod-head"><span class="pg-dot pg-dot--mem"></span><span class="pg-mod-label">Memory</span></div>
+        <label class="pg-field-label" for="sel-memory">Backend</label>
+        <div class="pg-select"><select id="sel-memory">
+          <option value="none">None</option>
+          <option value="minigrid">MiniGrid</option>
+          <option value="bot">Buffer-of-Thought</option>
+          <option value="graph">GraphContextMemory</option>
+          <option value="ace">ACE (Agentic Context Engine)</option>
+          <option value="amem">A-Mem (Associative Memory)</option>
+          <option value="dynamic_cheatsheet">Dynamic Cheatsheet</option>
+          <option value="letta">Letta (Structured Blocks)</option>
+        </select></div>
+        <p class="pg-hint">Stores and retrieves past observations. LLM-backends require <code>OPENAI_API_KEY</code>.</p>
+      </section>
+
+      <!-- Reflection -->
+      <section class="pg-mod">
+        <div class="pg-mod-head"><span class="pg-dot pg-dot--refl"></span><span class="pg-mod-label">Reflection</span></div>
+        <label class="pg-field-label" for="sel-reflection">Module</label>
+        <div class="pg-select"><select id="sel-reflection">
+          <option value="none">None</option>
+          <option value="self_refine">Self-Refine</option>
+        </select></div>
+        <p class="pg-hint">Self-refine and improve reasoning output iteratively.</p>
+      </section>
+    </div>
+  </aside>
+
+  <!-- ═══════════ CENTER ═══════════ -->
+  <main class="pg-center">
+
+    <!-- Module Combination Map -->
+    <div class="pg-panel pg-map-panel">
+      <div class="pg-panel-head">
+        <i class="fas fa-project-diagram pg-panel-head-icon"></i>
+        <div>
+          <h2>Module Combination Map</h2>
+          <p class="pg-panel-sub">See how different modules work together across environments</p>
+        </div>
+      </div>
+      <div class="pg-map-row">
+        <div class="pg-map-card pg-map-card--env" data-map="env">
+          <img class="pg-map-logo" src="../assests/playground_map/environment.png" alt="Environment" />
+          <div class="pg-map-name">Environment</div>
+          <div class="pg-map-val" id="map-env">MiniGrid</div>
+          <div class="pg-map-sub" id="map-env-sub">DoorKey-5x5</div>
+        </div>
+        <div class="pg-map-card pg-map-card--perc" data-map="perc">
+          <img class="pg-map-logo" src="../assests/playground_map/perception.png" alt="Perception" />
+          <div class="pg-map-name">Perception</div>
+          <div class="pg-map-val" id="map-perc">MiniGrid (basic)</div>
+        </div>
+        <div class="pg-map-card pg-map-card--reas" data-map="reas">
+          <img class="pg-map-logo" src="../assests/playground_map/reasoning.png" alt="Reasoning" />
+          <div class="pg-map-name">Reasoning</div>
+          <div class="pg-map-val" id="map-reas">Simple</div>
+          <div class="pg-map-sub" id="map-reas-sub">(no LLM)</div>
+        </div>
+        <div class="pg-map-card pg-map-card--mem" data-map="mem">
+          <img class="pg-map-logo" src="../assests/playground_map/memory.png" alt="Memory" />
+          <div class="pg-map-name">Memory</div>
+          <div class="pg-map-val" id="map-mem">None</div>
+        </div>
+        <div class="pg-map-card pg-map-card--refl" data-map="refl">
+          <img class="pg-map-logo" src="../assests/playground_map/reflection.png" alt="Reflection" />
+          <div class="pg-map-name">Reflection</div>
+          <div class="pg-map-val" id="map-refl">None</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Generated Agent Code -->
+    <div class="pg-panel pg-code-panel">
+      <div class="pg-code-head">
+        <div class="pg-code-title">
+          <i class="fas fa-code pg-code-title-icon"></i>
+          <div>
+            <h2>Generated Agent Code</h2>
+            <p class="pg-panel-sub">Run agent in different environments</p>
+          </div>
+        </div>
+        <div class="pg-code-actions">
+          <button class="pg-btn pg-btn--tab is-active" id="tab-python" data-tab="python">Python</button>
+          <button class="pg-btn pg-btn--copy" id="btn-copy"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div class="pg-code-editor">
+        <div class="pg-code-gutter" id="line-numbers"></div>
+        <pre class="pg-code-pre"><code id="code-output"></code></pre>
+        <button class="pg-code-inline-copy" id="btn-copy-inline" title="Copy"><i class="fas fa-copy"></i> Copy</button>
+      </div>
+      <div class="pg-code-footer">
+        <button class="pg-btn pg-btn--download" id="btn-download"><i class="fas fa-download"></i> Download</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════ RIGHT: Current Setup ═══════════ -->
+  <aside class="pg-right">
+    <div class="pg-panel pg-setup-card">
+      <div class="pg-setup-head">Current Setup</div>
+      <div class="pg-setup-env-badge">
+        <span class="pg-setup-env-label">Environment</span>
+        <span class="pg-setup-env-name" id="setup-env-name">DoorKey-5x5</span>
+      </div>
+    </div>
+
+    <div class="pg-panel pg-summary">
+      <h3 class="pg-summary-title">Module Summary</h3>
+      <div class="pg-summary-row"><span>Environment</span><span id="sum-env">MiniGrid (DoorKey-5x5)</span></div>
+      <div class="pg-summary-row"><span>Perception</span><span id="sum-perc">MiniGrid (basic)</span></div>
+      <div class="pg-summary-row"><span>Reasoning</span><span id="sum-reas">Simple (no LLM)</span></div>
+      <div class="pg-summary-row"><span>Memory</span><span id="sum-mem">None</span></div>
+      <div class="pg-summary-row"><span>Reflection</span><span id="sum-refl">None</span></div>
+    </div>
+
+    <div class="pg-panel pg-howto">
+      <h3 class="pg-howto-title">How to Run</h3>
+      <ol class="pg-howto-list">
+        <li><span class="pg-howto-num">1</span> Select an environment from the map.</li>
+        <li><span class="pg-howto-num">2</span> Configure module combinations in the left panel.</li>
+        <li><span class="pg-howto-num">3</span> Click 'Start Agent' to run.</li>
+      </ol>
+    </div>
+
+    <button class="pg-btn-start" id="btn-start">Start Agent <i class="fas fa-play"></i></button>
+
+    <div class="pg-panel pg-obv">
+      <div class="pg-obv-head">
+        <i class="fas fa-satellite-dish pg-obv-head-icon"></i>
+        <h3 class="pg-obv-title">Observation</h3>
+      </div>
+      <div class="pg-obv-meta">
+        <div class="pg-obv-meta-row">
+          <span class="pg-obv-meta-key">Recovery</span>
+          <span class="pg-obv-meta-val" id="obv-recovery">—</span>
+        </div>
+        <div class="pg-obv-meta-row">
+          <span class="pg-obv-meta-key">Diagnostic</span>
+          <code class="pg-obv-meta-code" id="obv-diagnostic">—</code>
+        </div>
+      </div>
+      <div class="pg-obv-steps" id="obv-steps"></div>
+    </div>
+  </aside>
+
+</div>
+
+<script src="playground.js"></script>
+</body>
+</html>

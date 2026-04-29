@@ -1,0 +1,32 @@
+{
+    "observation_summary": {
+      "recovery_type": "decomposed_reintegration",
+      "diagnostic_action": "VIEW_BAG()",
+      "steps": [
+        {
+          "step": 42,
+          "status": "initial_correction",
+          "action": "syntax_adjustment",
+          "result": "fragile"
+        },
+        {
+          "step": 43,
+          "status": "turning_point",
+          "action": "state_inspection",
+          "target": "compartment_metadata"
+        },
+        {
+          "step": 44,
+          "status": "success",
+          "action": "PLACE_FOOD_IN_BAG",
+          "payload": "order 4: 1 -> A"
+        },
+        {
+          "step": 45,
+          "status": "completion",
+          "action": "PLACE_FOOD_IN_BAG",
+          "payload": "order 5: 1 -> A; 2,3 -> B"
+        }
+      ]
+    }
+  }
