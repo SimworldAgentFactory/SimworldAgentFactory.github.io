@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- <title>AgentFactory — Home</title> -->
-  <title>AgentFactory: Composable Design and Analysis of Embodied Agents</title>
+  <title>AgentSpec: A Modular Specification Framework for Controlled Analysis of Embodied Agents</title>
   <meta name="description"
-    content="AgentFactory main page: modular architecture, benchmark-ready environments, docs, and playground." />
+    content="AgentSpec: a composable specification framework for controlled analysis of embodied agents across DeliveryBench, ALFRED, MiniGrid, and RoboTHOR." />
 
   <!-- Bulma + extensions -->
   <link rel="stylesheet" href="css/bulma.min.css" />
@@ -27,7 +26,7 @@
       <div class="navbar-brand">
         <a class="navbar-item has-text-weight-semibold" href="index.html">
           <span class="icon has-text-info mr-2"><i class="fas fa-robot"></i></span>
-          AgentFactory
+          AgentSpec
         </a>
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
           <span aria-hidden="true"></span>
@@ -60,14 +59,14 @@
       <div class="container">
         <div class="hero-stack has-text-centered">
           <div class="hero-brand-row">
-            <img src="assests/logo.png" alt="AgentFactory" class="hero-logo" width="96" height="96" decoding="async" />
+            <img src="assests/logo.png" alt="AgentSpec" class="hero-logo" width="96" height="96" decoding="async" />
             <p class="hero-wordmark">
-              <span class="hero-wordmark__soft">Agent</span><span class="hero-wordmark__strong">Factory</span>
+              <span class="hero-wordmark__soft">Agent</span><span class="hero-wordmark__strong">Spec</span>
             </p>
           </div>
           <h1 class="hero-headline">
-            <span class="hero-headline__line">Composable Design and</span>
-            <span class="hero-headline__line"> Analysis of Embodied Agents</span>
+            <span class="hero-headline__line">A Modular Specification Framework for</span>
+            <span class="hero-headline__line">Controlled Analysis of Embodied Agents</span>
           </h1>
         </div>
 
@@ -104,7 +103,7 @@
     <div class="container">
       <h2 class="title is-2 has-text-centered heading-display mb-5">Demo Video</h2>
       <div class="abstract-copy has-text-centered mb-5">
-        <p>See AgentFactory in action with a comprehensive demonstration.</p>
+        <p>See AgentSpec in action with a comprehensive demonstration.</p>
       </div>
       <figure class="overview-figure">
         <div class="demo-video-shell">
@@ -123,14 +122,14 @@
       <h2 class="title is-2 has-text-centered heading-display mb-5">Overview</h2>
       <div class="abstract-copy" id="abstract-copy" data-abstract-src="lists/abstract.md" aria-live="polite"></div>
       <figure class="overview-figure mt-5">
-        <img src="assests/agentfractory_main.png" alt="AgentFactory framework diagram"
+        <img src="assests/agentfractory_main.png" alt="AgentSpec framework diagram"
           class="overview-diagram media-rounded" loading="lazy" decoding="async" />
       </figure>
       <div class="abstract-copy overview-conclusion mt-4">
         <p>Evaluations across DeliveryBench, ALFRED, MiniGrid, and RoboTHOR show that performance depends not only on
           the strength of individual components but also on their interactions. Modular recomposition can outperform
           monolithic baselines, especially in long-horizon embodied tasks that benefit from state-aware,
-          trajectory-level memory and structured decision making. By exposing a clear design space, AgentFactory
+          trajectory-level memory and structured decision making. By exposing a clear design space, AgentSpec
           provides a foundation for agents that are more capable, more analyzable, and more scientifically grounded.
         </p>
       </div>
@@ -365,7 +364,7 @@
         <p class="section-eyebrow">Coverage</p>
         <h2 class="title is-2 heading-display mt-2">Covering Every Module and Domain</h2>
         <p class="subtitle is-6">
-          AgentFactory covers rigorous and adaptable setups for all major agent cognitive loops, spanning from memory
+          AgentSpec covers rigorous and adaptable setups for all major agent cognitive loops, spanning from memory
           architectures to reasoning paradigms and reflection mechanisms.
         </p>
       </div>
@@ -379,8 +378,7 @@
     <div class="container">
       <div class="section-intro section-intro--center mb-5">
         <h2 class="title is-3 heading-display">Key Features</h2>
-        <p class="subtitle is-6">Core capabilities that make the framework useful for embodied agent research and
-          benchmarking.</p>
+        <p class="subtitle is-6">Three core contributions that make AgentSpec useful for controlled embodied-agent research.</p>
       </div>
       <div class="columns is-multiline key-features-row">
         <div class="column is-4">
@@ -388,11 +386,12 @@
             <div class="card-content">
               <div class="is-flex is-align-items-start mb-3 flex-gap-xs">
                 <span class="feature-icon">1</span>
-                <h3 class="title is-5 mb-0">Structured Multimodal Interface</h3>
+                <h3 class="title is-5 mb-0">Modular Design Space</h3>
               </div>
               <p class="has-text-grey">
-                Converts raw environment observations into unified agent input with structured state, visual
-                inputs, task metadata, and action schema in one place.
+                Defines a unified Perception–Memory–Reasoning–Reflection–Action loop where every
+                module is independently replaceable, enabling systematic study of how each
+                component contributes to overall agent performance.
               </p>
               <figure class="feature-card-figure">
                 <img src="assests/feat1.png" width="400" height="520"
@@ -407,11 +406,12 @@
             <div class="card-content">
               <div class="is-flex is-align-items-start mb-3 flex-gap-xs">
                 <span class="feature-icon">2</span>
-                <h3 class="title is-5 mb-0">Pluggable Reasoning and Memory</h3>
+                <h3 class="title is-5 mb-0">Controlled Analysis Platform</h3>
               </div>
               <p class="has-text-grey">
-                Supports baseline policies, search-based planners, self-reflection, and multiple memory backends
-                that can be swapped independently for controlled ablations.
+                Supports reasoning (ReAct, CoT, Plan&amp;Solve, MAD, ToT), memory (Base,
+                DynamicCheatsheet, MemoryBank, OpenClaw), and reflection (Reflexion, Self-Refine)
+                modules that can be swapped independently for rigorous ablation studies.
               </p>
               <figure class="feature-card-figure">
                 <img src="assests/feat2.png" width="640" height="360"
@@ -426,11 +426,12 @@
             <div class="card-content">
               <div class="is-flex is-align-items-start mb-3 flex-gap-xs">
                 <span class="feature-icon">3</span>
-                <h3 class="title is-5 mb-0">Reusable Design Space</h3>
+                <h3 class="title is-5 mb-0">Cross-Benchmark Findings</h3>
               </div>
               <p class="has-text-grey">
-                Provides significant scientific utility, allowing for the isolated study of
-                specific modules without configuration of the entire framework.
+                Comprehensive evaluation across DeliveryBench, ALFRED, MiniGrid, and RoboTHOR
+                reveals that performance is driven more by module interaction than individual
+                component quality — structured memory and reflection matter most.
               </p>
               <figure class="feature-card-figure">
                 <img src="assests/feat3.png" width="800" height="600"
@@ -500,29 +501,18 @@
   </section>
 
   <!-- ── Evaluation Results ─────────────────────────────────── -->
-  <section class="section section-alt">
+  <section class="section section-alt" id="eval-results">
     <div class="container">
       <div class="section-intro section-intro--left mb-5">
         <h2 class="title is-3 heading-display">Evaluation Results</h2>
-        <p class="subtitle is-6">Comparison of different Module combination by given Task and Model</p>
+        <p class="subtitle is-6">
+          Performance across backbone models for representative module configurations on four benchmarks.
+          Hover over any data point to see the full configuration details.
+        </p>
       </div>
       <div class="box eval-results-card">
-        <div class="mb-3">
-          <p class="is-size-7 has-text-weight-semibold has-text-grey mb-2">Filter by Task</p>
-          <div id="eval-task-strip" class="eval-filter-strip" role="tablist" aria-label="Filter by task"></div>
-        </div>
-        <div class="mb-3">
-          <p class="is-size-7 has-text-weight-semibold has-text-grey mb-2">Filter by Model</p>
-          <div id="eval-model-strip" class="eval-filter-strip" role="tablist" aria-label="Filter by model"></div>
-        </div>
-        <div class="eval-chart-shell">
-          <div id="eval-bars" class="eval-bars" aria-live="polite"></div>
-          <div class="eval-axis-row" aria-hidden="true">
-            <span class="eval-axis-spacer"></span>
-            <div id="eval-axis" class="eval-axis"></div>
-          </div>
-          <div id="eval-hover-tooltip" class="eval-hover-tooltip" role="tooltip" aria-hidden="true"></div>
-        </div>
+        <div id="linechart-legend" class="linechart-legend mb-4" aria-hidden="true"></div>
+        <div id="eval-linecharts" class="linechart-grid" aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -700,7 +690,7 @@
       <div class="section-intro section-intro--center mb-5">
         <p class="section-eyebrow">Case Study</p>
         <h2 class="title is-3 heading-display mt-2">Environment-Specific Examples</h2>
-        <p class="subtitle is-6">Trajectory level analysis of AgentFactory on different Environment baselines.</p>
+        <p class="subtitle is-6">Trajectory level analysis of AgentSpec on different environment baselines.</p>
       </div>
 
       <div class="case-study-switcher" role="tablist" aria-label="Case study environments">
@@ -776,7 +766,7 @@
   <!-- ── Footer ─────────────────────────────────────────────── -->
   <footer class="footer site-footer">
     <div class="content has-text-centered">
-      <p>&copy; 2026 AgentFactory Team. All rights reserved.</p>
+      <p>&copy; 2026 AgentSpec Team. All rights reserved.</p>
     </div>
   </footer>
 
@@ -784,8 +774,10 @@
   <script src="js/fontawesome.all.min.js"></script>
   <script src="js/bulma-carousel.min.js"></script>
   <script src="js/bulma-slider.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="js/results-csv.js"></script>
   <script src="js/home.js"></script>
+  <script src="js/linechart.js"></script>
   <script src="js/components/coverage-tree.js"></script>
   <script src="js/components/module-cards.js"></script>
   <script>

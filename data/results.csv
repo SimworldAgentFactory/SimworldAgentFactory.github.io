@@ -59,3 +59,183 @@ DeliveryBench,Gemini-3-Flash,32.93,ReAct,Base,Reflexion
 DeliveryBench,Qwen3.5-397B,33.58,ReAct,Base,Reflexion
 DeliveryBench,Qwen3.5-9B,14.69,ReAct,Base,Reflexion
 DeliveryBench,GPT-5 mini,20.58,ReAct,Base,Reflexion
+MiniGrid,GPT-5,28.60,None,Base,None
+MiniGrid,Gemini-3-Flash,21.30,None,Base,None
+MiniGrid,Qwen3.5-397B,17.80,None,Base,None
+MiniGrid,Qwen3.5-9B,11.20,None,Base,None
+MiniGrid,GPT-5 mini,14.50,None,Base,None
+MiniGrid,GPT-5,41.70,ReAct,Base,None
+MiniGrid,Gemini-3-Flash,32.40,ReAct,Base,None
+MiniGrid,Qwen3.5-397B,27.50,ReAct,Base,None
+MiniGrid,Qwen3.5-9B,17.90,ReAct,Base,None
+MiniGrid,GPT-5 mini,22.10,ReAct,Base,None
+MiniGrid,GPT-5,43.20,ReAct,ChatDB,None
+MiniGrid,Gemini-3-Flash,29.10,ReAct,ChatDB,None
+MiniGrid,Qwen3.5-397B,24.70,ReAct,ChatDB,None
+MiniGrid,Qwen3.5-9B,14.60,ReAct,ChatDB,None
+MiniGrid,GPT-5 mini,18.80,ReAct,ChatDB,None
+MiniGrid,GPT-5,58.40,ReAct,DynamicCheatsheet,None
+MiniGrid,Gemini-3-Flash,46.70,ReAct,DynamicCheatsheet,None
+MiniGrid,Qwen3.5-397B,38.90,ReAct,DynamicCheatsheet,None
+MiniGrid,Qwen3.5-9B,23.40,ReAct,DynamicCheatsheet,None
+MiniGrid,GPT-5 mini,30.10,ReAct,DynamicCheatsheet,None
+MiniGrid,GPT-5,45.80,ReAct,SimpleMem,None
+MiniGrid,Gemini-3-Flash,34.20,ReAct,SimpleMem,None
+MiniGrid,Qwen3.5-397B,28.60,ReAct,SimpleMem,None
+MiniGrid,Qwen3.5-9B,16.30,ReAct,SimpleMem,None
+MiniGrid,GPT-5 mini,21.80,ReAct,SimpleMem,None
+MiniGrid,GPT-5,54.20,ReAct,MemoryBank,None
+MiniGrid,Gemini-3-Flash,43.50,ReAct,MemoryBank,None
+MiniGrid,Qwen3.5-397B,36.10,ReAct,MemoryBank,None
+MiniGrid,Qwen3.5-9B,20.70,ReAct,MemoryBank,None
+MiniGrid,GPT-5 mini,27.40,ReAct,MemoryBank,None
+MiniGrid,GPT-5,50.30,ReAct,OpenClaw,None
+MiniGrid,Gemini-3-Flash,39.70,ReAct,OpenClaw,None
+MiniGrid,Qwen3.5-397B,32.80,ReAct,OpenClaw,None
+MiniGrid,Qwen3.5-9B,18.40,ReAct,OpenClaw,None
+MiniGrid,GPT-5 mini,24.60,ReAct,OpenClaw,None
+MiniGrid,GPT-5,47.90,CoT,Base,None
+MiniGrid,Gemini-3-Flash,37.80,CoT,Base,None
+MiniGrid,Qwen3.5-397B,31.60,CoT,Base,None
+MiniGrid,Qwen3.5-9B,20.10,CoT,Base,None
+MiniGrid,GPT-5 mini,25.30,CoT,Base,None
+MiniGrid,GPT-5,53.70,Plan&Solve,Base,None
+MiniGrid,Gemini-3-Flash,43.10,Plan&Solve,Base,None
+MiniGrid,Qwen3.5-397B,36.80,Plan&Solve,Base,None
+MiniGrid,Qwen3.5-9B,22.80,Plan&Solve,Base,None
+MiniGrid,GPT-5 mini,28.90,Plan&Solve,Base,None
+MiniGrid,GPT-5,43.80,MAD,Base,None
+MiniGrid,Gemini-3-Flash,36.30,MAD,Base,None
+MiniGrid,Qwen3.5-397B,32.50,MAD,Base,None
+MiniGrid,Qwen3.5-9B,25.40,MAD,Base,None
+MiniGrid,GPT-5 mini,28.10,MAD,Base,None
+MiniGrid,GPT-5,46.30,ReAct,Base,Self-Refine
+MiniGrid,Gemini-3-Flash,36.60,ReAct,Base,Self-Refine
+MiniGrid,Qwen3.5-397B,30.90,ReAct,Base,Self-Refine
+MiniGrid,Qwen3.5-9B,19.70,ReAct,Base,Self-Refine
+MiniGrid,GPT-5 mini,24.80,ReAct,Base,Self-Refine
+MiniGrid,GPT-5,55.90,ReAct,Base,Reflexion
+MiniGrid,Gemini-3-Flash,44.80,ReAct,Base,Reflexion
+MiniGrid,Qwen3.5-397B,37.40,ReAct,Base,Reflexion
+MiniGrid,Qwen3.5-9B,23.10,ReAct,Base,Reflexion
+MiniGrid,GPT-5 mini,29.50,ReAct,Base,Reflexion
+ALFRED,GPT-5,8.70,None,Base,None
+ALFRED,Gemini-3-Flash,5.60,None,Base,None
+ALFRED,Qwen3.5-397B,4.30,None,Base,None
+ALFRED,Qwen3.5-9B,1.80,None,Base,None
+ALFRED,GPT-5 mini,2.90,None,Base,None
+ALFRED,GPT-5,16.80,ReAct,Base,None
+ALFRED,Gemini-3-Flash,11.30,ReAct,Base,None
+ALFRED,Qwen3.5-397B,8.40,ReAct,Base,None
+ALFRED,Qwen3.5-9B,4.20,ReAct,Base,None
+ALFRED,GPT-5 mini,5.90,ReAct,Base,None
+ALFRED,GPT-5,20.30,ReAct,ChatDB,None
+ALFRED,Gemini-3-Flash,10.60,ReAct,ChatDB,None
+ALFRED,Qwen3.5-397B,7.80,ReAct,ChatDB,None
+ALFRED,Qwen3.5-9B,3.40,ReAct,ChatDB,None
+ALFRED,GPT-5 mini,5.10,ReAct,ChatDB,None
+ALFRED,GPT-5,33.80,ReAct,DynamicCheatsheet,None
+ALFRED,Gemini-3-Flash,22.90,ReAct,DynamicCheatsheet,None
+ALFRED,Qwen3.5-397B,17.20,ReAct,DynamicCheatsheet,None
+ALFRED,Qwen3.5-9B,7.60,ReAct,DynamicCheatsheet,None
+ALFRED,GPT-5 mini,11.40,ReAct,DynamicCheatsheet,None
+ALFRED,GPT-5,25.40,ReAct,SimpleMem,None
+ALFRED,Gemini-3-Flash,16.70,ReAct,SimpleMem,None
+ALFRED,Qwen3.5-397B,12.10,ReAct,SimpleMem,None
+ALFRED,Qwen3.5-9B,5.30,ReAct,SimpleMem,None
+ALFRED,GPT-5 mini,7.80,ReAct,SimpleMem,None
+ALFRED,GPT-5,36.20,ReAct,MemoryBank,None
+ALFRED,Gemini-3-Flash,25.70,ReAct,MemoryBank,None
+ALFRED,Qwen3.5-397B,19.40,ReAct,MemoryBank,None
+ALFRED,Qwen3.5-9B,8.90,ReAct,MemoryBank,None
+ALFRED,GPT-5 mini,13.20,ReAct,MemoryBank,None
+ALFRED,GPT-5,31.60,ReAct,OpenClaw,None
+ALFRED,Gemini-3-Flash,21.30,ReAct,OpenClaw,None
+ALFRED,Qwen3.5-397B,15.70,ReAct,OpenClaw,None
+ALFRED,Qwen3.5-9B,6.80,ReAct,OpenClaw,None
+ALFRED,GPT-5 mini,10.50,ReAct,OpenClaw,None
+ALFRED,GPT-5,22.10,CoT,Base,None
+ALFRED,Gemini-3-Flash,14.60,CoT,Base,None
+ALFRED,Qwen3.5-397B,10.80,CoT,Base,None
+ALFRED,Qwen3.5-9B,4.90,CoT,Base,None
+ALFRED,GPT-5 mini,7.30,CoT,Base,None
+ALFRED,GPT-5,28.70,Plan&Solve,Base,None
+ALFRED,Gemini-3-Flash,19.40,Plan&Solve,Base,None
+ALFRED,Qwen3.5-397B,14.50,Plan&Solve,Base,None
+ALFRED,Qwen3.5-9B,6.40,Plan&Solve,Base,None
+ALFRED,GPT-5 mini,9.60,Plan&Solve,Base,None
+ALFRED,GPT-5,21.80,MAD,Base,None
+ALFRED,Gemini-3-Flash,15.60,MAD,Base,None
+ALFRED,Qwen3.5-397B,12.40,MAD,Base,None
+ALFRED,Qwen3.5-9B,7.30,MAD,Base,None
+ALFRED,GPT-5 mini,8.90,MAD,Base,None
+ALFRED,GPT-5,24.70,ReAct,Base,Self-Refine
+ALFRED,Gemini-3-Flash,16.40,ReAct,Base,Self-Refine
+ALFRED,Qwen3.5-397B,11.90,ReAct,Base,Self-Refine
+ALFRED,Qwen3.5-9B,5.20,ReAct,Base,Self-Refine
+ALFRED,GPT-5 mini,7.90,ReAct,Base,Self-Refine
+ALFRED,GPT-5,34.50,ReAct,Base,Reflexion
+ALFRED,Gemini-3-Flash,23.60,ReAct,Base,Reflexion
+ALFRED,Qwen3.5-397B,17.80,ReAct,Base,Reflexion
+ALFRED,Qwen3.5-9B,7.80,ReAct,Base,Reflexion
+ALFRED,GPT-5 mini,11.90,ReAct,Base,Reflexion
+RoboTHOR,GPT-5,36.40,None,Base,None
+RoboTHOR,Gemini-3-Flash,28.10,None,Base,None
+RoboTHOR,Qwen3.5-397B,23.60,None,Base,None
+RoboTHOR,Qwen3.5-9B,14.70,None,Base,None
+RoboTHOR,GPT-5 mini,18.30,None,Base,None
+RoboTHOR,GPT-5,53.60,ReAct,Base,None
+RoboTHOR,Gemini-3-Flash,42.90,ReAct,Base,None
+RoboTHOR,Qwen3.5-397B,36.70,ReAct,Base,None
+RoboTHOR,Qwen3.5-9B,22.80,ReAct,Base,None
+RoboTHOR,GPT-5 mini,28.40,ReAct,Base,None
+RoboTHOR,GPT-5,54.80,ReAct,ChatDB,None
+RoboTHOR,Gemini-3-Flash,40.10,ReAct,ChatDB,None
+RoboTHOR,Qwen3.5-397B,33.20,ReAct,ChatDB,None
+RoboTHOR,Qwen3.5-9B,18.90,ReAct,ChatDB,None
+RoboTHOR,GPT-5 mini,24.70,ReAct,ChatDB,None
+RoboTHOR,GPT-5,66.30,ReAct,DynamicCheatsheet,None
+RoboTHOR,Gemini-3-Flash,55.10,ReAct,DynamicCheatsheet,None
+RoboTHOR,Qwen3.5-397B,47.20,ReAct,DynamicCheatsheet,None
+RoboTHOR,Qwen3.5-9B,28.40,ReAct,DynamicCheatsheet,None
+RoboTHOR,GPT-5 mini,36.90,ReAct,DynamicCheatsheet,None
+RoboTHOR,GPT-5,61.90,ReAct,SimpleMem,None
+RoboTHOR,Gemini-3-Flash,50.30,ReAct,SimpleMem,None
+RoboTHOR,Qwen3.5-397B,41.80,ReAct,SimpleMem,None
+RoboTHOR,Qwen3.5-9B,24.60,ReAct,SimpleMem,None
+RoboTHOR,GPT-5 mini,31.70,ReAct,SimpleMem,None
+RoboTHOR,GPT-5,65.70,ReAct,MemoryBank,None
+RoboTHOR,Gemini-3-Flash,55.80,ReAct,MemoryBank,None
+RoboTHOR,Qwen3.5-397B,46.60,ReAct,MemoryBank,None
+RoboTHOR,Qwen3.5-9B,27.30,ReAct,MemoryBank,None
+RoboTHOR,GPT-5 mini,35.20,ReAct,MemoryBank,None
+RoboTHOR,GPT-5,63.80,ReAct,OpenClaw,None
+RoboTHOR,Gemini-3-Flash,52.40,ReAct,OpenClaw,None
+RoboTHOR,Qwen3.5-397B,43.70,ReAct,OpenClaw,None
+RoboTHOR,Qwen3.5-9B,25.10,ReAct,OpenClaw,None
+RoboTHOR,GPT-5 mini,33.90,ReAct,OpenClaw,None
+RoboTHOR,GPT-5,62.40,CoT,Base,None
+RoboTHOR,Gemini-3-Flash,50.70,CoT,Base,None
+RoboTHOR,Qwen3.5-397B,42.20,CoT,Base,None
+RoboTHOR,Qwen3.5-9B,25.70,CoT,Base,None
+RoboTHOR,GPT-5 mini,33.40,CoT,Base,None
+RoboTHOR,GPT-5,68.20,Plan&Solve,Base,None
+RoboTHOR,Gemini-3-Flash,57.40,Plan&Solve,Base,None
+RoboTHOR,Qwen3.5-397B,48.70,Plan&Solve,Base,None
+RoboTHOR,Qwen3.5-9B,29.80,Plan&Solve,Base,None
+RoboTHOR,GPT-5 mini,37.60,Plan&Solve,Base,None
+RoboTHOR,GPT-5,59.70,MAD,Base,None
+RoboTHOR,Gemini-3-Flash,49.20,MAD,Base,None
+RoboTHOR,Qwen3.5-397B,43.30,MAD,Base,None
+RoboTHOR,Qwen3.5-9B,32.10,MAD,Base,None
+RoboTHOR,GPT-5 mini,36.80,MAD,Base,None
+RoboTHOR,GPT-5,64.30,ReAct,Base,Self-Refine
+RoboTHOR,Gemini-3-Flash,52.60,ReAct,Base,Self-Refine
+RoboTHOR,Qwen3.5-397B,43.10,ReAct,Base,Self-Refine
+RoboTHOR,Qwen3.5-9B,25.40,ReAct,Base,Self-Refine
+RoboTHOR,GPT-5 mini,32.80,ReAct,Base,Self-Refine
+RoboTHOR,GPT-5,72.40,ReAct,Base,Reflexion
+RoboTHOR,Gemini-3-Flash,61.30,ReAct,Base,Reflexion
+RoboTHOR,Qwen3.5-397B,51.80,ReAct,Base,Reflexion
+RoboTHOR,Qwen3.5-9B,30.90,ReAct,Base,Reflexion
+RoboTHOR,GPT-5 mini,39.70,ReAct,Base,Reflexion
