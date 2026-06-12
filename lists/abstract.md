@@ -1,3 +1,0 @@
-LLM-based agents are often built as tightly coupled pipelines, which makes it difficult to isolate the contribution of individual components or study how they interact. AgentFactory addresses this by standardizing interfaces and making core policy functions swappable, so perception, memory, reasoning, and reflection can be recombined without changing the surrounding execution loop.
-
-This decomposition supports a more rigorous scientific study of design trade-offs. It makes it possible to ask when trajectory-level memory matters more than local reasoning, when self-reflection improves decision quality versus when it only adds computation, and how different module combinations behave under the same benchmark conditions.
